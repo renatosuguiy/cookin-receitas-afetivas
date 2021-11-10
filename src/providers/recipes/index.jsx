@@ -6,8 +6,7 @@ export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlcmxzdEBlbWFpbC5jb20iLCJpYXQiOjE2MzY1NzMwNTcsImV4cCI6MTYzNjU3NjY1Nywic3ViIjoiMyJ9.GaMz7T7HSl2fCnsKuklzhw9dgxwZcBM4BTZ2xtYA2jM";
+  const token = localStorage.getItem("token") || "";
 
   //lendo/puxando receitas públicas
   const getSharedRecipes = () => {
