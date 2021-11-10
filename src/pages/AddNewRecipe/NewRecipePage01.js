@@ -8,7 +8,7 @@ import {
   Select,
   Button,
 } from "@chakra-ui/react";
-import { inputStyle, formBoxStyle, buttonStyle } from "./styles";
+import { inputStyle, formBoxStyle } from "../../styles/styles";
 import { useHistory } from "react-router";
 
 const NewRecipePage01 = () => {
@@ -38,7 +38,11 @@ const NewRecipePage01 = () => {
           <option value="bebida">Bebida</option>
         </Select>
       </Box>
-      <Button style={buttonStyle} onClick={() => history.push("/newrecipe2")}>
+      <Button
+        colorScheme="orange"
+        color="white"
+        onClick={() => history.push("/newrecipe2")}
+      >
         Prosseguir
       </Button>
     </Container>

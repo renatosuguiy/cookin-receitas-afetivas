@@ -2,11 +2,10 @@ import { Container, Box, Text, Input, Button } from "@chakra-ui/react";
 import {
   inputStyle,
   formBoxStyle,
-  buttonStyle,
   plusButtonStyle,
   removeButtonStyle,
   ingredientBoxStyle,
-} from "./styles";
+} from "../../styles/styles";
 import { FaPlusCircle } from "react-icons/fa";
 import { useHistory } from "react-router";
 
@@ -39,7 +38,11 @@ const NewRecipePage02 = () => {
           Ingrediente <Button style={removeButtonStyle}>X</Button>
         </Box>
       </Box>
-      <Button style={buttonStyle} onClick={() => history.push("/newrecipe3")}>
+      <Button
+        colorScheme="orange"
+        color="white"
+        onClick={() => history.push("/newrecipe3")}
+      >
         Prosseguir
       </Button>
     </Container>

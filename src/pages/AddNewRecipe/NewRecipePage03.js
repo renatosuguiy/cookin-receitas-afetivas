@@ -15,7 +15,7 @@ import {
   plusButtonStyle,
   removeButtonStyle,
   ingredientBoxStyle,
-} from "./styles";
+} from "../../styles/styles";
 import { FaPlusCircle } from "react-icons/fa";
 
 const NewRecipePage03 = () => {
@@ -53,7 +53,7 @@ const NewRecipePage03 = () => {
           Instrução <Button style={removeButtonStyle}>X</Button>
         </Box>
       </Box>
-      <Button style={buttonStyle} onClick={() => concluir()}>
+      <Button colorScheme="orange" color="white" onClick={() => concluir()}>
         Concluir
       </Button>
     </Container>
