@@ -1,5 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { api } from "../../services/api";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 
 export const MyRecipesContext = createContext();
 
@@ -22,7 +28,15 @@ export const MyRecipesProvider = ({ children }) => {
       .post(`/myrecipes`, recipe, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => setMyRecipes([...response.data]))
+      .then((response) => {
+        setMyRecipes([...response.data]);
+        return (
+          <Alert status="success" variant="solid">
+            <AlertIcon />
+            Receita adicionada com sucesso!
+          </Alert>
+        );
+      })
       .catch((error) => console.log(error));
   };
 
@@ -31,7 +45,12 @@ export const MyRecipesProvider = ({ children }) => {
       .delete(`/myrecipes/${recipeId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => console.log(response))
+      .then((response) => (
+        <Alert status="info" variant="left-accent">
+          <AlertIcon />
+          Receita deletada.
+        </Alert>
+      ))
       .catch((error) => console.log(error));
   };
 
