@@ -1,11 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { api } from "../../services/api";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 
 export const MyRecipesContext = createContext();
 
