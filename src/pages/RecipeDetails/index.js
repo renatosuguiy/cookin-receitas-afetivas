@@ -23,6 +23,7 @@ import {
   ContainerRecipes,
   ListInstructions,
 } from "./styles";
+import { HeaderWelcome } from "../../components/HeaderWelcome";
 
 const recipe = {
   title: "Bolo de Laranja Vegano",
@@ -83,6 +84,7 @@ const RecipeDetails = () => {
 
   return (
     <>
+      {isLagerThan768 ? <HeaderWelcome /> : <></>}
       {isLagerThan768 ? <HeaderLogo /> : <></>}
       <ContainerRecipes>
         <ContainerHeader>
