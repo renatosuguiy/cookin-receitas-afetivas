@@ -86,3 +86,12 @@ export const ListInstructions = styled.div`
     margin: 0 auto;
   }
 `;
+
+export const ListOrdered = styled.span`
+  padding: 1px 6px;
+  margin-right: 6px;
+  border-radius: 100%;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #422040;
+`;

@@ -1,11 +1,4 @@
-import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import { List, ListItem, ListIcon, Heading, Text } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
@@ -25,6 +18,7 @@ import {
   ContainerInstructions,
   ContainerRecipes,
   ListInstructions,
+  ListOrdered,
 } from "./styles";
 
 import { useSharedRecipes } from "../../providers/recipes";
@@ -123,13 +117,14 @@ const RecipeDetails = () => {
             Modo de Preparo
           </Heading>
           <ListInstructions>
-            <OrderedList>
+            <List>
               {recipeDetails.instructions?.map((item, index) => (
                 <ListItem key={index} sx={{ padding: "5px 0px" }}>
+                  <ListOrdered>{index + 1}</ListOrdered>
                   {item}
                 </ListItem>
               ))}
-            </OrderedList>
+            </List>
           </ListInstructions>
         </ContainerInstructions>
       </ContainerRecipes>
