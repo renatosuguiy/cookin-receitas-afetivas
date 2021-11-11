@@ -1,4 +1,5 @@
-import { Heading, Button, Grid, Input, Text, VStack, Link } from "@chakra-ui/react"
+import { Heading, Button, Grid, Text, VStack, Link } from "@chakra-ui/react"
+import {Input} from "../../components/Form/Input"
 
 
 const LoginForm = ({ handleLogin, errors, register, loading }) => {
@@ -33,8 +34,6 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
             type="email"
             error={errors.email}
             color='black'
-            isInvalid={true}
-        errorBorderColor='red'
           />
           <Input
             placeholder="Senha"

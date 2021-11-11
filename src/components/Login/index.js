@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useAuth } from "../../providers/Auth";
 import LoginImages from "./LoginImages";
 import LoginForm from "./LoginForm";
-
+ 
 const LoginComponent = () => {
 
   const { login } = useAuth()
@@ -17,7 +17,7 @@ const LoginComponent = () => {
   const [loading, setLoading] = useState(false);
 
   const schema = yup.object().shape({
-    email: yup.string().required("Informe email!").email(),
+    email: yup.string().required("Informe email!").email("E-mail inválido"),
     password: yup
       .string()
       .min(6, "Minimo de 6 caracteres.")
@@ -40,7 +40,7 @@ console.log(data+'login')
     .catch(err => setLoading(false))
   };
 
-  return (
+  return ( 
     <Flex
       height="100vh"
       bgGradient="linear(to-r, orange.100 29%, orange.50 20%)"
