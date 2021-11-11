@@ -3,7 +3,6 @@ import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Welcome from "../pages/Welcome";
-import AddNewRecipe from "../pages/AddNewRecipe/index";
 
 export const Routes = () => {
   return (
@@ -19,9 +18,6 @@ export const Routes = () => {
       </Route>
       <Route exact path="/dashboard">
         <Dashboard />
-      </Route>
-      <Route exact path="/addNewRecipe">
-        <AddNewRecipe />
       </Route>
     </Switch>
   );
