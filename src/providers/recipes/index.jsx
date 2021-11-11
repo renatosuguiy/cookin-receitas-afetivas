@@ -6,10 +6,10 @@ export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
-  const token = localStorage.getItem("token") || "";
+  const localToken = localStorage.getItem("token") || "";
 
   //lendo/puxando receitas públicas
-  const getSharedRecipes = () => {
+  const getSharedRecipes = (token) => {
     api
       .get("/recipes", {
         headers: { Authorization: `Bearer ${token}` },
@@ -23,7 +23,7 @@ export const RecipesProvider = ({ children }) => {
 
   //adicionando receitas públicas (compartilhamento)
   //vou receber de parâmetro o corpo do receita privada e adicionar 2 campos de favorites e id da receita privada
-  const shareRecipe = (data) => {
+  const shareRecipe = (data, token) => {
     const { title, ingredients, instructions, category, author, userId, id } =
       data;
     api
@@ -52,7 +52,7 @@ export const RecipesProvider = ({ children }) => {
   };
 
   //deletando ou retirando compartilhamento de receitas públicas
-  const deleteOrUnshareSharedRecipes = (id) => {
+  const deleteOrUnshareSharedRecipes = (id, token) => {
     api
       .delete(`/recipes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -65,7 +65,7 @@ export const RecipesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getSharedRecipes();
+    getSharedRecipes(localToken);
   }, [recipes]);
 
   return (
