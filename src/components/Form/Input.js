@@ -72,7 +72,7 @@ const InputBase = (
             bg: "gray.100",
           }}
           size="lg"
-          h="60px"
+          h="45px"
           ref={ref}
           {...rest}
         />
