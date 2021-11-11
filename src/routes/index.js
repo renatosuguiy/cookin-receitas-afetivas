@@ -7,16 +7,16 @@ import Welcome from "../pages/Welcome";
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path='/' >
+      <Route exact path="/">
         <Welcome />
       </Route>
-      <Route exact path='/login' >
+      <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path='/signup' >
+      <Route exact path="/signup">
         <SignUp />
       </Route>
-      <Route exact path='/dashboard' >
+      <Route exact path="/dashboard">
         <Dashboard />
       </Route>
     </Switch>
