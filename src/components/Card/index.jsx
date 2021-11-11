@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 
 export const CardRecipes = ({ item, typeCard }) => {
   const isInFavorites = item.favorites_users.some((id) => id === item.userId);
-  const localToken = localStorage.getItem("token") || "";
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const history = useHistory();
 
   const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();

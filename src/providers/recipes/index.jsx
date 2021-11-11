@@ -6,7 +6,7 @@ export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
-  const localToken = localStorage.getItem("token") || "";
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
 
