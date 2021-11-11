@@ -1,6 +1,4 @@
-import {
-  Flex
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,10 +7,9 @@ import { useState } from "react";
 import { useAuth } from "../../providers/Auth";
 import LoginImages from "./LoginImages";
 import LoginForm from "./LoginForm";
- 
-const LoginComponent = () => {
 
-  const { login } = useAuth()
+const LoginComponent = () => {
+  const { login } = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -33,14 +30,14 @@ const LoginComponent = () => {
   });
 
   const handleLogin = (data) => {
-console.log(data+'login')
-    setLoading(true)
-     login(data)
-    .then((_) => setLoading(false))
-    .catch(err => setLoading(false))
+    console.log(data + "login");
+    setLoading(true);
+    login(data)
+      .then((_) => setLoading(false))
+      .catch((err) => setLoading(false));
   };
 
-  return ( 
+  return (
     <Flex
       height="100vh"
       bgGradient="linear(to-r, orange.100 29%, orange.50 20%)"
@@ -54,8 +51,13 @@ console.log(data+'login')
         alignItems="center"
         flexDirection="row"
       >
-       <LoginForm errors={errors} handleLogin={handleSubmit(handleLogin)} loading={loading} register={register}/>
-        <LoginImages/>
+        <LoginForm
+          errors={errors}
+          handleLogin={handleSubmit(handleLogin)}
+          loading={loading}
+          register={register}
+        />
+        <LoginImages />
       </Flex>
     </Flex>
   );
