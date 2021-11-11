@@ -5,7 +5,7 @@ import {
     Text,
     VStack,
     Link,
-    Select,
+    Select, 
     } from "@chakra-ui/react";
     import {Input} from "../../components/Form/Input"
     
