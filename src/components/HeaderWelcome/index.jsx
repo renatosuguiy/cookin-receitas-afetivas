@@ -4,21 +4,16 @@ import { Center, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import { Heading } from "@chakra-ui/layout";
 import { theme } from "../../styles/theme";
-import { useHistory } from "react-router";
+import { useAuth } from "../../providers/Auth";
 
 export const HeaderWelcome = () => {
-  const history = useHistory();
-  //receber o username do local storage ou provider user
-  const username = localStorage.getItem("username") || "";
+  const user = localStorage.getItem("@cookin:user") || "";
+  const username = JSON.parse(user).name;
 
-  //puxar do provider depois a função deslogar, essa aqui é temporária
+  const { logout } = useAuth();
+
   const handleLogoutNav = () => {
-    localStorage.clear();
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-
-    history.push("/login");
-    // notifyLogout() colocar toast!!
+    logout();
   };
 
   return (
