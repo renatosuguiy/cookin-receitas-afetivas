@@ -70,11 +70,13 @@ export const RecipesProvider = ({ children }) => {
     getSharedRecipes(localToken);
   }, [recipes]);
 
-  const getRecipeDetails = (id) => {
+  const getRecipeDetails = (recipeId, token) => {
     api
-      .get(`/recipes/${id}`)
+      .get(`/recipes/${recipeId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setRecipeDetails(response.data);
       })
       .catch((error) => console.log(error));

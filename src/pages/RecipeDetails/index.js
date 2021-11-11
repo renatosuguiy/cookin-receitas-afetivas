@@ -24,33 +24,11 @@ import {
   ListInstructions,
 } from "./styles";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
-
-const recipe = {
-  title: "Bolo de Laranja Vegano",
-  ingredients: [
-    "1 laranja em cubos",
-    "1/2 xícara de suco de laranja",
-    "3/4 de xícara de óleo",
-    "1 xícara de açúcar",
-    "2 xícaras de farinha de trigo",
-    "1 colher de sopa de fermento em pó",
-    "Pitada de sal",
-  ],
-  instructions: [
-    "Bater no liquidificador a laranja, o suco, o óleo, o açúcar e o sal e reservar.",
-    "Misturar em uma tigela a farinha e o fermento em pó.",
-    "Incorporar a mistura do liquidificador na farinha com o fermento.",
-    "Colocar a massa em uma forma untada e enfarinhada.",
-    "Assar por 40 a 50 minutos em forno pré-aquecido a 180ºC.",
-  ],
-  category: "doce",
-  author: "Mark Zuckerberg",
-  myrecipesId: 1,
-  userId: 1,
-  id: 1,
-};
+import { useSharedRecipes } from "../../providers/recipes";
 
 const RecipeDetails = () => {
+  const { recipeDetails } = useSharedRecipes();
+
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
   const styleList = {
@@ -89,11 +67,11 @@ const RecipeDetails = () => {
       <ContainerRecipes>
         <ContainerHeader>
           <Heading as="h1" size="lg" color="orange.400">
-            {recipe.title}
+            {recipeDetails.title}
           </Heading>
           <BoxAuthor>
             <Text>Receita de &nbsp;</Text>
-            <Text color="pink.400">{recipe.author}</Text>
+            <Text color="pink.400">{recipeDetails.author}</Text>
           </BoxAuthor>
           <BoxIconLogout>
             <button>
@@ -119,8 +97,8 @@ const RecipeDetails = () => {
             Ingredientes
           </Heading>
           <List sx={styleList}>
-            {recipe.ingredients.map((item) => (
-              <ListItem sx={styleListItem}>
+            {recipeDetails.ingredients?.map((item, index) => (
+              <ListItem key={index} sx={styleListItem}>
                 <ListIcon as={CheckCircleIcon} color="orange.400" />
                 {item}
               </ListItem>
@@ -133,8 +111,10 @@ const RecipeDetails = () => {
           </Heading>
           <ListInstructions>
             <OrderedList>
-              {recipe.instructions.map((item, index) => (
-                <ListItem sx={{ padding: "5px 0px" }}>{item}</ListItem>
+              {recipeDetails.instructions?.map((item, index) => (
+                <ListItem key={index} sx={{ padding: "5px 0px" }}>
+                  {item}
+                </ListItem>
               ))}
             </OrderedList>
           </ListInstructions>
