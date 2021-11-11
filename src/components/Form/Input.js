@@ -1,17 +1,10 @@
 import {
+  Input as ChakraInput,
   FormControl,
   FormErrorMessage,
-  FormLabel,
-  Input as ChakraInput,
-  InputLeftElement,
-  InputGroup,
+  FormLabel
 } from "@chakra-ui/react";
-import {
-  useState,
-  useCallback,
-  useEffect,
-  forwardRef,
-} from "react";
+import { forwardRef, useState, useCallback, useEffect } from "react";
 
 const InputColors = {
   default: "gray.100",
@@ -20,67 +13,58 @@ const InputColors = {
   focus: "purple.400",
 };
 
-const InputBase = (
-  { name, label, icon: Icon, error = null, ...rest },
-  ref
-) => {
+const InputBase = ({ name, label, error = null, ...rest }, ref) => {
   const [value, setValue] = useState("");
-  const [variation, setVariation] = useState("default");
+  const [color, setColor] = useState("default");
 
   useEffect(() => {
     if (error) {
-      return setVariation("error");
+      return setColor("error");
     }
   }, [error]);
 
   const handleInputFocus = useCallback(() => {
     if (!error) {
-      setVariation("focus");
+      setColor("focus");
     }
   }, [error]);
 
   const handleInputBlur = useCallback(() => {
     if (value.length > 1 && !error) {
-      return setVariation("filled");
+      return setColor("filled");
     }
   }, [error, value]);
 
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} display='flex' justifyContent='center'>
       {!!label && <FormLabel color="gray.400">{label}</FormLabel>}
 
-      <InputGroup flexDirection="column">
-        {Icon && (
-          <InputLeftElement color={InputColors[variation]} mt="2.5">
-            <Icon />
-          </InputLeftElement>
-        )}
+      <ChakraInput
+        id={name}
+        name={name}
+        onChangeCapture={(e) => setValue(e.currentTarget.value)}
+        onBlurCapture={handleInputBlur}
+        onFocus={handleInputFocus}
+        borderColor={InputColors[color]}
+        color={InputColors[color]}
+        bg="white"
+        variant="outline"
+        _hover={{ bgColor: "gray.100" }}
+        _placeholder={{ color: "gray.300" }}
+        _focus={{
+          bg: "gray.100",
+        }}
+        size="lg"
+        h="38px"
+        w='80%'
+        ref={ref}
+        {...rest}
+        display='flex'
+      />
 
-        <ChakraInput
-          id={name}
-          name={name}
-          onChangeCapture={(e) => setValue(e.currentTarget.value)}
-          onBlurCapture={handleInputBlur}
-          onFocus={handleInputFocus}
-          borderColor={InputColors[variation]}
-          color={InputColors[variation]}
-          bg="gray.50"
-          variant="outline"
-          _hover={{ bgColor: "gray.100" }}
-          _placeholder={{ color: "gray.300" }}
-          _focus={{
-            bg: "gray.100",
-          }}
-          size="lg"
-          h="45px"
-          ref={ref}
-          {...rest}
-        />
-
-        {!!error && (
-          <FormErrorMessage color="red.500">{error.message}</FormErrorMessage>
-        )}
-      </InputGroup>
+      {!!error && (
+        <FormErrorMessage color="red.500">{error.message}</FormErrorMessage>
+      )}
     </FormControl>
   );
 };
