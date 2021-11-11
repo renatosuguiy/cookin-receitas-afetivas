@@ -16,6 +16,12 @@ import { useAddRecipe } from "../../providers/AddRecipe";
 const NewRecipePage01 = () => {
   const history = useHistory();
   const { recipeBody, setRecipeBody } = useAddRecipe();
+  const { id } = JSON.parse(localStorage.getItem("@cookin:user"));
+
+  const nextPage = () => {
+    history.push("/addRecipe2");
+    setRecipeBody({ ...recipeBody, userId: id });
+  };
 
   return (
     <Container centerContent minWidth="320px">
@@ -65,7 +71,7 @@ const NewRecipePage01 = () => {
         colorScheme="orange"
         color="white"
         marginTop="20px"
-        onClick={() => history.push("/addRecipe2")}
+        onClick={nextPage}
       >
         Prosseguir
       </Button>

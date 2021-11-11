@@ -6,10 +6,8 @@ export const MyRecipesContext = createContext();
 
 export const MyRecipesProvider = ({ children }) => {
   const [myRecipes, setMyRecipes] = useState([]);
-  const token = 0; //pegar o token do localStorage
-  const userId = 1; //pegar o userId do localStorage
 
-  const getMyRecipes = () => {
+  const getMyRecipes = (token, userId) => {
     api
       .get(`/myrecipes?userId=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -18,7 +16,7 @@ export const MyRecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const addRecipe = (recipe) => {
+  const addRecipe = (recipe, token) => {
     api
       .post(`/myrecipes`, recipe, {
         headers: { Authorization: `Bearer ${token}` },
@@ -35,7 +33,7 @@ export const MyRecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const deleteRecipe = (recipeId) => {
+  const deleteRecipe = (recipeId, token) => {
     api
       .delete(`/myrecipes/${recipeId}`, {
         headers: { Authorization: `Bearer ${token}` },
