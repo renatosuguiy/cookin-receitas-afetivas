@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
     const [authToken, setAuthToken] = useState(localStorage.getItem("@cookin:accessToken") || "");
     const [user, setUser] = useState(localStorage.getItem("@cookin:username") || "");
 
-  const login = ({ email, password }) => {
+  const login = async ({ email, password }) => {
     api
       .post("/login", {email, password})
       .then((response) => {
@@ -32,9 +32,9 @@ const AuthProvider = ({children}) => {
       .catch((err) => console.log(err));
   };
 
-  const signUp = (userData) => {
+  const signUp = async (userData) => {
       console.log(userData)
-    api
+    api 
       .post("/register", userData)
       .then((response) => {
         localStorage.setItem("@cookin:accessToken", response.data.token);

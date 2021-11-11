@@ -33,6 +33,8 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
             type="email"
             error={errors.email}
             color='black'
+            isInvalid={true}
+        errorBorderColor='red'
           />
           <Input
             placeholder="Senha"

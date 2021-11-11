@@ -1,15 +1,7 @@
 import {
-  Image,
-  Flex,
-  Grid,
-  VStack,
-  Heading,
-  Button,
-  Text,
-  Link,
+  Flex
 } from "@chakra-ui/react";
 
-import { Input } from "../Form/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -20,7 +12,7 @@ import LoginForm from "./LoginForm";
 
 const LoginComponent = () => {
 
- // const { login } = useAuth()
+  const { login } = useAuth()
 
   const [loading, setLoading] = useState(false);
 
@@ -41,9 +33,9 @@ const LoginComponent = () => {
   });
 
   const handleLogin = (data) => {
-
+console.log(data+'login')
     setLoading(true)
-    // login(data)
+     login(data)
     .then((_) => setLoading(false))
     .catch(err => setLoading(false))
   };
@@ -51,7 +43,7 @@ const LoginComponent = () => {
   return (
     <Flex
       height="100vh"
-      bgGradient="linear(to-r, orange.100 30%, orange.50 80%)"
+      bgGradient="linear(to-r, orange.100 29%, orange.50 20%)"
       alignItems="center"
       padding="12px 20px"
       color="white"
