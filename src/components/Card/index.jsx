@@ -53,7 +53,7 @@ export const CardRecipes = ({ item, typeCard }) => {
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
             {item.title}
           </Heading>
-          <Text color="#0a0a0a" fontSize="small">
+          <Text color="#0a0a0a" fontSize="small" textTransform="capitalize">
             {item.category}
           </Text>
         </Box>
@@ -125,7 +125,7 @@ export const CardRecipes = ({ item, typeCard }) => {
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
             {item.title}
           </Heading>
-          <Text color="#0a0a0a" fontSize="small">
+          <Text color="#0a0a0a" fontSize="small" textTransform="capitalize">
             {item.category}
           </Text>
         </Box>

@@ -1,5 +1,7 @@
+import LoginComponent from "../../components/Login";
+
 const Login = () => {
-    return (<div>Login</div>)
-}
+  return <LoginComponent/>;
+};
 
 export default Login;

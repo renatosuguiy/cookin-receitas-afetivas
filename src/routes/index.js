@@ -1,6 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
+import RecipesShared from "../pages/RecipesShared";
 import SignUp from "../pages/SignUp";
 import Welcome from "../pages/Welcome";
 import RecipeDetails from "../pages/RecipeDetails";
@@ -19,6 +20,9 @@ export const Routes = () => {
       </Route>
       <Route exact path="/dashboard">
         <Dashboard />
+      </Route>
+      <Route exact path="/recipes">
+        <RecipesShared />
       </Route>
       <Route exact path="/recipes/:idRecipes">
         <RecipeDetails />
