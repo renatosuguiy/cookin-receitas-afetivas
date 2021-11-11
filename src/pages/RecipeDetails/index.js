@@ -28,6 +28,10 @@ import { useSharedRecipes } from "../../providers/recipes";
 
 const RecipeDetails = () => {
   const { recipeDetails } = useSharedRecipes();
+  const isInFavorites = recipeDetails.favorites_users?.some(
+    (id) => id === recipeDetails.userId
+  );
+  console.log(recipeDetails.favorites_users);
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
@@ -84,9 +88,15 @@ const RecipeDetails = () => {
             <button>
               <FaShareAlt style={{ fontSize: "18px", color: "#C8561F" }} />
             </button>
-            <button>
-              <AiFillHeart style={{ fontSize: "20px", color: "#979797" }} />
-            </button>
+            {isInFavorites ? (
+              <button>
+                <AiFillHeart style={{ fontSize: "20px", color: "#EB1616" }} />
+              </button>
+            ) : (
+              <button>
+                <AiFillHeart style={{ fontSize: "20px", color: "#979797" }} />
+              </button>
+            )}
             <button>
               <AiOutlineClose style={{ fontSize: "20px", color: "#EB1616" }} />
             </button>
