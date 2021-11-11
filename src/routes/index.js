@@ -3,14 +3,15 @@ import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Welcome from "../pages/Welcome";
-import AddNewRecipe from "../pages/AddNewRecipe/index";
-import NewRecipePage02 from "../pages/AddNewRecipe/index2";
-import NewRecipePage03 from "../pages/AddNewRecipe/index3";
+import AddRecipe from "../pages/AddNewRecipe";
+import NewRecipePage01 from "../pages/AddNewRecipe/page_1";
+import NewRecipePage02 from "../pages/AddNewRecipe/page_2";
+import NewRecipePage03 from "../pages/AddNewRecipe/page_3";
 
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/w">
+      <Route exact path="/">
         <Welcome />
       </Route>
       <Route exact path="/login">
@@ -22,8 +23,11 @@ export const Routes = () => {
       <Route exact path="/dashboard">
         <Dashboard />
       </Route>
-      <Route exact path="/">
-        <AddNewRecipe />
+      <Route exact path="/addRecipe">
+        <AddRecipe />
+      </Route>
+      <Route exact path="/addRecipe1">
+        <NewRecipePage01 />
       </Route>
       <Route exact path="/addRecipe2">
         <NewRecipePage02 />
