@@ -10,7 +10,7 @@ import NewRecipePage03 from "../pages/AddNewRecipe/index3";
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/w">
         <Welcome />
       </Route>
       <Route exact path="/login">
@@ -22,7 +22,7 @@ export const Routes = () => {
       <Route exact path="/dashboard">
         <Dashboard />
       </Route>
-      <Route exact path="/addRecipe">
+      <Route exact path="/">
         <AddNewRecipe />
       </Route>
       <Route exact path="/addRecipe2">

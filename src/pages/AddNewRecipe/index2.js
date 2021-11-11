@@ -1,13 +1,21 @@
-import { Container, Box, Text, Input, Button, Grid } from "@chakra-ui/react";
+import {
+  Container,
+  Box,
+  Text,
+  Input,
+  Button,
+  Grid,
+  Heading,
+} from "@chakra-ui/react";
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const NewRecipePage02 = () => {
   return (
     <Container centerContent minWidth="320px">
-      <Text fontSize="35px" color="#F16623" margin="10px auto 0px">
+      <Heading size="lg" color="orange.700" m="10px auto 0px">
         Cadastrar receita
-      </Text>
+      </Heading>
 
       <Grid as="form" m="0px" p="20px" w="100%" textAlign="center">
         <Text fontSize="lg" m="0px auto">
