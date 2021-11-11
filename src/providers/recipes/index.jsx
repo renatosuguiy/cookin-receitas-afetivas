@@ -8,6 +8,8 @@ export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const localToken = localStorage.getItem("token") || "";
 
+  const [recipeDetails, setRecipeDetails] = useState({});
+
   //lendo/puxando receitas públicas
   const getSharedRecipes = (token) => {
     api
@@ -68,6 +70,16 @@ export const RecipesProvider = ({ children }) => {
     getSharedRecipes(localToken);
   }, [recipes]);
 
+  const getRecipeDetails = (id) => {
+    api
+      .get(`/recipes/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setRecipeDetails(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -76,6 +88,8 @@ export const RecipesProvider = ({ children }) => {
         shareRecipe,
         recipes,
         setRecipes,
+        recipeDetails,
+        getRecipeDetails,
       }}
     >
       {children}
