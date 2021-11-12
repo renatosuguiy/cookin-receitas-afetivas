@@ -232,7 +232,7 @@ const RecipeDetails = () => {
                 >
                   <Circle
                     size="26px"
-                    bg="#422040"
+                    bg="purple.400"
                     color="white"
                     marginRight="10px"
                   >
