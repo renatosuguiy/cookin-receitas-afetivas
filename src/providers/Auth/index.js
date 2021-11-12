@@ -23,9 +23,9 @@ const login = async ({ email, password }) => {
 api
 .post("/login", {email, password})
 .then((response) => {
-localStorage.setItem("@cookin:accessToken", response.data.token);
+localStorage.setItem("@cookin:accessToken", response.data.accessToken);
 localStorage.setItem("@cookin:user", JSON.stringify(response.data.user));
-setAuthToken(response.data.token);
+setAuthToken(response.data.accessToken);
 setUser(response.data.user)
 history.push("/dashboard");
 })
@@ -33,14 +33,9 @@ history.push("/dashboard");
 };
 
 const signUp = async (userData) => {
-console.log(userData)
 api 
 .post("/register", userData)
 .then((response) => {
-localStorage.setItem("@cookin:accessToken", response.data.token);
-localStorage.setItem("@cookin:user", JSON.stringify(response.data.user));
-setAuthToken(response.data.token);
-setUser(response.data.user)
 history.push("/login");
 })
 .catch((err) => console.log(err));
