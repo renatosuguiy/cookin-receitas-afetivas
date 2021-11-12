@@ -10,7 +10,15 @@ import {
 import { FaPlusCircle } from "react-icons/fa";
 import { useAddRecipe } from "../../providers/AddRecipe";
 
-const AddItens = ({ array, setArray, buttonText, handleClick }) => {
+const AddItens = ({
+  array,
+  setArray,
+  buttonText,
+  handleClick,
+  handleBack,
+  title,
+  secondaryTitle,
+}) => {
   const { addToArray, removeFromArray, item, setItem } = useAddRecipe();
 
   return (
@@ -18,10 +26,10 @@ const AddItens = ({ array, setArray, buttonText, handleClick }) => {
       <Heading size="lg" color="orange.700" m="10px auto 0px">
         Cadastrar receita
       </Heading>
-
+      <Button onClick={handleBack}>Voltar</Button>
       <Grid m="0px" p="20px" w="100%" textAlign="center">
         <Text fontSize="lg" m="0px auto">
-          Adicione os ingredientes
+          {title}
         </Text>
         <Box>
           <Input
@@ -52,9 +60,9 @@ const AddItens = ({ array, setArray, buttonText, handleClick }) => {
         borderRadius="25px"
       >
         <Text fontSize="xl" m="5px auto 10px" color="orange.700">
-          Ingredientes selecionados
+          {secondaryTitle}
         </Text>
-        {array.map((ingredient, index) => (
+        {array.map((item, index) => (
           <Box
             key={index}
             boxShadow="2px 2px 2px 1px rgba(0, 0, 0, 0.4)"
@@ -64,14 +72,14 @@ const AddItens = ({ array, setArray, buttonText, handleClick }) => {
             border="1px solid gray"
             borderRadius="25px"
           >
-            <Text m="0px 10px">{ingredient}</Text>
+            <Text m="0px 10px">{item}</Text>
             <Button
               key={index}
               colorScheme="red"
               size="xs"
               fontSize="md"
               borderRadius="20px"
-              onClick={() => removeFromArray(array, setArray, ingredient)}
+              onClick={() => removeFromArray(array, setArray, item)}
             >
               X
             </Button>

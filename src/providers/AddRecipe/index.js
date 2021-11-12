@@ -21,7 +21,19 @@ export const AddRecipeProvider = ({ children }) => {
   };
 
   const removeFromArray = (array, setArray, item) => {
-    setArray(array.filter((instruc) => instruc !== item));
+    const filteredArray = array.filter((instruc) => instruc !== item);
+    if (array === ingredients) {
+      localStorage.setItem(
+        "@cookin:ingredients",
+        JSON.stringify(filteredArray)
+      );
+    } else {
+      localStorage.setItem(
+        "@cookin:instructions",
+        JSON.stringify(filteredArray)
+      );
+    }
+    setArray(filteredArray);
   };
 
   return (
