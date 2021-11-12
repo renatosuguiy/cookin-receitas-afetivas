@@ -47,7 +47,7 @@ export const CardRecipes = ({ item, typeCard }) => {
             console.log("card");
             getRecipeDetails(item.id, localToken);
             history.push(`/recipes/${item.id}`);
-          }} //falta colocar a rota da pagina da receita history.push("/recipes/id")
+          }}
           _hover={{ cursor: "pointer" }}
         >
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
@@ -119,7 +119,7 @@ export const CardRecipes = ({ item, typeCard }) => {
             console.log("card");
             getRecipeDetails(item.id, localToken);
             history.push(`/recipes/${item.id}`);
-          }} //falta colocar a rota da pagina da receita history.push("/recipes/id")
+          }}
           _hover={{ cursor: "pointer" }}
         >
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
