@@ -24,22 +24,12 @@ export const ModalRemoveRecipe = ({
                 <ModalContent padding='1' bg='white' color='gray.800' w='300px'>
                     <ModalHeader display='flex' alignItems='center'>
                         <Center w='30px' h='30px' borderRadius='5px'>
-                            <FaExclamation color={theme.colors.orange['50']} />
+                            <FaExclamation color={theme.colors.orange['100']} />
                         </Center>
                         <Text fontWeight='bold' ml='2'>
                             Deleter Receita
                         </Text>
-                        <Center
-                            onClick={onClose}
-                            as='button'
-                            ml='auto'
-                            w='25px'
-                            h='25px'
-                            fontSize='lg'
-                            borderRadius='md'
-                        >
-                            <FaTimes color='#000' />
-                        </Center>
+
                     </ModalHeader>
                     <ModalBody textAlign='center' fontSize='lg'>
                         <Text>
