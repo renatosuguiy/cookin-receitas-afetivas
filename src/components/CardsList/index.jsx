@@ -11,7 +11,6 @@ export const CardsList = ({
   return (
     <>
       <Flex
-        border="1px solid blue"
         justify="center"
         wrap="wrap"
         margin="10px auto"
@@ -19,7 +18,6 @@ export const CardsList = ({
         paddingX="2"
       >
         <Flex
-          border="1px solid red"
           justify={["center", "center", "space-around", "space-around"]}
           wrap="wrap"
           minWidth={["530px", "530px", "700px", "1000px"]}
