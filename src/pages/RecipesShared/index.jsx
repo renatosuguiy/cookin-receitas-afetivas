@@ -1,14 +1,18 @@
-import { Box, Grid, Flex, VStack } from "@chakra-ui/layout";
-import { CardRecipes } from "../../components/Card";
+import { Box } from "@chakra-ui/layout";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { useSharedRecipes } from "../../providers/recipes";
 import HeaderLogo from "../../components/HeaderLogo/index";
+import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
-import { ButtonClear } from "../../components/ButtonClear";
 import { CardsList } from "../../components/CardsList";
 
 const RecipesShared = () => {
-  const { recipes } = useSharedRecipes();
+  const {
+    recipes,
+    recipesSharedFound,
+    setRecipesSharedFound,
+    searchForRecipePublic,
+  } = useSharedRecipes();
 
   return (
     <Box>
