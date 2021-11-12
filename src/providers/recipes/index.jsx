@@ -54,7 +54,8 @@ export const RecipesProvider = ({ children }) => {
       .then((response) => {
         console.log(response.data);
         //toast de sucesso de compartilhamento
-        // setRecipes([...recipes,...response.data]);
+        setRecipes([...recipes, response.data]);
+        getSharedRecipes(localToken);
       })
       .catch((error) => console.log(error));
   };
@@ -67,6 +68,7 @@ export const RecipesProvider = ({ children }) => {
       })
       .then((response) => {
         console.log(response.data);
+        getSharedRecipes(localToken);
         //toast de sucesso em deletar/descompartilhar
       })
       .catch((error) => console.log(error));
