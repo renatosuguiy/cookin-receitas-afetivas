@@ -25,22 +25,12 @@ export const ModalShareRecipe = ({
                 <ModalContent padding='1' bg='white' color='gray.800' w='90vw'>
                     <ModalHeader display='flex' alignItems='center'>
                         <Center w='30px' h='30px' borderRadius='5px'>
-                            <FaShare color={theme.colors.orange['50']} />
+                            <FaShare color={theme.colors.orange['100']} />
                         </Center>
                         <Text fontWeight='bold' ml='2'>
                             Compartilhar Receita
                         </Text>
-                        <Center
-                            onClick={onClose}
-                            as='button'
-                            ml='auto'
-                            w='25px'
-                            h='25px'
-                            fontSize='lg'
-                            borderRadius='md'
-                        >
-                            <FaTimes color='#000' />
-                        </Center>
+
                     </ModalHeader>
                     <ModalBody textAlign='center' fontSize='lg'>
                         <Text >
@@ -49,7 +39,7 @@ export const ModalShareRecipe = ({
                     </ModalBody>
                     <ModalFooter flexDirection='column'>
                         <Button
-                            bg='red.400'
+                            bg='green.400'
                             color='white'
                             w='100%'
                             h='40px'
