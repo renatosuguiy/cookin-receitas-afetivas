@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
-    "@chakra-ui/react": "^1.6.12",  
+    "@chakra-ui/icons": "^1.0.17",
+    "@chakra-ui/media-query": "^1.1.5",
+    "@chakra-ui/react": "^1.6.12",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@hookform/resolvers": "^2.8.3",
@@ -24,6 +26,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "5",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },

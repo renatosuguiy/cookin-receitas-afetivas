@@ -8,6 +8,7 @@ import AddRecipe from "../pages/AddNewRecipe";
 import NewRecipePage01 from "../pages/AddNewRecipe/page_1";
 import NewRecipePage02 from "../pages/AddNewRecipe/page_2";
 import NewRecipePage03 from "../pages/AddNewRecipe/page_3";
+import RecipeDetails from "../pages/RecipeDetails";
 
 export const Routes = () => {
   return (
@@ -38,6 +39,9 @@ export const Routes = () => {
       </Route>
       <Route exact path="/recipes">
         <RecipesShared />
+      </Route>
+      <Route exact path="/recipes/:idRecipes">
+        <RecipeDetails />
       </Route>
     </Switch>
   );

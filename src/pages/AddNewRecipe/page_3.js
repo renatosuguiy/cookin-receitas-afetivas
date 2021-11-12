@@ -23,8 +23,6 @@ const NewRecipePage03 = () => {
     // addRecipe(recipeBody, token);
     console.log(recipeBody);
     console.log(accessToken);
-    //adicionar um toast
-    //adicionar um time
   };
 
   return (
@@ -35,7 +33,7 @@ const NewRecipePage03 = () => {
       setArray={setInstructions}
       handleClick={addNewRecipe}
       handleBack={handleBack}
-      buttonText="Prosseguir"
+      buttonText="Concluir"
     />
   );
 };
