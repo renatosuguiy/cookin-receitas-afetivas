@@ -1,11 +1,17 @@
-import { createContext, useEffect, useState } from "react";
-import { useContext } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+} from "react";
 import { api } from "../../services/api";
 
 export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
+  const [recipesSharedFound, setRecipesSharedFound] = useState([]);
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -66,6 +72,22 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  //procurando a receita publica
+  const searchForRecipePublic = useCallback(async (recipeTitle, token) => {
+    if (recipeTitle !== "") {
+      const response = await api.get(`/recipes?title_like=${recipeTitle}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.data.length) {
+        //chamar o toast de nada encontrado, procure novamente
+        console.log("achei nada");
+      }
+      setRecipesSharedFound(response.data);
+    }
+  }, []);
+
   useEffect(() => {
     getSharedRecipes(localToken);
   }, []);
@@ -91,6 +113,9 @@ export const RecipesProvider = ({ children }) => {
         setRecipes,
         recipeDetails,
         getRecipeDetails,
+        searchForRecipePublic,
+        recipesSharedFound,
+        setRecipesSharedFound,
       }}
     >
       {children}
