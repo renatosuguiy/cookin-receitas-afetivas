@@ -37,17 +37,9 @@ const AuthProvider = ({ children }) => {
   };
 
   const signUp = async (userData) => {
-    console.log(userData);
     api
       .post("/register", userData)
       .then((response) => {
-        localStorage.setItem("@cookin:accessToken", response.data.token);
-        localStorage.setItem(
-          "@cookin:user",
-          JSON.stringify(response.data.user)
-        );
-        setAuthToken(response.data.token);
-        setUser(response.data.user);
         history.push("/login");
       })
       .catch((err) => console.log(err));
