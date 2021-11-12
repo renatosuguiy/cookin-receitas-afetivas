@@ -7,7 +7,7 @@ const Menu = ({ index }) => {
     const isLagerThan768 = useMediaQuery('(min-width: 768px)');
     const history = useHistory();
     return (
-        <Box w='100vw' bgColor={['orange.50', 'orange.50', 'rgba(0,0,0,0)']}>
+        <Box w='100vw' margin='-1px' bgColor={['orange.50', 'orange.50', 'rgba(0,0,0,0)']}>
             <Center borderBottom='1px solid #D0BDBD' maxWidth='500px' margin='0 auto' w='90vw'>
                 <Tabs index={index}>
                     <TabList>
