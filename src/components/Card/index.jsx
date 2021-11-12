@@ -8,21 +8,28 @@ import LoveRed from "../../assets/Images/lovered.svg";
 import TimesDelete from "../../assets/Images/times.svg";
 import { useSharedRecipes } from "../../providers/recipes";
 import { useHistory } from "react-router";
+import { useMyRecipes } from "../../providers/MyRecipes";
 
 export const CardRecipes = ({ item, typeCard }) => {
-  const isInFavorites = item.favorites_users.some((id) => id === item.userId);
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userLoggedId = JSON.parse(user).id;
+  const isInFavorites = item.favorites_users.some((id) => id === userLoggedId);
+
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const history = useHistory();
 
   const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();
-  //falta puxar informações do provider favoritar receitas e do myrecipes
+  //falta puxar provider de favoritar/desfavoritar receitas
+  const { deleteRecipe } = useMyRecipes();
 
   const handleDeleteRecipe = (publicId, privateId) => {
-    //chama a função que deleta/não_compartilha do minhas receitas públicas
+    //funções chamadas para quando usuário apertar no X do card em minhas receitas:
+
+    //deleta do minhas receitas públicas
     deleteOrUnshareSharedRecipes(publicId, localToken);
 
-    //falta chamar a função que deleta do minhas receitas privadas
-    //função(privateId)--vem do provider myrecipes
+    //deleta do minhas receitas privadas
+    deleteRecipe(privateId, localToken);
   };
 
   if (typeCard === "heart") {
