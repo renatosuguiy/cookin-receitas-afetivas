@@ -59,7 +59,7 @@ import {
     }}
     size="lg"
     h="38px"
-    w='80%'
+    w={["90%", "90%","80%",'80%']}
     ref={ref}
     {...rest}
     display='flex'
