@@ -76,7 +76,6 @@ export const RecipesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        //console.log(response.data);
         setRecipeDetails(response.data);
       })
       .catch((error) => console.log(error));

@@ -36,6 +36,8 @@ export const BoxIconLogout = styled.div`
   position: absolute;
   left: 20px;
   top: 18px;
+  font-size: 30px;
+  color: #c8561f;
 
   @media (min-width: 500px) {
     left: 5px;
@@ -48,6 +50,7 @@ export const BoxIconsButton = styled.div`
   position: absolute;
   right: 5px;
   top: 8px;
+  font-size: 18px;
 
   @media (min-width: 500px) {
     right: 5px;

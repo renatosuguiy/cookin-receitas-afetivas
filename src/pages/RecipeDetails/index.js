@@ -22,12 +22,18 @@ import {
 } from "./styles";
 
 import { useSharedRecipes } from "../../providers/recipes";
+import { useAuth } from "../../providers/Auth";
 
 const RecipeDetails = () => {
   const history = useHistory();
   const { recipeDetails } = useSharedRecipes();
+  const { user } = useAuth();
+  console.log(user.id);
+
+  const isTheOwner = user.id === recipeDetails.userId;
+
   const isInFavorites = recipeDetails.favorites_users?.some(
-    (id) => id === recipeDetails.userId
+    (id) => id === user.id
   );
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
@@ -76,27 +82,30 @@ const RecipeDetails = () => {
           </BoxAuthor>
           <BoxIconLogout>
             <button onClick={() => history.push("/recipes")}>
-              <FaArrowAltCircleLeft
-                style={{ fontSize: "30px", color: "#C8561F" }}
-              />
+              <FaArrowAltCircleLeft />
             </button>
           </BoxIconLogout>
           <BoxIconsButton>
-            <button /*Falta onClick para compartilhar*/>
-              <FaShareAlt style={{ fontSize: "18px", color: "#C8561F" }} />
-            </button>
-            {isInFavorites ? (
-              <button /*Falta onClick para favoritar*/>
-                <AiFillHeart style={{ fontSize: "20px", color: "#EB1616" }} />
-              </button>
+            {!isTheOwner ? (
+              isInFavorites ? (
+                <button /*Falta onClick para favoritar*/>
+                  <AiFillHeart style={{ color: "#EB1616" }} />
+                </button>
+              ) : (
+                <button /*Falta onClick para favoritar*/>
+                  <AiFillHeart style={{ color: "#979797" }} />
+                </button>
+              )
             ) : (
-              <button /*Falta onClick para favoritar*/>
-                <AiFillHeart style={{ fontSize: "20px", color: "#979797" }} />
-              </button>
+              <>
+                <button /*Falta onClick para compartilhar*/>
+                  <FaShareAlt style={{ color: "#C8561F" }} />
+                </button>
+                <button /*Falta onClick para excluir*/>
+                  <AiOutlineClose style={{ color: "#EB1616" }} />
+                </button>
+              </>
             )}
-            <button /*Falta onClick para excluir*/>
-              <AiOutlineClose style={{ fontSize: "20px", color: "#EB1616" }} />
-            </button>
           </BoxIconsButton>
         </ContainerHeader>
         <ContainerIngredients>
