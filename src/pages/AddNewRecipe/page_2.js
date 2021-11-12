@@ -9,6 +9,7 @@ const NewRecipePage02 = () => {
 
   const handleClick = () => {
     history.push("/addRecipe3");
+    localStorage.setItem("@cookin:ingredients", JSON.stringify(ingredients));
     setRecipeBody({ ...recipeBody, ingredients: [...ingredients] });
   };
 

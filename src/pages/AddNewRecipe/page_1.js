@@ -16,7 +16,7 @@ import { useAddRecipe } from "../../providers/AddRecipe";
 const NewRecipePage01 = () => {
   const history = useHistory();
   const { recipeBody, setRecipeBody } = useAddRecipe();
-  const { id } = JSON.parse(localStorage.getItem("@cookin:user"));
+  const { id } = JSON.parse(localStorage.getItem("@cookin:user") || "");
 
   const nextPage = () => {
     history.push("/addRecipe2");

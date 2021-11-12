@@ -1,6 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
+import RecipesShared from "../pages/RecipesShared";
 import SignUp from "../pages/SignUp";
 import Welcome from "../pages/Welcome";
 import AddRecipe from "../pages/AddNewRecipe";
@@ -34,6 +35,9 @@ export const Routes = () => {
       </Route>
       <Route exact path="/addRecipe3">
         <NewRecipePage03 />
+      </Route>
+      <Route exact path="/recipes">
+        <RecipesShared />
       </Route>
     </Switch>
   );
