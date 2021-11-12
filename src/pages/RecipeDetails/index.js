@@ -29,7 +29,6 @@ const RecipeDetails = () => {
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
-  console.log(userId);
 
   const isTheOwner = userId === recipeDetails.userId;
 

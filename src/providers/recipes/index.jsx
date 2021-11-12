@@ -68,7 +68,7 @@ export const RecipesProvider = ({ children }) => {
 
   useEffect(() => {
     getSharedRecipes(localToken);
-  }, [recipes]);
+  }, []);
 
   const getRecipeDetails = (recipeId, token) => {
     api
