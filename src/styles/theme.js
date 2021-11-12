@@ -1,36 +1,18 @@
 import { extendTheme } from "@chakra-ui/react";
 
 export const theme = extendTheme({
-    colors: {
-        purple: {
-            400: '#422040'
-        },
-        gray: {
-            100: "#F6F4F4",
-            400: "#C8C8C8",
-        },
-        orange: {
-            50: "#F0D0C0",
-            100: "#F8B595",
-            200: "#EC8350",
-            400: "#F16623",
-            700: "#C8561F",
-        },
-        pink: {
-            400: "#E0607E",
-        },
-        green: {
-            500: "#46b934",
-        },
-        red: {
-            500: "#FA380E",
-        },
+  colors: {
+    purple: {
+      400: "#422040",
     },
     gray: {
+      100: "#F6F4F4",
       400: "#C8C8C8",
+      900: "#414144",
     },
     orange: {
       50: "#F0D0C0",
+      100: "#F8B595",
       200: "#EC8350",
       400: "#F16623",
       700: "#C8561F",
@@ -38,6 +20,28 @@ export const theme = extendTheme({
     pink: {
       400: "#E0607E",
     },
+    green: {
+      500: "#46b934",
+    },
+    red: {
+      500: "#FA380E",
+    },
+    white: {
+      50: "#ffffff",
+    },
+  },
+  gray: {
+    400: "#C8C8C8",
+  },
+  orange: {
+    50: "#F0D0C0",
+    200: "#EC8350",
+    400: "#F16623",
+    700: "#C8561F",
+  },
+  pink: {
+    400: "#E0607E",
+  },
   fonts: {
     heading: "Roboto",
     body: "Roboto",
