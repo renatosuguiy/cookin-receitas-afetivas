@@ -7,9 +7,8 @@ const NewRecipePage03 = () => {
   const { instructions, setInstructions, recipeBody, setRecipeBody } =
     useAddRecipe();
   const { addRecipe } = useMyRecipes();
-  const { token } = JSON.parse(
-    localStorage.getItem("@cookin:accessToken") || ""
-  );
+  const accessToken = localStorage.getItem("@cookin:accessToken") || "";
+
   const history = useHistory();
 
   const handleBack = () => {
@@ -23,7 +22,7 @@ const NewRecipePage03 = () => {
     setRecipeBody({ ...recipeBody, instructions: [...instructions] });
     // addRecipe(recipeBody, token);
     console.log(recipeBody);
-    console.log(token);
+    console.log(accessToken);
     //adicionar um toast
     //adicionar um time
   };
