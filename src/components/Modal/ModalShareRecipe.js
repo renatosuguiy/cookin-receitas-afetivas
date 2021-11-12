@@ -39,7 +39,7 @@ export const ModalShareRecipe = ({
                     </ModalBody>
                     <ModalFooter flexDirection='column'>
                         <Button
-                            bg='red.400'
+                            bg='green.400'
                             color='white'
                             w='100%'
                             h='40px'
