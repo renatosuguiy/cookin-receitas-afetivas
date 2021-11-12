@@ -6,7 +6,9 @@ export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
-  const localToken = localStorage.getItem("token") || "";
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
+
+  const [recipeDetails, setRecipeDetails] = useState({});
 
   //lendo/puxando receitas públicas
   const getSharedRecipes = (token) => {
@@ -66,7 +68,18 @@ export const RecipesProvider = ({ children }) => {
 
   useEffect(() => {
     getSharedRecipes(localToken);
-  }, [recipes]);
+  }, []);
+
+  const getRecipeDetails = (recipeId, token) => {
+    api
+      .get(`/recipes/${recipeId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setRecipeDetails(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <RecipesContext.Provider
@@ -76,6 +89,8 @@ export const RecipesProvider = ({ children }) => {
         shareRecipe,
         recipes,
         setRecipes,
+        recipeDetails,
+        getRecipeDetails,
       }}
     >
       {children}

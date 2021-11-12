@@ -7,12 +7,14 @@ import LoveGray from "../../assets/Images/lovegray.svg";
 import LoveRed from "../../assets/Images/lovered.svg";
 import TimesDelete from "../../assets/Images/times.svg";
 import { useSharedRecipes } from "../../providers/recipes";
+import { useHistory } from "react-router";
 
 export const CardRecipes = ({ item, typeCard }) => {
   const isInFavorites = item.favorites_users.some((id) => id === item.userId);
-  const localToken = localStorage.getItem("token") || "";
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
+  const history = useHistory();
 
-  const { deleteOrUnshareSharedRecipes } = useSharedRecipes();
+  const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();
   //falta puxar informações do provider favoritar receitas e do myrecipes
 
   const handleDeleteRecipe = (publicId, privateId) => {
@@ -43,7 +45,9 @@ export const CardRecipes = ({ item, typeCard }) => {
           ml="4"
           onClick={() => {
             console.log("card");
-          }} //falta colocar a rota da pagina da receita history.push("/recipes/id")
+            getRecipeDetails(item.id, localToken);
+            history.push(`/recipes/${item.id}`);
+          }}
           _hover={{ cursor: "pointer" }}
         >
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
@@ -113,7 +117,9 @@ export const CardRecipes = ({ item, typeCard }) => {
           ml="4"
           onClick={() => {
             console.log("card");
-          }} //falta colocar a rota da pagina da receita history.push("/recipes/id")
+            getRecipeDetails(item.id, localToken);
+            history.push(`/recipes/${item.id}`);
+          }}
           _hover={{ cursor: "pointer" }}
         >
           <Heading as="h2" fontSize="lg" color="#0a0a0a">
