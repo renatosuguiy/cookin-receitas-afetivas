@@ -1,9 +1,11 @@
-import { Box, Grid } from "@chakra-ui/layout";
+import { Box, Grid, Flex, VStack } from "@chakra-ui/layout";
 import { CardRecipes } from "../../components/Card";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { useSharedRecipes } from "../../providers/recipes";
 import HeaderLogo from "../../components/HeaderLogo/index";
 import Menu from "../../components/Menu";
+import { ButtonClear } from "../../components/ButtonClear";
+import { CardsList } from "../../components/CardsList";
 
 const RecipesShared = () => {
   const { recipes } = useSharedRecipes();
@@ -13,18 +15,13 @@ const RecipesShared = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu />
-      <Grid
-        w={["", "", "", "65vw"]}
-        m="0 auto"
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-        gap={10}
-        paddingX="8"
-        mt="8"
-      >
-        {recipes.map((item) => (
-          <CardRecipes key={item.id} item={item} typeCard="heart" />
-        ))}
-      </Grid>
+      <SearchBox functionToSearch={searchForRecipePublic} />
+      <CardsList
+        state={recipes}
+        stateOfSearchedRecipes={recipesSharedFound}
+        setStateOfSearchedRecipes={setRecipesSharedFound}
+        typeCard="heart"
+      />
     </Box>
   );
 };
