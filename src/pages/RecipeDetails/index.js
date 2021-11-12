@@ -22,18 +22,19 @@ import {
 } from "./styles";
 
 import { useSharedRecipes } from "../../providers/recipes";
-import { useAuth } from "../../providers/Auth";
 
 const RecipeDetails = () => {
   const history = useHistory();
   const { recipeDetails } = useSharedRecipes();
-  const { user } = useAuth();
-  console.log(user.id);
 
-  const isTheOwner = user.id === recipeDetails.userId;
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userId = JSON.parse(user).id;
+  console.log(userId);
+
+  const isTheOwner = userId === recipeDetails.userId;
 
   const isInFavorites = recipeDetails.favorites_users?.some(
-    (id) => id === user.id
+    (id) => id === userId
   );
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
