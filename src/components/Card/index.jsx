@@ -19,11 +19,11 @@ export const CardRecipes = ({ item, typeCard }) => {
   const history = useHistory();
 
   const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();
-  //falta puxar informações de favoritar/desfavoritar receitas
+  //falta puxar provider de favoritar/desfavoritar receitas
   const { deleteRecipe } = useMyRecipes();
 
   const handleDeleteRecipe = (publicId, privateId) => {
-    //funções para quando apertar no X do card em minhas receitas:
+    //funções chamadas para quando usuário apertar no X do card em minhas receitas:
 
     //deleta do minhas receitas públicas
     deleteOrUnshareSharedRecipes(publicId, localToken);
