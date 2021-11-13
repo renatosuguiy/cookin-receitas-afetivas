@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { api } from "../../services/api";
 import { Alert, AlertIcon } from "@chakra-ui/react";
 
@@ -6,6 +6,7 @@ export const MyRecipesContext = createContext();
 
 export const MyRecipesProvider = ({ children }) => {
   const [myRecipes, setMyRecipes] = useState([]);
+  const [recipesPrivateFound, setRecipesPrivateFound] = useState([]);
 
   const getMyRecipes = (token, userId) => {
     api
@@ -54,9 +55,32 @@ export const MyRecipesProvider = ({ children }) => {
   //       .catch((error) => console.log(error));
   //   };
 
+  const searchForRecipePrivate = useCallback(async (recipeTitle, token) => {
+    if (recipeTitle !== "") {
+      const response = await api.get(`/myRecipes?title_like=${recipeTitle}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.data.length) {
+        //chamar o toast de nada encontrado, procure novamente
+        console.log("achei nada");
+      }
+      setRecipesPrivateFound(response.data);
+    }
+  }, []);
+
   return (
     <MyRecipesContext.Provider
-      value={{ myRecipes, getMyRecipes, addRecipe, deleteRecipe }}
+      value={{
+        myRecipes,
+        getMyRecipes,
+        addRecipe,
+        deleteRecipe,
+        searchForRecipePrivate,
+        recipesPrivateFound,
+        setRecipesPrivateFound,
+      }}
     >
       {children}
     </MyRecipesContext.Provider>
