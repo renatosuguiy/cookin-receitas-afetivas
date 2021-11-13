@@ -18,7 +18,11 @@ export const CardRecipes = ({ item, typeCard }) => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const history = useHistory();
 
-  const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();
+  const {
+    deleteOrUnshareSharedRecipes,
+    getRecipeDetails,
+    addToFavoriteRecipes,
+  } = useSharedRecipes();
   //falta puxar provider de favoritar/desfavoritar receitas
   const { deleteRecipe } = useMyRecipes();
 
@@ -72,7 +76,8 @@ export const CardRecipes = ({ item, typeCard }) => {
             borderRadius="100%"
             onClick={() => {
               console.log("coração");
-            }} //falta chamar função que coloca o id do user no array favoritesuser (provider)
+              addToFavoriteRecipes(userLoggedId, item.id, localToken);
+            }}
             border="none"
             bgColor="#ededed"
             position="absolute"
