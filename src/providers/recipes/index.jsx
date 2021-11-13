@@ -10,6 +10,9 @@ export const RecipesProvider = ({ children }) => {
 
   const [recipeDetails, setRecipeDetails] = useState({});
 
+  const userIdList =
+    JSON.parse(localStorage.getItem("@cookin:userIdList")) || [];
+
   //lendo/puxando receitas públicas
   const getSharedRecipes = (token) => {
     api
@@ -81,6 +84,27 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const addToFavoriteRecipes = (userId, recipeId, token) => {
+    const isFavorite = userIdList.some((item) => item === userId);
+
+    !isFavorite && userIdList.push(userId);
+    localStorage.setItem("@cookin:userIdList", JSON.stringify(userIdList));
+
+    const data = {
+      favorites_users: userIdList,
+    };
+
+    api
+      .patch(`/recipes/${recipeId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        //toast "Receita Adicionada ao Favoritos"
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -91,6 +115,7 @@ export const RecipesProvider = ({ children }) => {
         setRecipes,
         recipeDetails,
         getRecipeDetails,
+        addToFavoriteRecipes,
       }}
     >
       {children}
