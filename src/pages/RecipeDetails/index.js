@@ -24,7 +24,8 @@ const RecipeDetails = () => {
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
 
-  const { recipeDetails, addToFavoriteRecipes } = useSharedRecipes();
+  const { recipeDetails, addToFavoriteRecipes, removeFromFavoriteRecipes } =
+    useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
@@ -163,7 +164,9 @@ const RecipeDetails = () => {
                   padding="10px"
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para favoritar*/
+                  onClick={() => {
+                    removeFromFavoriteRecipes(userId, recipeId, localToken);
+                  }}
                 >
                   <AiFillHeart style={{ color: "#EB1616" }} />
                 </Box>
