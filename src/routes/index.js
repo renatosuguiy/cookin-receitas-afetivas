@@ -23,9 +23,6 @@ export const Routes = () => {
       <Route exact path="/signup">
         <SignUp />
       </Route>
-      <Route exact path="/dashboard">
-        <Dashboard />
-      </Route>
       <Route exact path="/addRecipe">
         <AddRecipe />
       </Route>
