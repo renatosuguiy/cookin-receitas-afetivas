@@ -9,6 +9,8 @@ export const RecipesProvider = ({ children }) => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipeFavorites, setRecipeFavorites] = useState([]);
+  console.log(recipeFavorites);
 
   const userIdList =
     JSON.parse(localStorage.getItem("@cookin:userIdList")) || [];
@@ -129,6 +131,13 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const getFavoriteRecipes = (userId) => {
+    const favoriteRecipes = recipes.filter((item) =>
+      item.favorites_users.find((id) => id === userId)
+    );
+    setRecipeFavorites(favoriteRecipes);
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -139,6 +148,7 @@ export const RecipesProvider = ({ children }) => {
         setRecipes,
         recipeDetails,
         getRecipeDetails,
+        getFavoriteRecipes,
         addToFavoriteRecipes,
         removeFromFavoriteRecipes,
       }}
