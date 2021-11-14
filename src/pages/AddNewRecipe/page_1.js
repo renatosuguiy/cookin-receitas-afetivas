@@ -37,7 +37,7 @@ const NewRecipePage01 = () => {
         <Heading size="lg" color="orange.700" m="10px auto 0px">
           <Flex>
             <Button
-              onClick={() => history.push("/dashboard")}
+              onClick={() => history.push("/myrecipes")}
               color="#C8561F"
               fontSize="3xl"
               bgColor="transparent"
