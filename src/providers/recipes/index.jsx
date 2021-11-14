@@ -107,6 +107,28 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const removeFromFavoriteRecipes = (userId, recipeId, token) => {
+    const newUserIdList = userIdList.filter((item) => item !== userId);
+
+    localStorage.setItem("@cookin:userIdList", JSON.stringify(newUserIdList));
+
+    const data = {
+      favorites_users: newUserIdList,
+    };
+
+    api
+      .patch(`/recipes/${recipeId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        getSharedRecipes(token);
+        getRecipeDetails(recipeId, token);
+        //toast "Receita Removida do Favoritos"
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -118,6 +140,7 @@ export const RecipesProvider = ({ children }) => {
         recipeDetails,
         getRecipeDetails,
         addToFavoriteRecipes,
+        removeFromFavoriteRecipes,
       }}
     >
       {children}
