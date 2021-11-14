@@ -22,6 +22,7 @@ export const CardRecipes = ({ item, typeCard }) => {
     deleteOrUnshareSharedRecipes,
     getRecipeDetails,
     addToFavoriteRecipes,
+    removeFromFavoriteRecipes,
   } = useSharedRecipes();
   //falta puxar provider de favoritar/desfavoritar receitas
   const { deleteRecipe } = useMyRecipes();
@@ -95,7 +96,8 @@ export const CardRecipes = ({ item, typeCard }) => {
             borderRadius="100%"
             onClick={() => {
               console.log("coração");
-            }} //falta chamar função que remove o id do user no array favoritesuser (provider)
+              removeFromFavoriteRecipes(userLoggedId, item.id, localToken);
+            }}
             border="none"
             bgColor="#ededed"
             position="absolute"
