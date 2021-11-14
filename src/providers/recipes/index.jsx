@@ -100,6 +100,8 @@ export const RecipesProvider = ({ children }) => {
       })
       .then((response) => {
         console.log(response);
+        getSharedRecipes(token);
+        getRecipeDetails(recipeId, token);
         //toast "Receita Adicionada ao Favoritos"
       })
       .catch((error) => console.log(error));

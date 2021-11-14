@@ -48,6 +48,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("@cookin:accessToken");
     localStorage.removeItem("@cookin:user");
+    localStorage.removeItem("@cookin:userIdList");
     setAuthToken("");
     history.push("/");
   };
