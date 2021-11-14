@@ -172,6 +172,7 @@ export const RecipesProvider = ({ children }) => {
         setRecipes,
         recipeDetails,
         getRecipeDetails,
+        recipeFavorites,
         getFavoriteRecipes,
         addToFavoriteRecipes,
         removeFromFavoriteRecipes,
