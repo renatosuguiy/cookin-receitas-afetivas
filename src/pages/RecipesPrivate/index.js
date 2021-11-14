@@ -7,6 +7,7 @@ import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
 import { useHistory } from "react-router";
+import EmptyPage from "../../components/EmptyPage";
 
 const RecipesPrivate = () => {
   const {
@@ -23,26 +24,31 @@ const RecipesPrivate = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu />
-      <SearchBox functionToSearch={searchForRecipePrivate} />
-
-      <CardsList
-        state={myRecipes}
-        stateOfSearchedRecipes={recipesPrivateFound}
-        setStateOfSearchedRecipes={setRecipesPrivateFound}
-        typeCard="times"
-      />
-      <Box w="250px" margin="0 auto">
-        <Button
-          bg="orange.200"
-          h="54px"
-          w="250px"
-          color="#ffffff"
-          mt="6"
-          onClick={() => history.push("/addRecipe")}
-        >
-          Cadastrar receita
-        </Button>
-      </Box>
+      {myRecipes.length === 0 ? (
+        <EmptyPage />
+      ) : (
+        <>
+          <SearchBox functionToSearch={searchForRecipePrivate} />
+          <CardsList
+            state={myRecipes}
+            stateOfSearchedRecipes={recipesPrivateFound}
+            setStateOfSearchedRecipes={setRecipesPrivateFound}
+            typeCard="times"
+          />
+          <Box w="250px" margin="0 auto">
+            <Button
+              bg="orange.200"
+              h="54px"
+              w="250px"
+              color="#ffffff"
+              mt="6"
+              onClick={() => history.push("/addRecipe")}
+            >
+              Cadastrar receita
+            </Button>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };
