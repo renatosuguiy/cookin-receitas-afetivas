@@ -1,13 +1,5 @@
-import {
-  Flex,
-  Heading,
-  Text,
-  Box,
-  Image,
-  Center,
-  Stack,
-} from "@chakra-ui/react";
-import Salad from "../../assets/Images/salad.svg";
+import { Flex, Heading, Text, Box, Center, Stack } from "@chakra-ui/react";
+import { AiFillHeart } from "react-icons/ai";
 
 const EmptyFavoritesPage = () => {
   return (
@@ -26,11 +18,14 @@ const EmptyFavoritesPage = () => {
             <Text color="gray.400" textAlign="center" fontSize="lg">
               Adicione uma receita clicando no coração.
             </Text>
-            <Image
-              src={Salad}
-              alt="Imagem de Salada"
-              w={["150px", "150px", "250px"]}
-            />
+            <Box
+              padding="25px"
+              borderRadius="100%"
+              backgroundColor="#ededed"
+              boxShadow="0 0 0.4em #ededed"
+            >
+              <AiFillHeart style={{ color: "#979797", fontSize: "90px" }} />
+            </Box>
           </Stack>
         </Center>
       </Flex>
