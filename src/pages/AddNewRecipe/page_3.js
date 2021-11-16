@@ -20,7 +20,7 @@ const NewRecipePage03 = () => {
   const addNewRecipe = () => {
     localStorage.setItem("@cookin:instructions", JSON.stringify(instructions));
     setRecipeBody({ ...recipeBody, instructions: [...instructions] });
-    // addRecipe(recipeBody, token);
+    addRecipe(recipeBody, accessToken);
     console.log(recipeBody);
     console.log(accessToken);
   };
