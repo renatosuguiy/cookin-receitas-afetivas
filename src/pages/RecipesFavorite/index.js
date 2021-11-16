@@ -7,6 +7,7 @@ import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
 import { useEffect } from "react";
 import EmptyFavoritesPage from "../../components/EmptyFavoritesPage";
+import { fadeAnimation } from "../../styles/animations";
 
 const RecipesFavorite = () => {
   const {
@@ -30,19 +31,21 @@ const RecipesFavorite = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={2} />
-      {recipeFavorites.length === 0 ? (
-        <EmptyFavoritesPage />
-      ) : (
-        <>
-          <SearchBox functionToSearch={searchForRecipePublic} />
-          <CardsList
-            state={recipeFavorites}
-            stateOfSearchedRecipes={recipesSharedFound}
-            setStateOfSearchedRecipes={setRecipesSharedFound}
-            typeCard="heart"
-          />
-        </>
-      )}
+      <Box animation={fadeAnimation}>
+        {recipeFavorites.length === 0 ? (
+          <EmptyFavoritesPage />
+        ) : (
+          <Box >
+            <SearchBox functionToSearch={searchForRecipePublic} />
+            <CardsList
+              state={recipeFavorites}
+              stateOfSearchedRecipes={recipesSharedFound}
+              setStateOfSearchedRecipes={setRecipesSharedFound}
+              typeCard="heart"
+            />
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

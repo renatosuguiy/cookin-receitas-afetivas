@@ -6,6 +6,7 @@ import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
 import { useEffect } from "react";
+import { fadeAnimation } from "../../styles/animations";
 
 const RecipesShared = () => {
   const {
@@ -23,16 +24,20 @@ const RecipesShared = () => {
   }, []);
   return (
     <Box>
-      <HeaderWelcome />
-      <HeaderLogo />
-      <Menu index={0} />
-      <SearchBox functionToSearch={searchForRecipePublic} />
-      <CardsList
-        state={recipes}
-        stateOfSearchedRecipes={recipesSharedFound}
-        setStateOfSearchedRecipes={setRecipesSharedFound}
-        typeCard="heart"
-      />
+      <Box>
+        <HeaderWelcome />
+        <HeaderLogo />
+        <Menu index={0} />
+        <SearchBox functionToSearch={searchForRecipePublic} />
+      </Box>
+      <Box animation={fadeAnimation}>
+        <CardsList
+          state={recipes}
+          stateOfSearchedRecipes={recipesSharedFound}
+          setStateOfSearchedRecipes={setRecipesSharedFound}
+          typeCard='heart'
+        />
+      </Box>
     </Box>
   );
 };

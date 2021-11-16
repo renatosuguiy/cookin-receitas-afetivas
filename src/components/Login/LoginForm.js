@@ -1,5 +1,6 @@
 import { Heading, Button, Grid, Text, VStack, Link } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
+import { leftAnimation } from "../../styles/animations";
 
 const LoginForm = ({ handleLogin, errors, register, loading }) => {
   return (
@@ -16,6 +17,7 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
       borderColor="gray.100"
       bg="white"
       borderRadius="10px"
+      animation={leftAnimation}
     >
       <Heading
         box-shadow="0px 4px 4px 0px #00000040"

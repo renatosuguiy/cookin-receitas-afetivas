@@ -9,6 +9,7 @@ import TimesDelete from "../../assets/Images/times.svg";
 import { useSharedRecipes } from "../../providers/recipes";
 import { useHistory } from "react-router";
 import { useMyRecipes } from "../../providers/MyRecipes";
+import { scaleAnimation } from "../../styles/animations";
 
 export const CardRecipes = ({ item, typeCard }) => {
   const user = localStorage.getItem("@cookin:user") || "";
@@ -40,22 +41,24 @@ export const CardRecipes = ({ item, typeCard }) => {
   if (typeCard === "heart") {
     return (
       <Flex
-        align="center"
-        width="310px"
-        height="96px"
-        borderRadius="10px"
-        border="0.5px solid rgba(180, 194, 211, 0.2)"
-        boxShadow="base"
-        position="relative"
-        mb="26px"
+        align='center'
+        width='310px'
+        height='96px'
+        borderRadius='10px'
+        border='0.5px solid rgba(180, 194, 211, 0.2)'
+        boxShadow='base'
+        position='relative'
+        mb='26px'
+        _hover={{ transform: "scale(1.1)" }}
+        transition='ease 0.2s'
       >
-        <Center w="60px" h="60px" bg="white" fontSize="2x1" borderRadius="md">
+        <Center w='60px' h='60px' bg='white' fontSize='2x1' borderRadius='md'>
           {item.category === "doce" && <Image src={sweetCategory} />}
           {item.category === "salgado" && <Image src={saltCategory} />}
           {item.category === "bebida" && <Image src={drinkCategory} />}
         </Center>
         <Box
-          ml="4"
+          ml='4'
           onClick={() => {
             console.log("card");
             getRecipeDetails(item.id, localToken);
@@ -63,47 +66,47 @@ export const CardRecipes = ({ item, typeCard }) => {
           }}
           _hover={{ cursor: "pointer" }}
         >
-          <Heading as="h2" fontSize="lg" color="#0a0a0a">
+          <Heading as='h2' fontSize='lg' color='#0a0a0a'>
             {item.title}
           </Heading>
-          <Text color="#0a0a0a" fontSize="small" textTransform="capitalize">
+          <Text color='#0a0a0a' fontSize='small' textTransform='capitalize'>
             {item.category}
           </Text>
         </Box>
         {!isInFavorites && (
           <Center
-            as="button"
-            w="28px"
-            h="28px"
-            borderRadius="100%"
+            as='button'
+            w='28px'
+            h='28px'
+            borderRadius='100%'
             onClick={() => {
               console.log("coração");
               addToFavoriteRecipes(userLoggedId, item.id, localToken);
             }}
-            border="none"
-            bgColor="#ededed"
-            position="absolute"
-            bottom="12px"
-            right="18px"
+            border='none'
+            bgColor='#ededed'
+            position='absolute'
+            bottom='12px'
+            right='18px'
           >
             <Image src={LoveGray} />
           </Center>
         )}
         {isInFavorites && (
           <Center
-            as="button"
-            w="28px"
-            h="28px"
-            borderRadius="100%"
+            as='button'
+            w='28px'
+            h='28px'
+            borderRadius='100%'
             onClick={() => {
               console.log("coração");
               removeFromFavoriteRecipes(userLoggedId, item.id, localToken);
             }}
-            border="none"
-            bgColor="#ededed"
-            position="absolute"
-            bottom="12px"
-            right="18px"
+            border='none'
+            bgColor='#ededed'
+            position='absolute'
+            bottom='12px'
+            right='18px'
           >
             <Image src={LoveRed} />
           </Center>
@@ -115,22 +118,23 @@ export const CardRecipes = ({ item, typeCard }) => {
   if (typeCard === "times") {
     return (
       <Flex
-        align="center"
-        width="310px"
-        height="96px"
-        borderRadius="10px"
-        border="0.5px solid rgba(180, 194, 211, 0.2)"
-        boxShadow="base"
-        position="relative"
-        mb="26px"
+        align='center'
+        width='310px'
+        height='96px'
+        borderRadius='10px'
+        border='0.5px solid rgba(180, 194, 211, 0.2)'
+        boxShadow='base'
+        position='relative'
+        mb='26px'
+        _hover={{ animation: { scaleAnimation } }}
       >
-        <Center w="60px" h="60px" bg="white" fontSize="2x1" borderRadius="md">
+        <Center w='60px' h='60px' bg='white' fontSize='2x1' borderRadius='md'>
           {item.category === "doce" && <Image src={sweetCategory} />}
           {item.category === "salgado" && <Image src={saltCategory} />}
           {item.category === "bebida" && <Image src={drinkCategory} />}
         </Center>
         <Box
-          ml="4"
+          ml='4'
           onClick={() => {
             console.log("card");
             getRecipeDetails(item.id, localToken);
@@ -138,27 +142,27 @@ export const CardRecipes = ({ item, typeCard }) => {
           }}
           _hover={{ cursor: "pointer" }}
         >
-          <Heading as="h2" fontSize="lg" color="#0a0a0a">
+          <Heading as='h2' fontSize='lg' color='#0a0a0a'>
             {item.title}
           </Heading>
-          <Text color="#0a0a0a" fontSize="small" textTransform="capitalize">
+          <Text color='#0a0a0a' fontSize='small' textTransform='capitalize'>
             {item.category}
           </Text>
         </Box>
 
         <Center
-          as="button"
-          w="28px"
-          h="28px"
-          borderRadius="100%"
+          as='button'
+          w='28px'
+          h='28px'
+          borderRadius='100%'
           onClick={() => {
             handleDeleteRecipe(item.id, item.myrecipesId); //manda como parâmetros a id do item no público e no privado
           }}
-          border="none"
-          bgColor="#ededed"
-          position="absolute"
-          bottom="12px"
-          right="18px"
+          border='none'
+          bgColor='#ededed'
+          position='absolute'
+          bottom='12px'
+          right='18px'
         >
           <Image src={TimesDelete} />
         </Center>

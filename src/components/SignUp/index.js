@@ -1,27 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../providers/Auth";
 import SignUpImages from "./SignUpImages.js";
 import SignUpForm from "./SignUpForm.js";
-import { Flex, Fade, SlideFade, ScaleFade, keyframes } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
+import { leftAnimation } from "../../styles/animations";
 
 
-const spin = keyframes`
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg)}
-`;
 
 const SignUpComponent = () => {
     const { signUp } = useAuth();
-    const spinAnimation = `${spin} 1 2s linear`;
     const [loading, setLoading] = useState(false);
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        setShow(true);
-    }, [])
 
     const schema = yup.object().shape({
         email: yup.string().required("Informe email!").email("E-mail inválido"),
@@ -67,10 +58,9 @@ const SignUpComponent = () => {
                 justifyContent="center"
                 alignItems="center"
                 flexDirection="row"
-                animation={spinAnimation}
             >
-                <SignUpImages offsetX='30px' initialScale={0.5} />
 
+                <SignUpImages offsetX='30px' initialScale={0.5} />
                 <SignUpForm
                     errors={errors}
                     handleSignUp={handleSubmit(handleSignUp)}
@@ -78,7 +68,6 @@ const SignUpComponent = () => {
                     register={register}
 
                 />
-
             </Flex>
         </Flex>
     );
