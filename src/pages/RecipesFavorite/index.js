@@ -6,6 +6,7 @@ import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
 import { useEffect } from "react";
+import EmptyFavoritesPage from "../../components/EmptyFavoritesPage";
 
 const RecipesFavorite = () => {
   const {
@@ -30,7 +31,7 @@ const RecipesFavorite = () => {
       <HeaderLogo />
       <Menu />
       {recipeFavorites.length === 0 ? (
-        <p>Página Vazia</p> //Vou adicionar o componente EmptyFavoritesPage
+        <EmptyFavoritesPage />
       ) : (
         <>
           <SearchBox functionToSearch={searchForRecipePublic} />
