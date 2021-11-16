@@ -1,7 +1,9 @@
-import { Heading, Button, Grid, Text, VStack, Link } from "@chakra-ui/react";
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { Heading, Button, Grid, Text, VStack, Link, Image } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import LogoGoogle from "../../assets/Images/logogoogle.png"
+
+
 
 const LoginForm = ({ handleLogin, errors, register, loading }) => {
   return (
@@ -31,7 +33,7 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
       >
         Login
       </Heading>
-      <VStack spacing="4">
+      <VStack spacing="3">
         <Input
           placeholder="Email"
           {...register("email")}
@@ -46,7 +48,6 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
           type="password"
           error={errors.password}
           color="black"
-          mb='20px'
           icon={FaLock}
         />
         <Button
@@ -57,6 +58,7 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
           w="65%"
           padding="20px"
           h="40px"
+          mt='20px'
           bg="orange.200"
           _hover={{ bgColor: "orange.100" }}
         >
@@ -64,7 +66,7 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
         </Button>
         <Text color="orange.400">ou</Text>
         <Text color="orange.400">Entrar com a conta do Google</Text>
-        <Text color="black">GOOGLE</Text>
+        <Image src={LogoGoogle} cursor='pointer' w='50px' h='35px'/>
       </VStack>
       <Text textAlign="center" mt="30px" color="orange.400">
         Não tem uma conta? <br />
