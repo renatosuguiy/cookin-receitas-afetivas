@@ -12,7 +12,7 @@ const InputColors = {
   default: "gray.100",
   filled: "green.500",
   error: "red.500",
-  focus: "purple.400",
+  focus: "orange.400",
 };
 
 const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
@@ -38,13 +38,13 @@ const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
   }, [error, value]);
 
   return (
-    <FormControl isInvalid={!!error} display="flex" justifyContent="center">
+    <FormControl isInvalid={!!error}>
       {!!label && <FormLabel color="gray.400">{label}</FormLabel>}
-      
+
       <InputGroup flexDirection='column'>
         {Icon && (
           <InputLeftElement color={InputColors[color]} mt="0.5">
-            <Icon/>
+            <Icon />
           </InputLeftElement>
         )}
         <ChakraInput
@@ -64,13 +64,13 @@ const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
           }}
           size="lg"
           h="38px"
-          w={["90%", "90%", "80%", "80%"]}
+          w='100%'
           ref={ref}
           {...rest}
           display="flex"
         />
 
-        {!!error && (<FormErrorMessage mt='2px' fontSize='11px' margin='0'color="red.500">{error.message}</FormErrorMessage>)}
+        {!!error && (<FormErrorMessage mt='2px' fontSize='11px' margin='0' color="red.500">{error.message}</FormErrorMessage>)}
       </InputGroup>
     </FormControl>
   );
