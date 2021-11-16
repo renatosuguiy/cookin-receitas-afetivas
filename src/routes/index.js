@@ -1,5 +1,4 @@
 import { Switch, Route } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import RecipesShared from "../pages/RecipesShared";
 import SignUp from "../pages/SignUp";
@@ -9,6 +8,7 @@ import NewRecipePage01 from "../pages/AddNewRecipe/page_1";
 import NewRecipePage02 from "../pages/AddNewRecipe/page_2";
 import NewRecipePage03 from "../pages/AddNewRecipe/page_3";
 import RecipeDetails from "../pages/RecipeDetails";
+import RecipesPrivate from "../pages/RecipesPrivate";
 
 export const Routes = () => {
   return (
@@ -22,8 +22,8 @@ export const Routes = () => {
       <Route exact path="/signup">
         <SignUp />
       </Route>
-      <Route exact path="/dashboard">
-        <Dashboard />
+      <Route exact path="/myrecipes">
+        <RecipesPrivate />
       </Route>
       <Route exact path="/addRecipe">
         <AddRecipe />
