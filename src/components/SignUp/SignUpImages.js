@@ -4,7 +4,7 @@ import SignUpImage from "../../assets/Images/SignUpImage.png";
 
 const SignUpImages = () => {
     return (
-        <Grid w="100%" ml="220px">
+        <Grid Flex flexDirection='column' w="100%" >
             <Image boxSize="300px" src={LogoPrimary} alt="logo" />
             <Image  minWidth={["10px", "15px", "200px", "200px"]} w="55%" h="75%" src={SignUpImage} alt="logo" />
         </Grid>
