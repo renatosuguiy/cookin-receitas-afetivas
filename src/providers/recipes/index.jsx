@@ -16,10 +16,6 @@ export const RecipesProvider = ({ children }) => {
 
   const [recipeDetails, setRecipeDetails] = useState({});
   const [recipeFavorites, setRecipeFavorites] = useState([]);
-  console.log(recipeFavorites);
-
-  const userIdList =
-    JSON.parse(localStorage.getItem("@cookin:userIdList")) || [];
 
   //lendo/puxando receitas públicas
   const getSharedRecipes = (token) => {
@@ -111,10 +107,13 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const addToFavoriteRecipes = (userId, recipeId, token) => {
+    const recipe = recipes.filter((item) => item.id === recipeId);
+    const [userIdList] = recipe.map((item) => item.favorites_users);
+
     const isFavorite = userIdList.some((item) => item === userId);
 
     !isFavorite && userIdList.push(userId);
-    localStorage.setItem("@cookin:userIdList", JSON.stringify(userIdList));
+    console.log(userIdList);
 
     const data = {
       favorites_users: userIdList,
@@ -134,9 +133,11 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const removeFromFavoriteRecipes = (userId, recipeId, token) => {
-    const newUserIdList = userIdList.filter((item) => item !== userId);
+    const recipe = recipes.filter((item) => item.id === recipeId);
+    const [userIdList] = recipe.map((item) => item.favorites_users);
 
-    localStorage.setItem("@cookin:userIdList", JSON.stringify(newUserIdList));
+    const newUserIdList = userIdList.filter((item) => item !== userId);
+    console.log(newUserIdList);
 
     const data = {
       favorites_users: newUserIdList,
