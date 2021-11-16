@@ -64,7 +64,7 @@ const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
           }}
           size="lg"
           h="38px"
-          w='100%'
+          maxWidth='650px'
           ref={ref}
           {...rest}
           display="flex"

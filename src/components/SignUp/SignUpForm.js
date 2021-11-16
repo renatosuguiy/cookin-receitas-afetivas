@@ -17,12 +17,13 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
         <Grid
             onSubmit={handleSignUp}
             as="form"
-            id="login_Form"
+            id="signup_Form"
             mt="5 "
             h="550px"
-            padding={["5px 15px", "10px 30px", "15px 25px"]}
-            width={["100%", "100%", "60%", "60%"]}
-            mr={["0px", "15px", "200px", "200px"]}
+            maxWidth='600px'
+            padding={["5px 15px", "15px 20px", "15px 20px"]}
+            width={["100%", "100%", "100%", "68%"]}
+            mr={["0px", "15px", "0%", "15%"]}
             border="2px solid"
             borderColor="gray.100"
             bg="white"
@@ -87,7 +88,7 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
             <VStack spacing="3">
                 <Button
                     mt="10px"
-                    form="login_Form"
+                    form="signup_Form"
                     type="submit"
                     isLoading={loading}
                     w="65%"
