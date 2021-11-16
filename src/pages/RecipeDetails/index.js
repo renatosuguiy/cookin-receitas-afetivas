@@ -30,6 +30,8 @@ const RecipeDetails = () => {
     recipeDetails,
     addToFavoriteRecipes,
     removeFromFavoriteRecipes,
+    shareRecipe,
+    deleteOrUnshareSharedRecipes,
   } = useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
@@ -127,7 +129,10 @@ const RecipeDetails = () => {
                     padding="10px"
                     backgroundColor="#ededed"
                     boxShadow="0 0 0.4em #ededed"
-                    /*Falta onClick para des-compartilhar*/
+                    /*Para des-compartilhar*/
+                    onClick={() => {
+                      deleteOrUnshareSharedRecipes(recipeId, localToken);
+                    }}
                   >
                     <FaShareAlt style={{ color: "#C8561F" }} />
                   </Box>
@@ -139,7 +144,10 @@ const RecipeDetails = () => {
                     padding="10px"
                     backgroundColor="#ededed"
                     boxShadow="0 0 0.4em #ededed"
-                    /*Falta onClick para compartilhar*/
+                    /*Para compartilhar*/
+                    onClick={() => {
+                      shareRecipe(recipeDetails, localToken);
+                    }}
                   >
                     <FaShareAlt style={{ color: "#979797" }} />
                   </Box>
@@ -151,7 +159,10 @@ const RecipeDetails = () => {
                   padding="8px"
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para excluir*/
+                  /*Para excluir*/
+                  onClick={() => {
+                    deleteOrUnshareSharedRecipes(recipeId, localToken);
+                  }}
                 >
                   <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
                 </Box>
