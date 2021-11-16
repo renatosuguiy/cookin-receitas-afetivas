@@ -15,6 +15,7 @@ export const RecipesProvider = ({ children }) => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipeFavorites, setRecipeFavorites] = useState([]);
 
   //lendo/puxando receitas públicas
   const getSharedRecipes = (token) => {
@@ -105,6 +106,63 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const addToFavoriteRecipes = (userId, recipeId, token) => {
+    const recipe = recipes.filter((item) => item.id === recipeId);
+    const [userIdList] = recipe.map((item) => item.favorites_users);
+
+    const isFavorite = userIdList.some((item) => item === userId);
+
+    !isFavorite && userIdList.push(userId);
+    console.log(userIdList);
+
+    const data = {
+      favorites_users: userIdList,
+    };
+
+    api
+      .patch(`/recipes/${recipeId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        getSharedRecipes(token);
+        getRecipeDetails(recipeId, token);
+        //toast "Receita Adicionada ao Favoritos"
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const removeFromFavoriteRecipes = (userId, recipeId, token) => {
+    const recipe = recipes.filter((item) => item.id === recipeId);
+    const [userIdList] = recipe.map((item) => item.favorites_users);
+
+    const newUserIdList = userIdList.filter((item) => item !== userId);
+    console.log(newUserIdList);
+
+    const data = {
+      favorites_users: newUserIdList,
+    };
+
+    api
+      .patch(`/recipes/${recipeId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        getSharedRecipes(token);
+        getRecipeDetails(recipeId, token);
+        //toast "Receita Removida do Favoritos"
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getFavoriteRecipes = (userId) => {
+    const favoriteRecipes = recipes.filter((item) =>
+      item.favorites_users.find((id) => id === userId)
+    );
+    setRecipeFavorites(favoriteRecipes);
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -115,6 +173,10 @@ export const RecipesProvider = ({ children }) => {
         setRecipes,
         recipeDetails,
         getRecipeDetails,
+        recipeFavorites,
+        getFavoriteRecipes,
+        addToFavoriteRecipes,
+        removeFromFavoriteRecipes,
         searchForRecipePublic,
         recipesSharedFound,
         setRecipesSharedFound,
