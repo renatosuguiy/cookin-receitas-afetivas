@@ -4,8 +4,6 @@ import { leftAnimation } from "../../styles/animations";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import LogoGoogle from "../../assets/Images/logogoogle.png"
 
-
-
 const LoginForm = ({ handleLogin, errors, register, loading }) => {
   return (
     <Grid
@@ -15,9 +13,9 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
       mt="5 "
       h="470px"
       maxWidth='600px'
-      padding={["5px 15px", "15px 20px", "15px 20px",]}
-      width={["100%", "100%", "60%", "60%"]}
-      ml={["0px", "15px", "200px", "200px"]}
+      padding={["5px 15px", "15px 20px","15px 20px",]}
+      width={["100%", "100%", "100%", "55%"]}
+      ml={["0px", "15px", "0%", "15%"]}
       border="2px solid"
       borderColor="gray.100"
       bg="white"

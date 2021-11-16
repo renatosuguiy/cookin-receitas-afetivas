@@ -1,14 +1,23 @@
-import { Grid, Image } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import LogoPrimary from "../../assets/Images/logo_primary.png";
 import LoginCake from "../../assets/Images/login_cake.png";
 import { rightAnimation } from "../../styles/animations";
 
 const LoginImages = () => {
   return (
-    <Grid w="100%" ml="250px" animation={rightAnimation}>
-      <Image boxSize="310px" src={LogoPrimary} alt="logo" />
-      <Image minWidth={["10px", "15px", "200px", "200px"]} w="55%" h="90%" src={LoginCake} alt="logo" />
-    </Grid>
+    <Flex ml="10%" flexDirection="column" w="100%">
+      <Image 
+        minWidth={["10px", "15px", "240px", "250px"]}
+        maxWidth="55%"
+        h="80%" src={LogoPrimary} alt="logo" />
+      <Image
+         minWidth={["10px", "15px", "220px", "220px"]}
+         maxWidth="50%"
+         h="80%"
+        src={LoginCake}
+        alt="logo"
+      />
+    </Flex>
   );
 };
 
