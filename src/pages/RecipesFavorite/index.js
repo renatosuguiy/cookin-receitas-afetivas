@@ -35,28 +35,11 @@ const RecipesFavorite = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={2} />
-<<<<<<< HEAD
-      <Box animation={fadeAnimation}>
-        {recipeFavorites.length === 0 ? (
-          <EmptyFavoritesPage />
-        ) : (
-          <Box >
-            <SearchBox functionToSearch={searchForRecipePublic} />
-            <CardsList
-              state={recipeFavorites}
-              stateOfSearchedRecipes={recipesSharedFound}
-              setStateOfSearchedRecipes={setRecipesSharedFound}
-              typeCard="heart"
-            />
-          </Box>
-        )}
-      </Box>
-=======
       {recipeFavorites.length === 0 ? (
         <EmptyFavoritesPage />
       ) : (
         <>
-          <SearchBox functionToSearch={searchForRecipeFavorite} />
+          <SearchBox functionToSearch={searchForRecipeFavorite} animation={fadeAnimation} />
           <CardsList
             state={recipeFavorites}
             stateOfSearchedRecipes={recipesFavoritesFound}
@@ -65,7 +48,6 @@ const RecipesFavorite = () => {
           />
         </>
       )}
->>>>>>> developer
     </Box>
   );
 };
