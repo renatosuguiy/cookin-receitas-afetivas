@@ -16,6 +16,9 @@ const RecipesFavorite = () => {
     setRecipesSharedFound,
     searchForRecipePublic,
     getFavoriteRecipes,
+    searchForRecipeFavorite,
+    recipesFavoritesFound,
+    setRecipesFavoritesFound,
   } = useSharedRecipes();
 
   const user = localStorage.getItem("@cookin:user") || "";
@@ -34,11 +37,11 @@ const RecipesFavorite = () => {
         <EmptyFavoritesPage />
       ) : (
         <>
-          <SearchBox functionToSearch={searchForRecipePublic} />
+          <SearchBox functionToSearch={searchForRecipeFavorite} />
           <CardsList
             state={recipeFavorites}
-            stateOfSearchedRecipes={recipesSharedFound}
-            setStateOfSearchedRecipes={setRecipesSharedFound}
+            stateOfSearchedRecipes={recipesFavoritesFound}
+            setStateOfSearchedRecipes={setRecipesFavoritesFound}
             typeCard="heart"
           />
         </>
