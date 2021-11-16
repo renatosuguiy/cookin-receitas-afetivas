@@ -9,7 +9,7 @@ import { Flex } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 
 const SignUpComponent = () => {
-  const isLagerThan720 = useMediaQuery("(min-width: 720px)");
+  const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
   const { signUp } = useAuth();
 
@@ -39,7 +39,6 @@ const SignUpComponent = () => {
   });
 
   const handleSignUp = (data) => {
-    console.log(data);
     setLoading(true);
     signUp(data)
       .then((_) => setLoading(false))
@@ -50,10 +49,10 @@ const SignUpComponent = () => {
     <Flex
       height="100vh"
       bgGradient={[
-        "linear(to-r, orange.50 10%, orange.100 -100%)",
-        "linear(to-r, orange.50 10%, orange.100 -100%)",
-        "linear(to-r, orange.50 20%, orange.100 20%)",
-        "linear(to-r, orange.50 20%, orange.100 29%)",
+        "linear(to-l, orange.100 -100%, orange.50 10%)",
+        "linear(to-l, orange.100 -110%, orange.50 20%)",
+        "linear(to-r, orange.50 70%, orange.100 30%)",
+        "linear(to-r, orange.50 70%, orange.100 30%)",
       ]}
       alignItems="center"
       padding="12px 20px"
@@ -65,7 +64,7 @@ const SignUpComponent = () => {
         alignItems="center"
         flexDirection="row"
       >
-        {isLagerThan720 && <SignUpImages />}
+        {isLagerThan768 && <SignUpImages />}
 
         <SignUpForm
           errors={errors}

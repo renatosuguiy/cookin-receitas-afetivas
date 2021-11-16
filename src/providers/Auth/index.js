@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { useState, useContext, createContext } from "react";
 import { useHistory } from "react-router";
 
@@ -12,6 +13,9 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
+
+//  const toast = useToast();
+
   const history = useHistory();
 
   const [authToken, setAuthToken] = useState(
@@ -32,8 +36,22 @@ const AuthProvider = ({ children }) => {
         setAuthToken(response.data.accessToken);
         setUser(response.data.user);
         history.push("/recipes");
+          // toast({
+          //   title: "Account created.",
+          //   description: "We've created your account for you.",
+          //   status: "success",
+          //   duration: 2000,
+          //   isClosable: true,
+          // })
       })
       .catch((err) => console.log(err));
+      // toast({
+      //   title: "Account created.",
+      //   description: "We've created your account for you.",
+      //   status: "error  ",
+      //   duration: 2000,
+      //   isClosable: true,
+      // })
   };
 
   const signUp = async (userData) => {
