@@ -22,10 +22,11 @@ const NewRecipePage01 = () => {
   const history = useHistory();
   const { recipeBody, setRecipeBody } = useAddRecipe();
   const { id } = JSON.parse(localStorage.getItem("@cookin:user") || "");
+  const { name } = JSON.parse(localStorage.getItem("@cookin:user") || "");
 
   const nextPage = () => {
     history.push("/addRecipe2");
-    setRecipeBody({ ...recipeBody, userId: id });
+    setRecipeBody({ ...recipeBody, userId: id, author: name });
   };
 
   return (
