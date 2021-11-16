@@ -11,8 +11,9 @@ import {
   AccordionPanel,
   AccordionButton,
 } from "@chakra-ui/react";
-import Avatar from "../../assets/Images/avatar.png";
 import { useMediaQuery } from "@mui/material";
+import { BsLinkedin, BsGithub } from "react-icons/bs";
+
 const Footer = () => {
   const desktopVersion = useMediaQuery("(min-width: 768px)");
 

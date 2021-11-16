@@ -6,99 +6,110 @@ import {
     VStack,
     Link,
     Select,
-    } from "@chakra-ui/react";
-    import {Input} from "../../components/Form/Input"
-    
-    const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
+    Image,
+} from "@chakra-ui/react";
+import { Input } from "../../components/Form/Input";
+import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import LogoGoogle from "../../assets/Images/logogoogle.png";
+
+const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
     return (
-    <Grid
-    onSubmit={handleSignUp}
-    as="form"
-    id="login_Form"
-    mt="5 "
-    h="550px"
-    padding="15px 25px"
-    w={["100%", "100%", "60%", "60%"]}
-    mr="220px"
-    border="2px solid"
-    borderColor="gray.100"
-    bg="white"
-    borderRadius="10px"
-    >
-    <Heading
-    box-shadow="0px 4px 4px 0px #00000040"
-    textAlign="center"
-    fontSize="3xl"
-    mt="10px"
-    color="orange.400"
-    >
-    Cadastrar
-    </Heading>
-    <VStack spacing="4">
-    <Input
-    placeholder="Nome"
-    {...register("name")}
-    type="text"
-    error={errors.name}
-    color="black"
-    />
-    <Input
-    placeholder="Email"
-    {...register("email")}
-    type="email"
-    error={errors.email}
-    color="black"
-    />
-    <Input
-    placeholder="Senha"
-    {...register("password")}
-    type="password"
-    error={errors.password}
-    color="black"
-    />
-    <Input
-    placeholder="Confirmar senha"
-    {...register("confirmPassword")}
-    type="password"
-    error={errors.confirmPassword}
-    color="black"
-    />
-    <Select
-    color="black"
-    error={errors.gender}
-    {...register("gender")}
-    placeholder="Gênero"
-    >
-    <option value="Feminino">Feminino</option>
-    <option value="Binário">Binário</option>
-    <option value="Masculino">Masculino</option>
-    </Select>
-    <Button
-    form="login_Form"
-    type="submit"
-    isLoading={loading}
-    w="65%"
-    padding="20px"
-    h="40px"
-    bg="orange.200"
-    _hover={{ bgColor: "orange.100" }}
-    >
-    Cadastrar
-    </Button>
-    <Text color="orange.400">Cadastrar com a conta do Google</Text>
-    <Text mb="15px" color="black">
-    GOOGLE
-    </Text>
-    </VStack>
-    <Text textAlign="center" mt="20px" color="orange.400">
-    Já tem uma conta? <br />
-    Crie uma{" "}
-    <Link href="/login" fontWeight="bold" color="pink.400">
-    clicando aqui
-    </Link>
-    </Text>
-    </Grid>
+        <Grid
+            onSubmit={handleSignUp}
+            as="form"
+            id="login_Form"
+            mt="5 "
+            h="550px"
+            padding={["5px 15px", "10px 30px", "15px 25px"]}
+            width={["100%", "100%", "60%", "60%"]}
+            mr={["0px", "15px", "200px", "200px"]}
+            border="2px solid"
+            borderColor="gray.100"
+            bg="white"
+            borderRadius="10px"
+            minWidth={["0", "0", "330px", "330px"]}
+        >
+            <Heading
+                box-shadow="0px 4px 4px 0px #00000040"
+                textAlign="center"
+                fontSize="3xl"
+                mt="10px"
+                color="orange.400"
+            >
+                Cadastrar
+            </Heading>
+            <VStack spacing="3">
+                <Input
+                    placeholder="Nome"
+                    {...register("name")}
+                    type="text"
+                    error={errors.name}
+                    color="black"
+                    icon={FaUser}
+
+                />
+                <Input
+                    placeholder="Email"
+                    {...register("email")}
+                    type="email"
+                    error={errors.email}
+                    color="black"
+                    icon={FaEnvelope}
+                />
+                <Input
+                    placeholder="Senha"
+                    {...register("password")}
+                    type="password"
+                    error={errors.password}
+                    color="black"
+                    icon={FaLock}
+                />
+                <Input
+                    placeholder="Confirmar senha"
+                    {...register("confirmPassword")}
+                    type="password"
+                    error={errors.confirmPassword}
+                    color="black"
+                    icon={FaLock}
+                />
+                <Select
+                    w='100%'
+                    color="black"
+                    error={errors.gender}
+                    {...register("gender")}
+                    placeholder="Escolha seu gênero"
+                >
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Outro">Outro</option>
+                </Select>
+            </VStack>
+            <VStack spacing="3">
+                <Button
+                    mt="10px"
+                    form="login_Form"
+                    type="submit"
+                    isLoading={loading}
+                    w="65%"
+                    padding="20px"
+                    h="35px"
+                    bg="orange.200"
+                    _hover={{ bgColor: "orange.100" }}
+                >
+                    Cadastrar
+                </Button>
+                <Text color="orange.400">Cadastrar com a conta do Google</Text>
+                <Image src={LogoGoogle} cursor="pointer" w="50px" h="35px" />
+                <Text textAlign="center" mt="20px" color="orange.400">
+                    Já tem uma conta? <br />
+                    Crie uma {" "}
+                    <Link href="/login" fontWeight="bold" color="pink.400">
+                        clicando aqui
+                    </Link>
+                </Text>
+            </VStack>
+        </Grid>
     );
-    };
-    
-    export default SignUpForm;
+};
+
+export default SignUpForm;

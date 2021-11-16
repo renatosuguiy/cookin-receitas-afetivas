@@ -1,31 +1,38 @@
-import { List, ListItem, ListIcon, Heading, Text } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  Heading,
+  Text,
+  Circle,
+  Box,
+} from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
-import { useHistory } from "react-router";
-import { AiFillHeart, AiOutlineClose } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
+import { AiFillHeart } from "react-icons/ai";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 
-import {
-  BoxAuthor,
-  BoxIconLogout,
-  BoxIconsButton,
-  ContainerHeader,
-  ContainerIngredients,
-  ContainerInstructions,
-  ContainerRecipes,
-  ListInstructions,
-  ListOrdered,
-} from "./styles";
-
+import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
 
 const RecipeDetails = () => {
   const history = useHistory();
-  const { recipeDetails } = useSharedRecipes();
+  const parameters = useParams();
+  const recipeId = parameters.idRecipes;
+
+  const {
+    recipes,
+    recipeDetails,
+    addToFavoriteRecipes,
+    removeFromFavoriteRecipes,
+  } = useSharedRecipes();
+
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
@@ -36,107 +43,196 @@ const RecipeDetails = () => {
     (id) => id === userId
   );
 
+  const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
+
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
-
-  const styleList = {
-    width: "290px",
-    marginLeft: "10px",
-    display: "flex",
-    flexWrap: "wrap",
-    padding: "10px 0px",
-    "@media screen and (min-width: 500px)": {
-      width: "620px",
-      margin: "0 auto",
-    },
-  };
-
-  const styleListItem = {
-    width: "290px",
-    padding: "5px 0px",
-    display: "flex",
-    alignItems: "center",
-    "@media screen and (min-width: 500px)": {
-      width: "310px",
-    },
-  };
-
-  const styleTitle = {
-    marginLeft: "10px",
-    "@media screen and (min-width: 500px)": {
-      marginLeft: "40px",
-    },
-  };
 
   return (
     <>
-      {isLagerThan768 ? <HeaderWelcome /> : <></>}
-      {isLagerThan768 ? <HeaderLogo /> : <></>}
-      <ContainerRecipes>
-        <ContainerHeader>
+      {isLagerThan768 && <HeaderWelcome />}
+      {isLagerThan768 && <HeaderLogo />}
+      <Box margin="0 auto" position="relative" w={["100%", "700px"]}>
+        <Box
+          padding="20px"
+          color="gray.900"
+          w={["100%", "450px"]}
+          margin={["", "0 auto"]}
+          textAlign={["", "center"]}
+          paddingTop={["60px", "20px"]}
+          backgroundColor={["orange.50", "white.50"]}
+        >
           <Heading as="h1" size="lg" color="orange.400">
             {recipeDetails.title}
           </Heading>
-          <BoxAuthor>
+          <Box display="flex" padding="10px 0px">
             <Text>Receita de &nbsp;</Text>
             <Text color="pink.400">{recipeDetails.author}</Text>
-          </BoxAuthor>
-          <BoxIconLogout>
-            <button onClick={() => history.push("/recipes")}>
+          </Box>
+          <Box
+            display="flex"
+            position="absolute"
+            fontSize="30px"
+            color="orange.700"
+            top={["18px", "50px"]}
+            left={["20px", "5px"]}
+          >
+            <Box as="button" onClick={() => history.push("/recipes")}>
               <FaArrowAltCircleLeft />
-            </button>
-          </BoxIconLogout>
-          <BoxIconsButton>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            position="absolute"
+            fontSize="18px"
+            top={["8px", "40px"]}
+            right={["10px", "5px"]}
+          >
             {!isTheOwner ? (
               isInFavorites ? (
-                <button /*Falta onClick para favoritar*/>
+                <Box
+                  as="button"
+                  margin="2px"
+                  borderRadius="100%"
+                  padding="10px"
+                  backgroundColor="#ededed"
+                  boxShadow="0 0 0.4em #ededed"
+                  onClick={() => {
+                    removeFromFavoriteRecipes(userId, recipeId, localToken);
+                  }}
+                >
                   <AiFillHeart style={{ color: "#EB1616" }} />
-                </button>
+                </Box>
               ) : (
-                <button /*Falta onClick para favoritar*/>
+                <Box
+                  as="button"
+                  margin="2px"
+                  borderRadius="100%"
+                  padding="10px"
+                  backgroundColor="#ededed"
+                  boxShadow="0 0 0.4em #ededed"
+                  onClick={() => {
+                    addToFavoriteRecipes(userId, recipeId, localToken);
+                  }}
+                >
                   <AiFillHeart style={{ color: "#979797" }} />
-                </button>
+                </Box>
               )
             ) : (
               <>
-                <button /*Falta onClick para compartilhar*/>
-                  <FaShareAlt style={{ color: "#C8561F" }} />
-                </button>
-                <button /*Falta onClick para excluir*/>
-                  <AiOutlineClose style={{ color: "#EB1616" }} />
-                </button>
+                {isShared ? (
+                  <Box
+                    as="button"
+                    margin="2px"
+                    borderRadius="100%"
+                    padding="10px"
+                    backgroundColor="#ededed"
+                    boxShadow="0 0 0.4em #ededed"
+                    /*Falta onClick para des-compartilhar*/
+                  >
+                    <FaShareAlt style={{ color: "#C8561F" }} />
+                  </Box>
+                ) : (
+                  <Box
+                    as="button"
+                    margin="2px"
+                    borderRadius="100%"
+                    padding="10px"
+                    backgroundColor="#ededed"
+                    boxShadow="0 0 0.4em #ededed"
+                    /*Falta onClick para compartilhar*/
+                  >
+                    <FaShareAlt style={{ color: "#979797" }} />
+                  </Box>
+                )}
+                <Box
+                  as="button"
+                  margin="2px"
+                  borderRadius="100%"
+                  padding="8px"
+                  backgroundColor="#ededed"
+                  boxShadow="0 0 0.4em #ededed"
+                  /*Falta onClick para excluir*/
+                >
+                  <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
+                </Box>
               </>
             )}
-          </BoxIconsButton>
-        </ContainerHeader>
-        <ContainerIngredients>
-          <Heading as="h2" size="md" color="orange.400" sx={styleTitle}>
+          </Box>
+        </Box>
+        <Box
+          paddingTop={["10px"]}
+          borderTop={["", "1px solid #c0c0c0"]}
+          borderBottom={["", "1px solid #c0c0c0"]}
+        >
+          <Heading
+            as="h2"
+            size="md"
+            color="orange.400"
+            marginLeft={["10px", "40px"]}
+          >
             Ingredientes
           </Heading>
-          <List sx={styleList}>
+          <List
+            display="flex"
+            flexWrap="wrap"
+            padding="10px 0px"
+            w={["290px", "620px"]}
+            margin={["", "0 auto"]}
+            marginLeft={["10px"]}
+          >
             {recipeDetails.ingredients?.map((item, index) => (
-              <ListItem key={index} sx={styleListItem}>
+              <ListItem
+                key={index}
+                display="flex"
+                alignItems="center"
+                padding="5px 0px"
+                w={["290px", "310px"]}
+              >
                 <ListIcon as={CheckCircleIcon} color="orange.400" />
                 {item}
               </ListItem>
             ))}
           </List>
-        </ContainerIngredients>
-        <ContainerInstructions>
-          <Heading as="h2" size="md" color="orange.400" sx={styleTitle}>
+        </Box>
+        <Box paddingTop="10px">
+          <Heading
+            as="h2"
+            size="md"
+            color="orange.400"
+            marginLeft={["10px", "40px"]}
+          >
             Modo de Preparo
           </Heading>
-          <ListInstructions>
+          <Box
+            padding="10px 0px"
+            margin={["", "0 auto"]}
+            marginLeft={["10px"]}
+            w={["300px", "620px"]}
+          >
             <List>
               {recipeDetails.instructions?.map((item, index) => (
-                <ListItem key={index} sx={{ padding: "5px 0px" }}>
-                  <ListOrdered>{index + 1}</ListOrdered>
+                <ListItem
+                  key={index}
+                  display="flex"
+                  padding="5px 0px"
+                  alignItems="center"
+                  textAlign="justify"
+                >
+                  <Circle
+                    size="26px"
+                    bg="purple.400"
+                    color="white"
+                    marginRight="10px"
+                  >
+                    {index + 1}
+                  </Circle>
                   {item}
                 </ListItem>
               ))}
             </List>
-          </ListInstructions>
-        </ContainerInstructions>
-      </ContainerRecipes>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };

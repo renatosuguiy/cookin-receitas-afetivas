@@ -18,7 +18,12 @@ export const CardRecipes = ({ item, typeCard }) => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const history = useHistory();
 
-  const { deleteOrUnshareSharedRecipes, getRecipeDetails } = useSharedRecipes();
+  const {
+    deleteOrUnshareSharedRecipes,
+    getRecipeDetails,
+    addToFavoriteRecipes,
+    removeFromFavoriteRecipes,
+  } = useSharedRecipes();
   //falta puxar provider de favoritar/desfavoritar receitas
   const { deleteRecipe } = useMyRecipes();
 
@@ -42,6 +47,7 @@ export const CardRecipes = ({ item, typeCard }) => {
         border="0.5px solid rgba(180, 194, 211, 0.2)"
         boxShadow="base"
         position="relative"
+        mb="26px"
       >
         <Center w="60px" h="60px" bg="white" fontSize="2x1" borderRadius="md">
           {item.category === "doce" && <Image src={sweetCategory} />}
@@ -72,7 +78,8 @@ export const CardRecipes = ({ item, typeCard }) => {
             borderRadius="100%"
             onClick={() => {
               console.log("coração");
-            }} //falta chamar função que coloca o id do user no array favoritesuser (provider)
+              addToFavoriteRecipes(userLoggedId, item.id, localToken);
+            }}
             border="none"
             bgColor="#ededed"
             position="absolute"
@@ -90,7 +97,8 @@ export const CardRecipes = ({ item, typeCard }) => {
             borderRadius="100%"
             onClick={() => {
               console.log("coração");
-            }} //falta chamar função que remove o id do user no array favoritesuser (provider)
+              removeFromFavoriteRecipes(userLoggedId, item.id, localToken);
+            }}
             border="none"
             bgColor="#ededed"
             position="absolute"
@@ -114,6 +122,7 @@ export const CardRecipes = ({ item, typeCard }) => {
         border="0.5px solid rgba(180, 194, 211, 0.2)"
         boxShadow="base"
         position="relative"
+        mb="26px"
       >
         <Center w="60px" h="60px" bg="white" fontSize="2x1" borderRadius="md">
           {item.category === "doce" && <Image src={sweetCategory} />}

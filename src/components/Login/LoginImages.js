@@ -5,8 +5,8 @@ import LoginCake from "../../assets/Images/login_cake.png";
 const LoginImages = () => {
   return (
     <Grid w="100%" ml="250px">
-      <Image boxSize="300px" src={LogoPrimary} alt="logo" />
-      <Image w="55%" h="75%" src={LoginCake} alt="logo" />
+      <Image boxSize="310px" src={LogoPrimary} alt="logo" />
+      <Image minWidth={["10px", "15px", "200px", "200px"]} w="55%" h="90%" src={LoginCake} alt="logo" />
     </Grid>
   );
 };

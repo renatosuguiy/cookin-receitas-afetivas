@@ -9,14 +9,15 @@ import {
     Text,
     Center,
 } from "@chakra-ui/react";
-import { FaExclamation, FaTimes } from "react-icons/fa";
+import { FaExclamation, FaQuestion, FaTimes } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
-export const ModalRemoveRecipe = ({
+export const ModalConfirmRecipe = ({
     isOpen,
     onClose,
     onClick,
 }) => {
+
     return (
         <>
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -24,22 +25,22 @@ export const ModalRemoveRecipe = ({
                 <ModalContent padding='1' bg='white' color='gray.800' w='300px'>
                     <ModalHeader display='flex' alignItems='center'>
                         <Center w='30px' h='30px' borderRadius='5px'>
-                            <FaExclamation color={theme.colors.orange['100']} />
+                            <FaQuestion color={theme.colors.orange['100']} />
                         </Center>
                         <Text fontWeight='bold' ml='2'>
-                            Deleter Receita
+                            Confirmar Receita
                         </Text>
 
                     </ModalHeader>
                     <ModalBody textAlign='center' fontSize='lg'>
                         <Text>
-                            Você realmente deseja deletar a receita?
+                            Deseja finalizar sua receita?
                         </Text>
                     </ModalBody>
 
                     <ModalFooter flexDirection='column'>
                         <Button
-                            bg='red.400'
+                            bg='green.400'
                             color='white'
                             w='100%'
                             h='40px'

@@ -4,18 +4,24 @@ import {
   FormErrorMessage,
   FormLabel,
   InputGroup,
-  InputLeftElement,
 } from "@chakra-ui/react";
 import { forwardRef, useState, useCallback, useEffect } from "react";
+
+import { InputRightElement } from "@chakra-ui/input";
+import { Center } from "@chakra-ui/layout";
+import { theme } from "../../styles/theme";
+import { FaSearch } from "react-icons/fa";
+
+import { Icon } from "@chakra-ui/icon";
 
 const InputColors = {
   default: "gray.100",
   filled: "green.500",
   error: "red.500",
-  focus: "orange.400",
+  focus: "gray.400",
 };
 
-const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
+const InputBase = ({ name, label, error = null, ...rest }, ref) => {
   const [value, setValue] = useState("");
   const [color, setColor] = useState("default");
 
@@ -31,49 +37,56 @@ const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
     }
   }, [error]);
 
-  const handleInputBlur = useCallback(() => {
-    if (value.length > 1 && !error) {
-      return setColor("filled");
-    }
-  }, [error, value]);
-
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} display="flex" justifyContent="center">
       {!!label && <FormLabel color="gray.400">{label}</FormLabel>}
-
-      <InputGroup flexDirection='column'>
-        {Icon && (
-          <InputLeftElement color={InputColors[color]} mt="0.5">
-            <Icon />
-          </InputLeftElement>
-        )}
+      <InputGroup justifyContent="center">
         <ChakraInput
           id={name}
           name={name}
           onChangeCapture={(e) => setValue(e.currentTarget.value)}
-          onBlurCapture={handleInputBlur}
           onFocus={handleInputFocus}
           borderColor={InputColors[color]}
-          color={InputColors[color]}
+          color="#8894a2"
           bg="white"
           variant="outline"
           _hover={{ bgColor: "gray.100" }}
-          _placeholder={{ color: "gray.300" }}
+          _placeholder={{ color: "gray.400" }}
           _focus={{
             bg: "gray.100",
           }}
           size="lg"
           h="38px"
-          w='100%'
+          w="80%"
           ref={ref}
           {...rest}
           display="flex"
+          boxShadow="base"
         />
 
-        {!!error && (<FormErrorMessage mt='2px' fontSize='11px' margin='0' color="red.500">{error.message}</FormErrorMessage>)}
+        {/* {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>} */}
+        <InputRightElement>
+          <Center
+            borderRadius="100%"
+            as="button"
+            ml="1"
+            mr="4"
+            w="40px"
+            h="40px"
+            fontSize="2xl"
+          >
+            <Icon
+              fill="gray.400"
+              _hover={{ fill: theme.colors.orange[200] }}
+              w="20px"
+              h="20px"
+              as={FaSearch}
+            />
+          </Center>
+        </InputRightElement>
       </InputGroup>
     </FormControl>
   );
 };
 
-export const Input = forwardRef(InputBase);
+export const InputSearch = forwardRef(InputBase);
