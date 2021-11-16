@@ -11,7 +11,7 @@ import { useMediaQuery } from "@mui/material";
 
 const LoginComponent = () => {
 
-  const isLagerThan720 = useMediaQuery('(min-width: 720px)');
+  const isLagerThan768 = useMediaQuery('(min-width: 768px)');
 
 
   const { login } = useAuth();
@@ -68,7 +68,7 @@ const LoginComponent = () => {
           loading={loading}
           register={register}
         />
-        {isLagerThan720 && (<LoginImages />)}
+        {isLagerThan768 && (<LoginImages />)}
       </Flex>
     </Flex>
   );

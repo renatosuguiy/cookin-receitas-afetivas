@@ -1,6 +1,10 @@
-import Menu from '../../components/Menu'
+import Menu from "../../components/Menu";
 const Dashboard = () => {
-    return (<div><Menu /></div>)
-}
+  return (
+    <div>
+      <Menu />
+    </div>
+  );
+};
 
 export default Dashboard;
