@@ -174,7 +174,14 @@ export const RecipesProvider = ({ children }) => {
         console.log(response);
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
-        //toast "Receita Adicionada ao Favoritos"
+        toast({
+          title: "Adicionada!",
+          description: "Receita Adicionada ao Favoritos.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -198,7 +205,14 @@ export const RecipesProvider = ({ children }) => {
         console.log(response);
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
-        //toast "Receita Removida do Favoritos"
+        toast({
+          title: "Removida!",
+          description: "Receita Removida do Favoritos.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
       .catch((error) => console.log(error));
   };
