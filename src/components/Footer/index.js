@@ -3,7 +3,7 @@ import {
   Box,
   Text,
   Flex,
-  Image,
+  Container,
   Link,
   Accordion,
   AccordionItem,
@@ -15,166 +15,307 @@ import { useMediaQuery } from "@mui/material";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 
 const Footer = () => {
-  const desktopVersion = useMediaQuery("(min-width: 768px)");
+  const desktopVersion = useMediaQuery("(min-width: 850px)");
 
   return (
-    <Box bgColor="orange.50" w="100%" textAlign="center" p="10px 0px">
+    <>
       {desktopVersion ? (
-        <>
-          <Heading fontSize="xl" color="orange.700" fontWeight="bold">
+        <Box w="100vw" textAlign="center" bgColor="orange.50">
+          <Heading fontSize="xl" color="orange.700" fontWeight="bold" mb="10px">
             Nossa equipe
           </Heading>
           <Flex justifyContent="center">
-            <Flex>
-              <Text
-                m="10px 0px 10px 15px"
-                borderRight="1px solid #000000"
-                pr="15px"
-              >
+            <Box
+              m="10px 0px 10px 15px"
+              borderRight="1px solid #000000"
+              pr="15px"
+            >
+              <Flex>
                 <Link
                   href="https://www.linkedin.com/in/emilypregolao/"
                   isExternal
+                  m="2px 5px 0px"
+                  fontSize="lg"
                   _hover={{ textDecoration: "none", color: "orange.900" }}
                 >
-                  Emily Regolão
+                  <BsLinkedin />
                 </Link>
-              </Text>
-            </Flex>
-            <Flex>
-              <Text
-                m="10px 0px 10px 15px"
-                borderRight="1px solid #000000"
-                pr="15px"
-              >
                 <Link
-                  href="#"
+                  href="https://github.com/emilyregolao"
                   isExternal
+                  m="2px 5px"
+                  fontSize="lg"
                   _hover={{ textDecoration: "none", color: "orange.900" }}
                 >
-                  Larissa Oliveira
+                  <BsGithub />
                 </Link>
-              </Text>
-            </Flex>
-            <Flex>
-              <Text
-                m="10px 0px 10px 15px"
-                borderRight="1px solid #000000"
-                pr="15px"
-              >
+                <Text m="0px 5px">Emily Regolão</Text>
+              </Flex>
+            </Box>
+
+            <Box
+              m="10px 0px 10px 15px"
+              borderRight="1px solid #000000"
+              pr="15px"
+            >
+              <Flex>
                 <Link
-                  href="#"
+                  href="https://www.linkedin.com/in/oliveir5/"
                   isExternal
+                  m="2px 5px 0px"
+                  fontSize="lg"
                   _hover={{ textDecoration: "none", color: "orange.900" }}
                 >
-                  Manoela Cunha
+                  <BsLinkedin />
                 </Link>
-              </Text>
-            </Flex>
-            <Flex>
-              <Text
-                m="10px 0px 10px 15px"
-                borderRight="1px solid #000000"
-                pr="15px"
-              >
                 <Link
-                  href="#"
+                  href="https://github.com/larissakoliveira"
                   isExternal
+                  m="2px 5px"
+                  fontSize="lg"
                   _hover={{ textDecoration: "none", color: "orange.900" }}
                 >
-                  Raissa Toledo
+                  <BsGithub />
                 </Link>
-              </Text>
-            </Flex>
-            <Flex>
-              <Text m="10px 0px 10px 15px">
+                <Text m="0px 5px">Larissa Oliveira</Text>
+              </Flex>
+            </Box>
+
+            <Box
+              m="10px 0px 10px 15px"
+              borderRight="1px solid #000000"
+              pr="15px"
+            >
+              <Flex>
                 <Link
-                  href="#"
+                  href="https://www.linkedin.com/in/manoela-cunha/"
                   isExternal
+                  m="2px 5px 0px"
+                  fontSize="lg"
                   _hover={{ textDecoration: "none", color: "orange.900" }}
                 >
-                  Renato Suguiy
+                  <BsLinkedin />
                 </Link>
-              </Text>
-            </Flex>
+                <Link
+                  href="https://github.com/ManoelaCunha"
+                  isExternal
+                  m="2px 5px"
+                  fontSize="lg"
+                  _hover={{ textDecoration: "none", color: "orange.900" }}
+                >
+                  <BsGithub />
+                </Link>
+                <Text m="0px 5px">Manoela Cunha</Text>
+              </Flex>
+            </Box>
+
+            <Box
+              m="10px 0px 10px 15px"
+              borderRight="1px solid #000000"
+              pr="15px"
+            >
+              <Flex>
+                <Link
+                  href="http://www.linkedin.com/in/raissalstoledo"
+                  isExternal
+                  m="2px 5px 0px"
+                  fontSize="lg"
+                  _hover={{ textDecoration: "none", color: "orange.900" }}
+                >
+                  <BsLinkedin />
+                </Link>
+                <Link
+                  href="https://github.com/raissalst"
+                  isExternal
+                  m="2px 5px"
+                  fontSize="lg"
+                  _hover={{ textDecoration: "none", color: "orange.900" }}
+                >
+                  <BsGithub />
+                </Link>
+                <Text m="0px 5px">Raissa Toledo</Text>
+              </Flex>
+            </Box>
+
+            <Box m="10px 0px 10px 15px">
+              <Flex>
+                <Link
+                  href="https://www.linkedin.com/in/renatosuguiy/"
+                  isExternal
+                  m="2px 5px 0px"
+                  fontSize="lg"
+                  _hover={{ textDecoration: "none", color: "orange.900" }}
+                >
+                  <BsLinkedin />
+                </Link>
+                <Link
+                  href="https://github.com/renatosuguiy"
+                  isExternal
+                  m="2px 5px"
+                  fontSize="lg"
+                  _hover={{ textDecoration: "none", color: "orange.900" }}
+                >
+                  <BsGithub />
+                </Link>
+                <Text m="0px 5px">Renato Suguiy</Text>
+              </Flex>
+            </Box>
           </Flex>
-        </>
+        </Box>
       ) : (
         <>
-          <Accordion defaultIndex={[0]} allowMultiple>
-            <AccordionItem>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  <Heading fontSize="xl" color="orange.700" fontWeight="bold">
-                    Nossa equipe
-                  </Heading>
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
+          <Flex
+            w="100%"
+            alignItems="center"
+            justifyContent="center"
+            bgColor="orange.50"
+          >
+            <Accordion defaultIndex={[0]} allowMultiple>
+              <AccordionItem>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    <Heading fontSize="xl" color="orange.700" fontWeight="bold">
+                      Nossa equipe
+                    </Heading>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
 
-              <AccordionPanel pb={4}>
-                <Text>
-                  <Link
-                    href="https://www.linkedin.com/in/emilypregolao/"
-                    isExternal
-                    _hover={{ textDecoration: "none", color: "orange.900" }}
-                  >
-                    Emily Regolão
-                  </Link>
-                </Text>
-              </AccordionPanel>
+                <AccordionPanel pb={4}>
+                  <Box>
+                    <Flex>
+                      <Link
+                        href="https://www.linkedin.com/in/emilypregolao/"
+                        isExternal
+                        m="2px 5px 0px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsLinkedin />
+                      </Link>
+                      <Link
+                        href="https://github.com/emilyregolao"
+                        isExternal
+                        m="2px 5px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsGithub />
+                      </Link>
+                      <Text m="0px 5px">Emily Regolão</Text>
+                    </Flex>
+                  </Box>
+                </AccordionPanel>
 
-              <AccordionPanel pb={4}>
-                <Text>
-                  <Link
-                    href="#"
-                    isExternal
-                    _hover={{ textDecoration: "none", color: "orange.900" }}
-                  >
-                    Larissa Oliveira
-                  </Link>
-                </Text>
-              </AccordionPanel>
+                <AccordionPanel pb={4}>
+                  <Box>
+                    <Flex>
+                      <Link
+                        href="https://www.linkedin.com/in/oliveir5/"
+                        isExternal
+                        m="2px 5px 0px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsLinkedin />
+                      </Link>
+                      <Link
+                        href="https://github.com/larissakoliveira"
+                        isExternal
+                        m="2px 5px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsGithub />
+                      </Link>
+                      <Text m="0px 5px">Larissa Oliveira</Text>
+                    </Flex>
+                  </Box>
+                </AccordionPanel>
 
-              <AccordionPanel pb={4}>
-                <Text>
-                  <Link
-                    href="#"
-                    isExternal
-                    _hover={{ textDecoration: "none", color: "orange.900" }}
-                  >
-                    Manoela Cunha
-                  </Link>
-                </Text>
-              </AccordionPanel>
+                <AccordionPanel pb={4}>
+                  <Box>
+                    <Flex>
+                      <Link
+                        href="https://www.linkedin.com/in/manoela-cunha/"
+                        isExternal
+                        m="2px 5px 0px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsLinkedin />
+                      </Link>
+                      <Link
+                        href="https://github.com/ManoelaCunha"
+                        isExternal
+                        m="2px 5px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsGithub />
+                      </Link>
+                      <Text m="0px 5px">Manoela Cunha</Text>
+                    </Flex>
+                  </Box>
+                </AccordionPanel>
 
-              <AccordionPanel pb={4}>
-                <Text>
-                  <Link
-                    href="#"
-                    isExternal
-                    _hover={{ textDecoration: "none", color: "orange.900" }}
-                  >
-                    Raissa Toledo
-                  </Link>
-                </Text>
-              </AccordionPanel>
+                <AccordionPanel pb={4}>
+                  <Box>
+                    <Flex>
+                      <Link
+                        href="http://www.linkedin.com/in/raissalstoledo"
+                        isExternal
+                        m="2px 5px 0px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsLinkedin />
+                      </Link>
+                      <Link
+                        href="https://github.com/raissalst"
+                        isExternal
+                        m="2px 5px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsGithub />
+                      </Link>
+                      <Text m="0px 5px">Raissa Toledo</Text>
+                    </Flex>
+                  </Box>
+                </AccordionPanel>
 
-              <AccordionPanel pb={4}>
-                <Text>
-                  <Link
-                    href="#"
-                    isExternal
-                    _hover={{ textDecoration: "none", color: "orange.900" }}
-                  >
-                    Renato Suguiy
-                  </Link>
-                </Text>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+                <AccordionPanel pb={4}>
+                  <Box>
+                    <Flex>
+                      <Link
+                        href="https://www.linkedin.com/in/renatosuguiy/"
+                        isExternal
+                        m="2px 5px 0px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsLinkedin />
+                      </Link>
+                      <Link
+                        href="https://github.com/renatosuguiy"
+                        isExternal
+                        m="2px 5px"
+                        fontSize="lg"
+                        _hover={{ textDecoration: "none", color: "orange.900" }}
+                      >
+                        <BsGithub />
+                      </Link>
+                      <Text m="0px 5px">Renato Suguiy</Text>
+                    </Flex>
+                  </Box>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </Flex>
         </>
       )}
-    </Box>
+    </>
   );
 };
 

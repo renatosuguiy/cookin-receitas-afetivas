@@ -4,7 +4,6 @@ import { useSharedRecipes } from "../../providers/recipes";
 import HeaderLogo from "../../components/HeaderLogo/index";
 import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
-import Footer from "../../components/Footer";
 import { CardsList } from "../../components/CardsList";
 import { useEffect } from "react";
 
@@ -37,7 +36,6 @@ const RecipesShared = () => {
           typeCard="heart"
         />
       </Box>
-      <Footer />
     </>
   );
 };
