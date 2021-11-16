@@ -8,6 +8,7 @@ import NewRecipePage01 from "../pages/AddNewRecipe/page_1";
 import NewRecipePage02 from "../pages/AddNewRecipe/page_2";
 import NewRecipePage03 from "../pages/AddNewRecipe/page_3";
 import RecipeDetails from "../pages/RecipeDetails";
+import RecipesFavorite from "../pages/RecipesFavorite";
 import RecipesPrivate from "../pages/RecipesPrivate";
 
 export const Routes = () => {
@@ -42,6 +43,9 @@ export const Routes = () => {
       </Route>
       <Route exact path="/recipes/:idRecipes">
         <RecipeDetails />
+      </Route>
+      <Route exact path="/favorites">
+        <RecipesFavorite />
       </Route>
     </Switch>
   );
