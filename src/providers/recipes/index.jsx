@@ -18,8 +18,8 @@ export const RecipesProvider = ({ children }) => {
   const [recipeFavorites, setRecipeFavorites] = useState([]);
 
   //lendo/puxando receitas públicas
-  const getSharedRecipes = (token) => {
-    api
+  const getSharedRecipes = async (token) => {
+    await api
       .get("/recipes", {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -156,7 +156,7 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const getFavoriteRecipes = (userId) => {
+  const getFavoriteRecipes = async (userId) => {
     const favoriteRecipes = recipes.filter((item) =>
       item.favorites_users.find((id) => id === userId)
     );

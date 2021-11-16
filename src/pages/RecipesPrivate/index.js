@@ -31,11 +31,11 @@ const RecipesPrivate = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={1} />
-      <Box animation={fadeAnimation}>
+      <Box >
         {myRecipes.length === 0 ? (
           <EmptyPage />
         ) : (
-          <Box >
+          <Box animation={fadeAnimation}>
             <SearchBox functionToSearch={searchForRecipePrivate} />
             <CardsList
               state={myRecipes}

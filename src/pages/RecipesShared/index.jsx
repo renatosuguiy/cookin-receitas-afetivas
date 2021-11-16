@@ -5,8 +5,7 @@ import HeaderLogo from "../../components/HeaderLogo/index";
 import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
-import { useEffect } from "react";
-import { fadeAnimation } from "../../styles/animations";
+import { useEffect, useState } from "react";
 
 const RecipesShared = () => {
   const {
@@ -18,10 +17,12 @@ const RecipesShared = () => {
   } = useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSharedRecipes(localToken);
+    getSharedRecipes(localToken).then((_) => setLoading(false));
   }, []);
+
   return (
     <Box>
       <Box>
@@ -30,12 +31,13 @@ const RecipesShared = () => {
         <Menu index={0} />
         <SearchBox functionToSearch={searchForRecipePublic} />
       </Box>
-      <Box animation={fadeAnimation}>
+      <Box>
         <CardsList
           state={recipes}
           stateOfSearchedRecipes={recipesSharedFound}
           setStateOfSearchedRecipes={setRecipesSharedFound}
           typeCard='heart'
+          loading={loading}
         />
       </Box>
     </Box>
