@@ -5,11 +5,10 @@ const AddRecipeContext = createContext();
 export const AddRecipeProvider = ({ children }) => {
   const [recipeBody, setRecipeBody] = useState({});
   const [ingredients, setIngredients] = useState(
-    JSON.parse(localStorage.getItem("@cookin:ingredients"))
+    []
   );
   const [instructions, setInstructions] = useState(
-    JSON.parse(localStorage.getItem("@cookin:instructions"))
-  );
+    []);
   const [item, setItem] = useState("");
 
   const addToArray = (array, setArray, item) => {

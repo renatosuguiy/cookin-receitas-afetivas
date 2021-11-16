@@ -21,6 +21,7 @@ const NewRecipePage03 = () => {
     localStorage.setItem("@cookin:instructions", JSON.stringify(instructions));
     setRecipeBody({ ...recipeBody, instructions: [...instructions] });
     addRecipe(recipeBody, accessToken);
+    history.push('/myrecipes')
     console.log(recipeBody);
     console.log(accessToken);
   };
