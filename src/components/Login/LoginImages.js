@@ -1,6 +1,7 @@
 import { Flex, Image } from "@chakra-ui/react";
 import LogoPrimary from "../../assets/Images/logo_primary.png";
 import LoginCake from "../../assets/Images/login_cake.png";
+import { rightAnimation } from "../../styles/animations";
 
 const LoginImages = () => {
   return (

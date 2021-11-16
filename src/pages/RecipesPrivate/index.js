@@ -12,6 +12,7 @@ import { CardsList } from "../../components/CardsList";
 import { useHistory } from "react-router";
 import { useMediaQuery } from "@mui/material";
 import { useMyRecipes } from "../../providers/MyRecipes";
+import { fadeAnimation } from "../../styles/animations";
 
 const RecipesPrivate = () => {
   const {
@@ -30,45 +31,47 @@ const RecipesPrivate = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={1} />
-      {myRecipes.length === 0 ? (
-        <EmptyPage />
-      ) : (
-        <>
-          <SearchBox functionToSearch={searchForRecipePrivate} />
-          <CardsList
-            state={myRecipes}
-            stateOfSearchedRecipes={recipesPrivateFound}
-            setStateOfSearchedRecipes={setRecipesPrivateFound}
-            typeCard="times"
-          />
-          {isLagerThan480 ? (
-            <Box w="250px" margin="0 auto">
-              <Button
-                bg="orange.200"
-                h="54px"
-                w="250px"
-                color="white.50"
-                mt="6"
-                onClick={() => history.push("/addRecipe")}
-              >
-                Cadastrar receita
-              </Button>
-            </Box>
-          ) : (
-            <IconButton
-              size="lg"
-              color="white.50"
-              backgroundColor="orange.700"
-              borderRadius="100%"
-              position="fixed"
-              bottom="10px"
-              left="10px"
-              icon={<AddIcon />}
-              onClick={() => history.push("/addRecipe")}
+      <Box >
+        {myRecipes.length === 0 ? (
+          <EmptyPage />
+        ) : (
+          <Box animation={fadeAnimation}>
+            <SearchBox functionToSearch={searchForRecipePrivate} />
+            <CardsList
+              state={myRecipes}
+              stateOfSearchedRecipes={recipesPrivateFound}
+              setStateOfSearchedRecipes={setRecipesPrivateFound}
+              typeCard="times"
             />
-          )}
-        </>
-      )}
+            {isLagerThan480 ? (
+              <Box w="250px" margin="0 auto">
+                <Button
+                  bg="orange.200"
+                  h="54px"
+                  w="250px"
+                  color="white.50"
+                  mt="6"
+                  onClick={() => history.push("/addRecipe")}
+                >
+                  Cadastrar receita
+                </Button>
+              </Box>
+            ) : (
+              <IconButton
+                size="lg"
+                color="white.50"
+                backgroundColor="orange.700"
+                borderRadius="100%"
+                position="fixed"
+                bottom="10px"
+                left="10px"
+                icon={<AddIcon />}
+                onClick={() => history.push("/addRecipe")}
+              />
+            )}
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

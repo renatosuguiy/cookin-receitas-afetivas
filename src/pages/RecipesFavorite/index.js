@@ -5,8 +5,9 @@ import HeaderLogo from "../../components/HeaderLogo/index";
 import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EmptyFavoritesPage from "../../components/EmptyFavoritesPage";
+import { fadeAnimation } from "../../styles/animations";
 
 const RecipesFavorite = () => {
   const {
@@ -23,6 +24,7 @@ const RecipesFavorite = () => {
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getFavoriteRecipes(userId);
@@ -37,7 +39,7 @@ const RecipesFavorite = () => {
         <EmptyFavoritesPage />
       ) : (
         <>
-          <SearchBox functionToSearch={searchForRecipeFavorite} />
+          <SearchBox functionToSearch={searchForRecipeFavorite} animation={fadeAnimation} />
           <CardsList
             state={recipeFavorites}
             stateOfSearchedRecipes={recipesFavoritesFound}

@@ -6,9 +6,10 @@ import {
     VStack,
     Link,
     Select,
-    Image,
+    Image
 } from "@chakra-ui/react";
-import { Input } from "../../components/Form/Input";
+import { Input } from "../../components/Form/Input"
+import { rightAnimation } from "../../styles/animations";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import LogoGoogle from "../../assets/Images/logogoogle.png";
 
@@ -28,6 +29,7 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
             borderColor="gray.100"
             bg="white"
             borderRadius="10px"
+            animation={rightAnimation}
             minWidth={["0", "0", "330px", "330px"]}
         >
             <Heading
