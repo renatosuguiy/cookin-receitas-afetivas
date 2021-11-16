@@ -10,7 +10,6 @@ import {
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
-import { useHistory } from "react-router";
 import { IoClose } from "react-icons/io5";
 import { AiFillHeart } from "react-icons/ai";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
@@ -18,11 +17,18 @@ import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 
+import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
 
 const RecipeDetails = () => {
   const history = useHistory();
-  const { recipeDetails } = useSharedRecipes();
+  const parameters = useParams();
+  const recipeId = parameters.idRecipes;
+
+  const { recipeDetails, addToFavoriteRecipes, removeFromFavoriteRecipes } =
+    useSharedRecipes();
+
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
@@ -84,7 +90,9 @@ const RecipeDetails = () => {
                   padding="10px"
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para favoritar*/
+                  onClick={() => {
+                    removeFromFavoriteRecipes(userId, recipeId, localToken);
+                  }}
                 >
                   <AiFillHeart style={{ color: "#EB1616" }} />
                 </Box>
@@ -96,7 +104,9 @@ const RecipeDetails = () => {
                   padding="10px"
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para favoritar*/
+                  onClick={() => {
+                    addToFavoriteRecipes(userId, recipeId, localToken);
+                  }}
                 >
                   <AiFillHeart style={{ color: "#979797" }} />
                 </Box>

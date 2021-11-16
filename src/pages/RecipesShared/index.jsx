@@ -1,30 +1,38 @@
-import { Box, Grid } from "@chakra-ui/layout";
-import { CardRecipes } from "../../components/Card";
+import { Box } from "@chakra-ui/layout";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { useSharedRecipes } from "../../providers/recipes";
 import HeaderLogo from "../../components/HeaderLogo/index";
+import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
+import { CardsList } from "../../components/CardsList";
+import { useEffect } from "react";
 
 const RecipesShared = () => {
-  const { recipes } = useSharedRecipes();
+  const {
+    recipes,
+    recipesSharedFound,
+    getSharedRecipes,
+    setRecipesSharedFound,
+    searchForRecipePublic,
+  } = useSharedRecipes();
 
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
+
+  useEffect(() => {
+    getSharedRecipes(localToken);
+  }, []);
   return (
     <Box>
       <HeaderWelcome />
       <HeaderLogo />
       <Menu />
-      <Grid
-        w={["", "", "", "65vw"]}
-        m="0 auto"
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-        gap={10}
-        paddingX="8"
-        mt="8"
-      >
-        {recipes.map((item) => (
-          <CardRecipes key={item.id} item={item} typeCard="heart" />
-        ))}
-      </Grid>
+      <SearchBox functionToSearch={searchForRecipePublic} />
+      <CardsList
+        state={recipes}
+        stateOfSearchedRecipes={recipesSharedFound}
+        setStateOfSearchedRecipes={setRecipesSharedFound}
+        typeCard="heart"
+      />
     </Box>
   );
 };
