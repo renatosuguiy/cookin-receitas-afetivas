@@ -14,7 +14,7 @@ import { scaleAnimation } from "../../styles/animations";
 export const CardRecipes = ({ item, typeCard }) => {
   const user = localStorage.getItem("@cookin:user") || "";
   const userLoggedId = JSON.parse(user).id;
-  const isInFavorites = item.favorites_users.some((id) => id === userLoggedId);
+  const isInFavorites = item.favorites_users?.some((id) => id === userLoggedId);
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const history = useHistory();
