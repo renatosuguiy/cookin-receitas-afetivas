@@ -29,7 +29,7 @@ const RecipesPrivate = () => {
     <Box>
       <HeaderWelcome />
       <HeaderLogo />
-      <Menu />
+      <Menu index={1} />
       {myRecipes.length === 0 ? (
         <EmptyPage />
       ) : (

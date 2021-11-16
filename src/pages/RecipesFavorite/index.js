@@ -29,7 +29,7 @@ const RecipesFavorite = () => {
     <Box>
       <HeaderWelcome />
       <HeaderLogo />
-      <Menu />
+      <Menu index={2} />
       {recipeFavorites.length === 0 ? (
         <EmptyFavoritesPage />
       ) : (
