@@ -25,7 +25,7 @@ const RecipesShared = () => {
     <Box>
       <HeaderWelcome />
       <HeaderLogo />
-      <Menu />
+      <Menu index={0} />
       <SearchBox functionToSearch={searchForRecipePublic} />
       <CardsList
         state={recipes}
