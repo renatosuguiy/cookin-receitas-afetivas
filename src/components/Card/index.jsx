@@ -20,6 +20,7 @@ export const CardRecipes = ({ item, typeCard }) => {
   const history = useHistory();
 
   const {
+    recipes,
     deleteOrUnshareSharedRecipes,
     getRecipeDetails,
     addToFavoriteRecipes,
@@ -28,14 +29,22 @@ export const CardRecipes = ({ item, typeCard }) => {
   //falta puxar provider de favoritar/desfavoritar receitas
   const { deleteRecipe } = useMyRecipes();
 
-  const handleDeleteRecipe = (publicId, privateId) => {
-    //funções chamadas para quando usuário apertar no X do card em minhas receitas:
-
-    //deleta do minhas receitas públicas
-    deleteOrUnshareSharedRecipes(publicId, localToken);
-
-    //deleta do minhas receitas privadas
+  const handleDeleteRecipe = (privateId) => {
+    //funções chamadas para quando usuário apertar no X do card na página Minhas Receitas:
+    //deleta do minhas receitas privadas:
     deleteRecipe(privateId, localToken);
+
+    //deleta do minhas receitas públicas:
+    //procura se a receita está compartilhada
+    let foundPublicRecipe = recipes.find(
+      (item) => item.myrecipesId === privateId
+    );
+    let publicId = 0;
+    //pega id pública caso a receita esteja mesmo compartilhada
+    if (foundPublicRecipe !== undefined) {
+      publicId = foundPublicRecipe.id;
+    }
+    foundPublicRecipe && deleteOrUnshareSharedRecipes(publicId, localToken);
   };
 
   if (typeCard === "heart") {
@@ -156,7 +165,7 @@ export const CardRecipes = ({ item, typeCard }) => {
           h='28px'
           borderRadius='100%'
           onClick={() => {
-            handleDeleteRecipe(item.id, item.myrecipesId); //manda como parâmetros a id do item no público e no privado
+            handleDeleteRecipe(item.id); //manda como parâmetro a id do item no myRecipes
           }}
           border='none'
           bgColor='#ededed'

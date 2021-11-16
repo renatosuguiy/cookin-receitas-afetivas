@@ -45,7 +45,7 @@ export const CardsList = ({
         <Flex
           justify={["center", "center", "space-around", "space-around"]}
           wrap='wrap'
-          minWidth={["530px", "530px", "700px", "1000px"]}
+          minWidth={["310px", "530px", "700px", "1000px"]}
           maxWidth={["530px", "530px", "700px", "1064px"]}
         >
           {!stateOfSearchedRecipes.length &&

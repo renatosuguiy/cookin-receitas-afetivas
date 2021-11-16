@@ -6,16 +6,20 @@ import {
   useCallback,
 } from "react";
 import { api } from "../../services/api";
+import { useToast } from "@chakra-ui/toast";
 
 export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [recipesSharedFound, setRecipesSharedFound] = useState([]);
+  const [recipesFavoritesFound, setRecipesFavoritesFound] = useState([]);
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
   const [recipeFavorites, setRecipeFavorites] = useState([]);
+
+  const toast = useToast();
 
   //lendo/puxando receitas públicas
   const getSharedRecipes = async (token) => {
@@ -54,11 +58,29 @@ export const RecipesProvider = ({ children }) => {
       )
       .then((response) => {
         console.log(response.data);
-        //toast de sucesso de compartilhamento
         setRecipes([...recipes, response.data]);
         getSharedRecipes(localToken);
+        //toast de sucesso de compartilhamento
+        toast({
+          title: "Receita compartilhada!",
+          description: "Receita compartilhada com sucesso.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        toast({
+          title: "Receita não compartilhada!",
+          description: "A receita não foi compartilhada.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
   };
 
   //deletando ou retirando compartilhamento de receitas públicas
@@ -71,8 +93,26 @@ export const RecipesProvider = ({ children }) => {
         console.log(response.data);
         getSharedRecipes(localToken);
         //toast de sucesso em deletar/descompartilhar
+        toast({
+          title: "Receita descompartilhada!",
+          description: "Receita descompartilhada com sucesso.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        toast({
+          title: "Receita não descompartilhada!",
+          description: "A receita não foi descompartilhada.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
   };
 
   //procurando a receita publica
@@ -85,14 +125,17 @@ export const RecipesProvider = ({ children }) => {
       });
       if (!response.data.length) {
         //chamar o toast de nada encontrado, procure novamente
-        console.log("achei nada");
+        toast({
+          title: "Nenhuma receita encontrada!",
+          description: "Procure por outra receita.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       }
       setRecipesSharedFound(response.data);
     }
-  }, []);
-
-  useEffect(() => {
-    getSharedRecipes(localToken);
   }, []);
 
   const getRecipeDetails = (recipeId, token) => {
@@ -127,7 +170,14 @@ export const RecipesProvider = ({ children }) => {
         console.log(response);
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
-        //toast "Receita Adicionada ao Favoritos"
+        toast({
+          title: "Adicionada!",
+          description: "Receita Adicionada ao Favoritos.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -151,7 +201,14 @@ export const RecipesProvider = ({ children }) => {
         console.log(response);
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
-        //toast "Receita Removida do Favoritos"
+        toast({
+          title: "Removida!",
+          description: "Receita Removida do Favoritos.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -161,6 +218,31 @@ export const RecipesProvider = ({ children }) => {
       item.favorites_users.find((id) => id === userId)
     );
     setRecipeFavorites(favoriteRecipes);
+  };
+
+  //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
+  function filterFavoriteRecipes(array, query) {
+    return array.filter(function (el) {
+      return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+  }
+
+  //procurando a receita dentro dos favoritos
+  const searchForRecipeFavorite = (recipeTitle, token) => {
+    if (recipeTitle !== "") {
+      const searchResult = filterFavoriteRecipes(recipeFavorites, recipeTitle);
+      if (!searchResult.length) {
+        toast({
+          title: "Nenhuma receita encontrada!",
+          description: "Procure por outra receita.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+      setRecipesFavoritesFound(searchResult);
+    }
   };
 
   return (
@@ -180,6 +262,9 @@ export const RecipesProvider = ({ children }) => {
         searchForRecipePublic,
         recipesSharedFound,
         setRecipesSharedFound,
+        searchForRecipeFavorite,
+        recipesFavoritesFound,
+        setRecipesFavoritesFound,
       }}
     >
       {children}

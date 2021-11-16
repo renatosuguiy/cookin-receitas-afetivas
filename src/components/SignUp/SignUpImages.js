@@ -8,7 +8,7 @@ const SignUpImages = () => {
     return (
         <Grid w="100%" ml="220px" animation={leftAnimation}>
             <Image boxSize="300px" src={LogoPrimary} alt="logo" />
-            <Image w="55%" h="75%" src={SignUpImage} alt="logo" />
+            <Image  minWidth={["10px", "15px", "200px", "200px"]} w="55%" h="75%" src={SignUpImage} alt="logo" />
         </Grid>
     );
 };

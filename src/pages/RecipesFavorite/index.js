@@ -17,6 +17,9 @@ const RecipesFavorite = () => {
     setRecipesSharedFound,
     searchForRecipePublic,
     getFavoriteRecipes,
+    searchForRecipeFavorite,
+    recipesFavoritesFound,
+    setRecipesFavoritesFound,
   } = useSharedRecipes();
 
   const user = localStorage.getItem("@cookin:user") || "";
@@ -32,6 +35,7 @@ const RecipesFavorite = () => {
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={2} />
+<<<<<<< HEAD
       <Box animation={fadeAnimation}>
         {recipeFavorites.length === 0 ? (
           <EmptyFavoritesPage />
@@ -47,6 +51,21 @@ const RecipesFavorite = () => {
           </Box>
         )}
       </Box>
+=======
+      {recipeFavorites.length === 0 ? (
+        <EmptyFavoritesPage />
+      ) : (
+        <>
+          <SearchBox functionToSearch={searchForRecipeFavorite} />
+          <CardsList
+            state={recipeFavorites}
+            stateOfSearchedRecipes={recipesFavoritesFound}
+            setStateOfSearchedRecipes={setRecipesFavoritesFound}
+            typeCard="heart"
+          />
+        </>
+      )}
+>>>>>>> developer
     </Box>
   );
 };

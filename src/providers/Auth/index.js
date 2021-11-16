@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/toast";
 import { useState, useContext, createContext } from "react";
 import { useHistory } from "react-router";
 
@@ -12,6 +13,9 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
+
+  const toast = useToast();
+
   const history = useHistory();
 
   const [authToken, setAuthToken] = useState(
@@ -31,18 +35,54 @@ const AuthProvider = ({ children }) => {
         );
         setAuthToken(response.data.accessToken);
         setUser(response.data.user);
-        history.push("/recipes");
+          toast({
+            title: "Login feito com sucesso!",
+            description: "Bem-vindo ao Cookin'",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top-right"
+          })
+          history.push("/recipes");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast({
+        title: "Login inválido!",
+        description: "Algo deu errado!",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top-right"
+      })
+    })
   };
 
   const signUp = async (userData) => {
     api
       .post("/register", userData)
       .then((response) => {
+        toast({
+          title: "Conta criada com sucesso!",
+          description: "Faça seu login",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right"
+        })
         history.push("/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Cadastro inválido!",
+          description: "Algo deu errado!",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right"
+        })
+        })
   };
 
   const logout = () => {

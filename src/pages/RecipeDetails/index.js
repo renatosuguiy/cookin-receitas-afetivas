@@ -25,8 +25,14 @@ const RecipeDetails = () => {
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
 
-  const { recipeDetails, addToFavoriteRecipes, removeFromFavoriteRecipes } =
-    useSharedRecipes();
+  const {
+    recipes,
+    recipeDetails,
+    addToFavoriteRecipes,
+    removeFromFavoriteRecipes,
+    shareRecipe,
+    deleteOrUnshareSharedRecipes,
+  } = useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
@@ -38,6 +44,8 @@ const RecipeDetails = () => {
   const isInFavorites = recipeDetails.favorites_users?.some(
     (id) => id === userId
   );
+
+  const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
@@ -113,17 +121,37 @@ const RecipeDetails = () => {
               )
             ) : (
               <>
-                <Box
-                  as="button"
-                  margin="2px"
-                  borderRadius="100%"
-                  padding="10px"
-                  backgroundColor="#ededed"
-                  boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para compartilhar*/
-                >
-                  <FaShareAlt style={{ color: "#C8561F" }} />
-                </Box>
+                {isShared ? (
+                  <Box
+                    as="button"
+                    margin="2px"
+                    borderRadius="100%"
+                    padding="10px"
+                    backgroundColor="#ededed"
+                    boxShadow="0 0 0.4em #ededed"
+                    /*Para des-compartilhar*/
+                    onClick={() => {
+                      deleteOrUnshareSharedRecipes(recipeId, localToken);
+                    }}
+                  >
+                    <FaShareAlt style={{ color: "#C8561F" }} />
+                  </Box>
+                ) : (
+                  <Box
+                    as="button"
+                    margin="2px"
+                    borderRadius="100%"
+                    padding="10px"
+                    backgroundColor="#ededed"
+                    boxShadow="0 0 0.4em #ededed"
+                    /*Para compartilhar*/
+                    onClick={() => {
+                      shareRecipe(recipeDetails, localToken);
+                    }}
+                  >
+                    <FaShareAlt style={{ color: "#979797" }} />
+                  </Box>
+                )}
                 <Box
                   as="button"
                   margin="2px"
@@ -131,7 +159,10 @@ const RecipeDetails = () => {
                   padding="8px"
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
-                  /*Falta onClick para excluir*/
+                  /*Para excluir*/
+                  onClick={() => {
+                    deleteOrUnshareSharedRecipes(recipeId, localToken);
+                  }}
                 >
                   <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
                 </Box>
