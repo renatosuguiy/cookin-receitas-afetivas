@@ -23,7 +23,7 @@ export const MyRecipesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setMyRecipes([...response.data]);
+        setMyRecipes([...myRecipes, response.data]);
         return (
           <Alert status="success" variant="solid">
             <AlertIcon />

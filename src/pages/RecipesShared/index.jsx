@@ -5,7 +5,7 @@ import HeaderLogo from "../../components/HeaderLogo/index";
 import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const RecipesShared = () => {
   const {
@@ -17,26 +17,30 @@ const RecipesShared = () => {
   } = useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSharedRecipes(localToken);
+    getSharedRecipes(localToken).then((_) => setLoading(false));
   }, []);
 
   return (
-    <>
+    <Box>
       <Box>
         <HeaderWelcome />
         <HeaderLogo />
         <Menu index={0} />
         <SearchBox functionToSearch={searchForRecipePublic} />
+      </Box>
+      <Box>
         <CardsList
           state={recipes}
           stateOfSearchedRecipes={recipesSharedFound}
           setStateOfSearchedRecipes={setRecipesSharedFound}
           typeCard="heart"
+          loading={loading}
         />
       </Box>
-    </>
+    </Box>
   );
 };
 

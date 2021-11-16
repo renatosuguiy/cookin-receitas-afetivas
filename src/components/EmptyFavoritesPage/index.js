@@ -1,9 +1,10 @@
 import { Flex, Heading, Text, Box, Center, Stack } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai";
+import { fadeAnimation } from "../../styles/animations";
 
 const EmptyFavoritesPage = () => {
   return (
-    <Box w="100vw" mt="6">
+    <Box w="100vw" mt="6" animation={fadeAnimation}>
       <Flex flexDirection="column" alignItems="center" w="90%" margin="0 auto">
         <Center
           border="1px dashed #D0D0D0"
