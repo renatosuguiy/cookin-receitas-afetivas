@@ -36,7 +36,7 @@ const RecipesShared = () => {
           state={recipes}
           stateOfSearchedRecipes={recipesSharedFound}
           setStateOfSearchedRecipes={setRecipesSharedFound}
-          typeCard='heart'
+          typeCard="heart"
           loading={loading}
         />
       </Box>
