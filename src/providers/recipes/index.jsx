@@ -12,6 +12,7 @@ export const RecipesContext = createContext();
 export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [recipesSharedFound, setRecipesSharedFound] = useState([]);
+  const [recipesFavoritesFound, setRecipesFavoritesFound] = useState([]);
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -163,6 +164,25 @@ export const RecipesProvider = ({ children }) => {
     setRecipeFavorites(favoriteRecipes);
   };
 
+  //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
+  function filterFavoriteRecipes(array, query) {
+    return array.filter(function (el) {
+      return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+  }
+
+  //procurando a receita dentro dos favoritos
+  const searchForRecipeFavorite = (recipeTitle, token) => {
+    if (recipeTitle !== "") {
+      const searchResult = filterFavoriteRecipes(recipeFavorites, recipeTitle);
+      if (!searchResult.length) {
+        //chamar o toast de nada encontrado, procure novamente
+        console.log("achei nada");
+      }
+      setRecipesFavoritesFound(searchResult);
+    }
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -180,6 +200,9 @@ export const RecipesProvider = ({ children }) => {
         searchForRecipePublic,
         recipesSharedFound,
         setRecipesSharedFound,
+        searchForRecipeFavorite,
+        recipesFavoritesFound,
+        setRecipesFavoritesFound,
       }}
     >
       {children}

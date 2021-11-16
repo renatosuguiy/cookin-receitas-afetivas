@@ -21,6 +21,7 @@ const RecipesShared = () => {
   useEffect(() => {
     getSharedRecipes(localToken);
   }, []);
+
   return (
     <Box>
       <HeaderWelcome />
