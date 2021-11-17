@@ -55,6 +55,8 @@ const RecipeDetailsPrivate = () => {
       publicId = foundPublicRecipe.id;
     }
     foundPublicRecipe && deleteOrUnshareSharedRecipes(publicId, localToken);
+
+    history.push("/myrecipes");
   };
 
   return (
@@ -164,7 +166,7 @@ const RecipeDetailsPrivate = () => {
             padding="10px 0px"
             w={["290px", "290px", "620px"]}
             margin={["", "", "0 auto"]}
-            marginLeft={["10px", "10px"]}
+            marginLeft={["10px"]}
           >
             {recipePrivateDetails.ingredients?.map((item, index) => (
               <ListItem
@@ -192,7 +194,7 @@ const RecipeDetailsPrivate = () => {
           <Box
             padding="10px 0px"
             margin={["", "0 auto"]}
-            marginLeft={["10px", "10px"]}
+            marginLeft={["10px"]}
             w={["300px", "300px", "620px"]}
           >
             <List>
