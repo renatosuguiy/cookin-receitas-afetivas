@@ -10,21 +10,26 @@ import NewRecipePage03 from "../pages/AddNewRecipe/page_3";
 import RecipeDetails from "../pages/RecipeDetails";
 import RecipesFavorite from "../pages/RecipesFavorite";
 import RecipesPrivate from "../pages/RecipesPrivate";
-import { Route } from './Route';
-
-
+import RecipeDetailsPrivate from "../pages/RecipeDetailsPrivate";
+import { Route } from "./Route";
 
 export const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Welcome} />
 
-
       <Route exact path="/login" component={Login} />
 
       <Route exact path="/signup" component={SignUp} />
 
       <Route exact path="/myrecipes" isPrivate component={RecipesPrivate} />
+
+      <Route
+        exact
+        path="/myrecipes/:idRecipes"
+        isPrivate
+        component={RecipeDetailsPrivate}
+      />
 
       <Route exact path="/addRecipe" isPrivate component={AddRecipe} />
 
@@ -36,10 +41,14 @@ export const Routes = () => {
 
       <Route exact path="/recipes" isPrivate component={RecipesShared} />
 
-      <Route exact path="/recipes/:idRecipes" isPrivate component={RecipeDetails} />
+      <Route
+        exact
+        path="/recipes/:idRecipes"
+        isPrivate
+        component={RecipeDetails}
+      />
 
       <Route exact path="/favorites" isPrivate component={RecipesFavorite} />
-
     </Switch>
   );
 };
