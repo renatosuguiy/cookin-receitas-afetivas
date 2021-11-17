@@ -4,30 +4,26 @@ import { useHistory } from "react-router";
 
 const NewRecipePage02 = () => {
   const history = useHistory();
-  const { ingredients, setIngredients, recipeBody, setRecipeBody } =
-    useAddRecipe();
+  const { ingredients, setIngredients } = useAddRecipe();
 
   const handleClick = () => {
     history.push("/addRecipe3");
-    localStorage.setItem("@cookin:ingredients", JSON.stringify(ingredients));
-    setRecipeBody({ ...recipeBody, ingredients: [...ingredients] });
   };
 
   const handleBack = () => {
     history.push("/addRecipe");
-    localStorage.setItem("@cookin:ingredients", JSON.stringify(ingredients));
-    setRecipeBody({ ...recipeBody, ingredients: [...ingredients] });
   };
 
   return (
     <AddItens
       title="Adicione os ingredientes"
-      secondaryTitle="Ingredientes adicionados"
+      subtitle="Ingredientes adicionados"
       array={ingredients}
       setArray={setIngredients}
       handleClick={handleClick}
       handleBack={handleBack}
       buttonText="Prosseguir"
+      placeholder="Ingrediente"
     />
   );
 };
