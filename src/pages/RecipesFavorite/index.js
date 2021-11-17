@@ -21,7 +21,6 @@ const RecipesFavorite = () => {
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getFavoriteRecipes(userId);

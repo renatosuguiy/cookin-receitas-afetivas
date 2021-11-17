@@ -9,7 +9,7 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
 export const ModalLogout = ({

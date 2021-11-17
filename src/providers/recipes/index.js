@@ -156,9 +156,9 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const addToFavoriteRecipes = (userId, recipeId, token) => {
+  const addToFavoriteRecipes = async (userId, recipeId, token) => {
     const recipe = recipes.filter((item) => item.id === Number(recipeId));
-    const [userIdList] = recipe.map((item) => item.favorites_users);
+    const userIdList = recipe.map((item) => item.favorites_users);
 
     const isFavorite = userIdList?.some((item) => item === userId);
 
@@ -168,7 +168,7 @@ export const RecipesProvider = ({ children }) => {
       favorites_users: userIdList,
     };
 
-    api
+    await api
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -187,9 +187,9 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const removeFromFavoriteRecipes = (userId, recipeId, token) => {
+  const removeFromFavoriteRecipes = async (userId, recipeId, token) => {
     const recipe = recipes.filter((item) => item.id === Number(recipeId));
-    const [userIdList] = recipe.map((item) => item.favorites_users);
+    const userIdList = recipe.map((item) => item.favorites_users);
 
     const newUserIdList = userIdList.filter((item) => item !== userId);
 
@@ -197,7 +197,7 @@ export const RecipesProvider = ({ children }) => {
       favorites_users: newUserIdList,
     };
 
-    api
+    await api
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })

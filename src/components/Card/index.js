@@ -1,4 +1,3 @@
-import { Image } from "@chakra-ui/image";
 import {
   Box,
   Center,
@@ -6,18 +5,24 @@ import {
   Heading,
   Text,
   useDisclosure,
+  Image,
+  Button
 } from "@chakra-ui/react";
+import { useState } from 'react';
+import { useHistory } from "react-router";
+
 import sweetCategory from "../../assets/Images/category_dessert.svg";
 import saltCategory from "../../assets/Images/category_salt.svg";
 import drinkCategory from "../../assets/Images/category_drink.svg";
 import LoveGray from "../../assets/Images/lovegray.svg";
 import LoveRed from "../../assets/Images/lovered.svg";
 import TimesDelete from "../../assets/Images/times.svg";
+
 import { useSharedRecipes } from "../../providers/recipes";
-import { useHistory } from "react-router";
 import { useMyRecipes } from "../../providers/MyRecipes";
 import { scaleAnimation } from "../../styles/animations";
 import { ModalRemoveRecipe } from "../Modal/ModalRemoveRecipe";
+
 
 export const CardRecipes = ({ item, typeCard }) => {
   const user = localStorage.getItem("@cookin:user") || "";
@@ -28,6 +33,7 @@ export const CardRecipes = ({ item, typeCard }) => {
   const history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const {
     recipes,
@@ -94,42 +100,51 @@ export const CardRecipes = ({ item, typeCard }) => {
           </Text>
         </Box>
         {!isInFavorites && (
-          <Center
-            as='button'
-            w='28px'
-            h='28px'
-            borderRadius='100%'
-            onClick={() => {
-              addToFavoriteRecipes(userLoggedId, item.id, localToken);
-            }}
-            border='none'
-            bgColor='#ededed'
-            position='absolute'
-            bottom='12px'
-            right='18px'
-          >
-            <Image src={LoveGray} />
-          </Center>
-        )}
-        {isInFavorites && (
-          <Center
-            as='button'
-            w='28px'
-            h='28px'
-            borderRadius='100%'
-            onClick={() => {
-              removeFromFavoriteRecipes(userLoggedId, item.id, localToken);
-            }}
-            border='none'
-            bgColor='#ededed'
-            position='absolute'
-            bottom='12px'
-            right='18px'
-          >
-            <Image src={LoveRed} />
-          </Center>
-        )}
-      </Flex>
+          <>
+            <Center
+              w='28px'
+              h='28px'
+              borderRadius='100%'
+              border='none'
+              bgColor='#ededed'
+              position='absolute'
+              bottom='12px'
+              right='18px'
+            >
+              <Button padding='0'
+                isLoading={loadingButton}
+                onClick={() => {
+                  setLoadingButton(true);
+                  addToFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
+                }}>
+                <Image src={LoveGray} />
+              </Button>
+            </Center>
+          </>
+        )
+        }
+        {
+          isInFavorites && (
+            <Center
+              w='28px'
+              h='28px'
+              borderRadius='100%'
+              border='none'
+              bgColor='#ededed'
+              position='absolute'
+              bottom='12px'
+              right='18px'
+            >
+              <Button padding='0' isLoading={loadingButton} onClick={() => {
+                setLoadingButton(true);
+                removeFromFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
+              }}>
+                <Image src={LoveRed} />
+              </Button>
+            </Center>
+          )
+        }
+      </Flex >
     );
   }
 

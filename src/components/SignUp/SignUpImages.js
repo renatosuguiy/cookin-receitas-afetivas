@@ -1,7 +1,6 @@
 import { Flex, Image } from "@chakra-ui/react";
 import LogoPrimary from "../../assets/Images/logo_primary.png";
 import SignUpImage from "../../assets/Images/SignUpImage.png";
-import { leftAnimation } from "../../styles/animations";
 
 
 const SignUpImages = () => {
