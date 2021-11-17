@@ -14,7 +14,11 @@ export const MyRecipesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => setMyRecipes([...response.data]))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setMyRecipes([])
+        console.log(error)
+      })
+
   };
 
   const addRecipe = (recipe, token) => {
