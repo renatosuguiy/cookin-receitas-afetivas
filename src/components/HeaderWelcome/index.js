@@ -1,5 +1,4 @@
 import { FaSignOutAlt } from "react-icons/fa";
-import UserImage from "../../assets/Images/avatar.png";
 import { Center, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import { Heading } from "@chakra-ui/layout";
