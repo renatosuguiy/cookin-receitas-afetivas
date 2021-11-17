@@ -1,7 +1,6 @@
 import { useToast } from "@chakra-ui/toast";
 import { useState, useContext, createContext } from "react";
 import { useHistory } from "react-router";
-
 import { api } from "../../services/api";
 import { useMyRecipes } from "../MyRecipes";
 import { useSharedRecipes } from "../recipes";

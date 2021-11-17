@@ -40,7 +40,6 @@ const NewRecipePage01 = () => {
         category: recipeCategory,
       });
       history.push("/addRecipe2");
-      console.log(recipeBody);
     } else {
       toast({
         title: "Nome e/ou categoria da receita inválido(s)",
