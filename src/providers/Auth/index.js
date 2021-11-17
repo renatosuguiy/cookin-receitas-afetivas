@@ -13,7 +13,6 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-
   const toast = useToast();
 
   const history = useHistory();
@@ -35,27 +34,27 @@ const AuthProvider = ({ children }) => {
         );
         setAuthToken(response.data.accessToken);
         setUser(response.data.user);
-          toast({
-            title: "Login feito com sucesso!",
-            description: "Bem-vindo ao Cookin'",
-            status: "success",
-            duration: 2000,
-            isClosable: true,
-            position: "top-right"
-          })
-          history.push("/recipes");
+        toast({
+          title: "Login feito com sucesso!",
+          description: "Bem-vindo ao Cookin'",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+        history.push("/recipes");
       })
       .catch((err) => {
         console.log(err);
         toast({
-        title: "Login inválido!",
-        description: "Algo deu errado!",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-        position: "top-right"
-      })
-    })
+          title: "Login inválido!",
+          description: "Algo deu errado!",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      });
   };
 
   const signUp = async (userData) => {
@@ -68,8 +67,8 @@ const AuthProvider = ({ children }) => {
           status: "success",
           duration: 2000,
           isClosable: true,
-          position: "top-right"
-        })
+          position: "top-right",
+        });
         history.push("/login");
       })
       .catch((err) => {
@@ -80,14 +79,16 @@ const AuthProvider = ({ children }) => {
           status: "error",
           duration: 2000,
           isClosable: true,
-          position: "top-right"
-        })
-        })
+          position: "top-right",
+        });
+      });
   };
 
   const logout = () => {
     localStorage.removeItem("@cookin:accessToken");
     localStorage.removeItem("@cookin:user");
+    localStorage.removeItem("@cookin:ingredients");
+    localStorage.removeItem("@cookin:instructions");
     setAuthToken("");
     history.push("/");
   };
