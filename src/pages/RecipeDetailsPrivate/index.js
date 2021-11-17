@@ -9,12 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
+import { useDisclosure } from "@chakra-ui/react";
 
 import { IoClose } from "react-icons/io5";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
+import { ModalRemoveRecipe } from "../../components/Modal/ModalRemoveRecipe";
 
 import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
@@ -24,6 +26,7 @@ const RecipeDetailsPrivate = () => {
   const history = useHistory();
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     recipes,
@@ -61,6 +64,11 @@ const RecipeDetailsPrivate = () => {
 
   return (
     <>
+      <ModalRemoveRecipe
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={() => handleDeleteRecipe(Number(recipeId))}
+      />
       {isLagerThan768 && <HeaderWelcome />}
       {isLagerThan768 && <HeaderLogo />}
       <Box margin="0 auto" position="relative" w={["100%", "100%", "700px"]}>
@@ -139,7 +147,7 @@ const RecipeDetailsPrivate = () => {
               boxShadow="0 0 0.4em #ededed"
               /*Para excluir*/
               onClick={() => {
-                handleDeleteRecipe(Number(recipeId));
+                onOpen();
                 getMyRecipes(localToken, userId);
               }}
             >
