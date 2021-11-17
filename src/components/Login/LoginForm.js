@@ -46,6 +46,7 @@ const LoginForm = ({ handleLogin, errors, register, loading }) => {
           placeholder="Senha"
           {...register("password")}
           type="password"
+          marginTop='0'
           error={errors.password}
           color="black"
           icon={FaLock}
