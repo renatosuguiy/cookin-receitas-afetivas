@@ -40,7 +40,6 @@ const NewRecipePage01 = () => {
         category: recipeCategory,
       });
       history.push("/addRecipe2");
-      console.log(recipeBody);
     } else {
       toast({
         title: "Nome e/ou categoria da receita inválido(s)",
@@ -119,7 +118,7 @@ const NewRecipePage01 = () => {
         <Button
           colorScheme="orange"
           color="white"
-          marginTop="20px"
+          m="20px auto 40px"
           onClick={nextPage}
         >
           Prosseguir

@@ -44,7 +44,7 @@ const RecipeDetailsPrivate = () => {
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
   const handleDeleteRecipe = (privateId) => {
-    deleteRecipe(privateId, localToken);
+    deleteRecipe(privateId, localToken, userId);
 
     let foundPublicRecipe = recipes.find(
       (item) => item.myrecipesId === privateId

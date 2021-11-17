@@ -43,7 +43,7 @@ const InputBase = ({ name, label, icon: Icon, error = null, ...rest }, ref) => {
 
       <InputGroup flexDirection='column'>
         {Icon && (
-          <InputLeftElement color={InputColors[color]} mt="0.5">
+          <InputLeftElement color={InputColors[color]}>
             <Icon />
           </InputLeftElement>
         )}

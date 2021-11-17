@@ -7,7 +7,7 @@ export const CardSkeleton = ({
     const howMany = Array.from(Array(repeatCount).keys());
     return (
         <>
-            {howMany.map((_) => {
+            {howMany.map((_, index) => {
                 return (
                     <Skeleton
                         {...rest}
@@ -15,6 +15,7 @@ export const CardSkeleton = ({
                         startColor='gray.100'
                         endColor='gray.200'
                         mt='6'
+                        key={index}
                     >
                         <Box w='310px' h='96px' padding='7' />
                     </Skeleton>
