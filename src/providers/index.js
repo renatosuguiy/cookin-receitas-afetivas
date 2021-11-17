@@ -9,11 +9,11 @@ export const AppProvider = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
       <RecipesProvider>
-        <AuthProvider>
-          <MyRecipesProvider>
+        <MyRecipesProvider>
+          <AuthProvider>
             <AddRecipeProvider>{children}</AddRecipeProvider>
-          </MyRecipesProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </MyRecipesProvider>
       </RecipesProvider>
     </ChakraProvider>
   );

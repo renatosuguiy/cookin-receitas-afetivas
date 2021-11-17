@@ -3,6 +3,8 @@ import { useState, useContext, createContext } from "react";
 import { useHistory } from "react-router";
 
 import { api } from "../../services/api";
+import { useMyRecipes } from "../MyRecipes";
+import { useSharedRecipes } from "../recipes";
 
 const AuthContext = createContext();
 
@@ -13,6 +15,10 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
+  const { setRecipesSharedFound, setRecipesFavoritesFound } =
+    useSharedRecipes();
+  const { setRecipesPrivateFound } = useMyRecipes();
+
   const toast = useToast();
 
   const history = useHistory();
@@ -90,6 +96,9 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("@cookin:ingredients");
     localStorage.removeItem("@cookin:instructions");
     setAuthToken("");
+    setRecipesSharedFound([]);
+    setRecipesPrivateFound([]);
+    setRecipesFavoritesFound([]);
     history.push("/");
   };
 
