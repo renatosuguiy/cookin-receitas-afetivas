@@ -10,8 +10,7 @@ import {
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
-//import { IoClose } from "react-icons/io5";
-import { AiFillHeart } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import HeaderLogo from "../../components/HeaderLogo";
@@ -19,35 +18,44 @@ import { HeaderWelcome } from "../../components/HeaderWelcome";
 
 import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
+import { useMyRecipes } from "../../providers/MyRecipes";
 
-const RecipeDetails = () => {
+const RecipeDetailsPrivate = () => {
   const history = useHistory();
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
 
   const {
     recipes,
-    recipeDetails,
-    addToFavoriteRecipes,
-    removeFromFavoriteRecipes,
+    recipePrivateDetails,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
   } = useSharedRecipes();
+
+  const { deleteRecipe, getMyRecipes } = useMyRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
 
-  const isTheOwner = userId === recipeDetails.userId;
-
-  const isInFavorites = recipeDetails.favorites_users?.some(
-    (id) => id === userId
-  );
-
   const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
+
+  const handleDeleteRecipe = (privateId) => {
+    deleteRecipe(privateId, localToken);
+
+    let foundPublicRecipe = recipes.find(
+      (item) => item.myrecipesId === privateId
+    );
+    let publicId = 0;
+
+    if (foundPublicRecipe !== undefined) {
+      publicId = foundPublicRecipe.id;
+    }
+    foundPublicRecipe && deleteOrUnshareSharedRecipes(publicId, localToken);
+  };
 
   return (
     <>
@@ -64,11 +72,11 @@ const RecipeDetails = () => {
           backgroundColor={["orange.50", "white.50"]}
         >
           <Heading as="h1" size="lg" color="orange.400">
-            {recipeDetails.title}
+            {recipePrivateDetails.title}
           </Heading>
           <Box display="flex" padding="10px 0px">
             <Text>Receita de &nbsp;</Text>
-            <Text color="pink.400">{recipeDetails.author}</Text>
+            <Text color="pink.400">{recipePrivateDetails.author}</Text>
           </Box>
           <Box
             display="flex"
@@ -78,7 +86,7 @@ const RecipeDetails = () => {
             top={["18px", "50px"]}
             left={["20px", "5px"]}
           >
-            <Box as="button" onClick={() => history.push("/recipes")}>
+            <Box as="button" onClick={() => history.push("/myrecipes")}>
               <FaArrowAltCircleLeft />
             </Box>
           </Box>
@@ -89,71 +97,52 @@ const RecipeDetails = () => {
             top={["8px", "40px"]}
             right={["10px", "5px"]}
           >
-            {!isTheOwner ? (
-              isInFavorites ? (
-                <Box
-                  as="button"
-                  margin="2px"
-                  borderRadius="100%"
-                  padding="10px"
-                  backgroundColor="#ededed"
-                  boxShadow="0 0 0.4em #ededed"
-                  onClick={() => {
-                    removeFromFavoriteRecipes(userId, recipeId, localToken);
-                  }}
-                >
-                  <AiFillHeart style={{ color: "#EB1616" }} />
-                </Box>
-              ) : (
-                <Box
-                  as="button"
-                  margin="2px"
-                  borderRadius="100%"
-                  padding="10px"
-                  backgroundColor="#ededed"
-                  boxShadow="0 0 0.4em #ededed"
-                  onClick={() => {
-                    addToFavoriteRecipes(userId, recipeId, localToken);
-                  }}
-                >
-                  <AiFillHeart style={{ color: "#979797" }} />
-                </Box>
-              )
+            {isShared ? (
+              <Box
+                as="button"
+                margin="2px"
+                borderRadius="100%"
+                padding="10px"
+                backgroundColor="#ededed"
+                boxShadow="0 0 0.4em #ededed"
+                /*Para des-compartilhar*/
+                onClick={() => {
+                  deleteOrUnshareSharedRecipes(recipeId, localToken);
+                }}
+              >
+                <FaShareAlt style={{ color: "#C8561F" }} />
+              </Box>
             ) : (
-              <>
-                {isShared ? (
-                  <Box
-                    as="button"
-                    margin="2px"
-                    borderRadius="100%"
-                    padding="10px"
-                    backgroundColor="#ededed"
-                    boxShadow="0 0 0.4em #ededed"
-                    /*Para des-compartilhar*/
-                    onClick={() => {
-                      deleteOrUnshareSharedRecipes(recipeId, localToken);
-                    }}
-                  >
-                    <FaShareAlt style={{ color: "#C8561F" }} />
-                  </Box>
-                ) : (
-                  <Box
-                    as="button"
-                    margin="2px"
-                    borderRadius="100%"
-                    padding="10px"
-                    backgroundColor="#ededed"
-                    boxShadow="0 0 0.4em #ededed"
-                    /*Para compartilhar*/
-                    onClick={() => {
-                      shareRecipe(recipeDetails, localToken);
-                    }}
-                  >
-                    <FaShareAlt style={{ color: "#979797" }} />
-                  </Box>
-                )}
-              </>
+              <Box
+                as="button"
+                margin="2px"
+                borderRadius="100%"
+                padding="10px"
+                backgroundColor="#ededed"
+                boxShadow="0 0 0.4em #ededed"
+                /*Para compartilhar*/
+                onClick={() => {
+                  shareRecipe(recipePrivateDetails, localToken);
+                }}
+              >
+                <FaShareAlt style={{ color: "#979797" }} />
+              </Box>
             )}
+            <Box
+              as="button"
+              margin="2px"
+              borderRadius="100%"
+              padding="8px"
+              backgroundColor="#ededed"
+              boxShadow="0 0 0.4em #ededed"
+              /*Para excluir*/
+              onClick={() => {
+                handleDeleteRecipe(Number(recipeId));
+                getMyRecipes(localToken, userId);
+              }}
+            >
+              <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
+            </Box>
           </Box>
         </Box>
         <Box
@@ -177,7 +166,7 @@ const RecipeDetails = () => {
             margin={["", "0 auto"]}
             marginLeft={["10px"]}
           >
-            {recipeDetails.ingredients?.map((item, index) => (
+            {recipePrivateDetails.ingredients?.map((item, index) => (
               <ListItem
                 key={index}
                 display="flex"
@@ -207,7 +196,7 @@ const RecipeDetails = () => {
             w={["300px", "620px"]}
           >
             <List>
-              {recipeDetails.instructions?.map((item, index) => (
+              {recipePrivateDetails.instructions?.map((item, index) => (
                 <ListItem
                   key={index}
                   display="flex"
@@ -234,4 +223,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default RecipeDetailsPrivate;

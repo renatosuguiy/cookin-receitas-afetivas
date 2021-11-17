@@ -9,6 +9,7 @@ import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { SearchBox } from "../../components/SearchBox";
 import { CardsList } from "../../components/CardsList";
 
+import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useMediaQuery } from "@mui/material";
 import { useMyRecipes } from "../../providers/MyRecipes";
@@ -22,16 +23,27 @@ const RecipesPrivate = () => {
     setRecipesPrivateFound,
   } = useMyRecipes();
 
+  const { getMyRecipes } = useMyRecipes();
+
   const history = useHistory();
 
   const isLagerThan480 = useMediaQuery("(min-width: 480px)");
+
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userId = JSON.parse(user).id;
+
+  const localToken = localStorage.getItem("@cookin:accessToken") || "";
+
+  useEffect(() => {
+    getMyRecipes(localToken, userId);
+  }, []);
 
   return (
     <Box>
       <HeaderWelcome />
       <HeaderLogo />
       <Menu index={1} />
-      <Box >
+      <Box>
         {myRecipes.length === 0 ? (
           <EmptyPage />
         ) : (
