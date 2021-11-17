@@ -10,7 +10,7 @@ import {
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
-import { IoClose } from "react-icons/io5";
+//import { IoClose } from "react-icons/io5";
 import { AiFillHeart } from "react-icons/ai";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
@@ -99,6 +99,9 @@ const RecipeDetails = () => {
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
                   onClick={() => {
+                    console.log(userId);
+                    console.log(recipeId);
+                    console.log(localToken);
                     removeFromFavoriteRecipes(userId, recipeId, localToken);
                   }}
                 >
@@ -152,20 +155,6 @@ const RecipeDetails = () => {
                     <FaShareAlt style={{ color: "#979797" }} />
                   </Box>
                 )}
-                <Box
-                  as="button"
-                  margin="2px"
-                  borderRadius="100%"
-                  padding="8px"
-                  backgroundColor="#ededed"
-                  boxShadow="0 0 0.4em #ededed"
-                  /*Para excluir*/
-                  onClick={() => {
-                    deleteOrUnshareSharedRecipes(recipeId, localToken);
-                  }}
-                >
-                  <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
-                </Box>
               </>
             )}
           </Box>

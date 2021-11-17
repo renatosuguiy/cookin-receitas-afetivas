@@ -157,10 +157,10 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const addToFavoriteRecipes = (userId, recipeId, token) => {
-    const recipe = recipes.filter((item) => item.id === recipeId);
+    const recipe = recipes.filter((item) => item.id === Number(recipeId));
     const [userIdList] = recipe.map((item) => item.favorites_users);
 
-    const isFavorite = userIdList.some((item) => item === userId);
+    const isFavorite = userIdList?.some((item) => item === userId);
 
     !isFavorite && userIdList.push(userId);
     console.log(userIdList);
@@ -173,7 +173,8 @@ export const RecipesProvider = ({ children }) => {
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((_) => {
+      .then((response) => {
+        console.log(response);
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
         toast({
@@ -189,7 +190,7 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const removeFromFavoriteRecipes = (userId, recipeId, token) => {
-    const recipe = recipes.filter((item) => item.id === recipeId);
+    const recipe = recipes.filter((item) => item.id === Number(recipeId));
     const [userIdList] = recipe.map((item) => item.favorites_users);
 
     const newUserIdList = userIdList.filter((item) => item !== userId);

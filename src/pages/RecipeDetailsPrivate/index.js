@@ -36,6 +36,9 @@ const RecipeDetailsPrivate = () => {
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userId = JSON.parse(user).id;
+
   const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
@@ -135,7 +138,7 @@ const RecipeDetailsPrivate = () => {
               /*Para excluir*/
               onClick={() => {
                 handleDeleteRecipe(recipeId);
-                history.push("/myrecipes");
+                getMyRecipes(localToken, userId);
               }}
             >
               <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />

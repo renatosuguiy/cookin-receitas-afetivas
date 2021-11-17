@@ -13,9 +13,6 @@ const RecipesFavorite = () => {
   const {
     recipes,
     recipeFavorites,
-    recipesSharedFound,
-    setRecipesSharedFound,
-    searchForRecipePublic,
     getFavoriteRecipes,
     searchForRecipeFavorite,
     recipesFavoritesFound,
@@ -39,7 +36,10 @@ const RecipesFavorite = () => {
         <EmptyFavoritesPage />
       ) : (
         <>
-          <SearchBox functionToSearch={searchForRecipeFavorite} animation={fadeAnimation} />
+          <SearchBox
+            functionToSearch={searchForRecipeFavorite}
+            animation={fadeAnimation}
+          />
           <CardsList
             state={recipeFavorites}
             stateOfSearchedRecipes={recipesFavoritesFound}
