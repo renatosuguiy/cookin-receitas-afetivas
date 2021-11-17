@@ -36,7 +36,6 @@ const RecipesPrivate = () => {
 
   useEffect(() => {
     getMyRecipes(localToken, userId);
-    console.log('my recipes')
   }, []);
 
   return (

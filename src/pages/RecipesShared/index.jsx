@@ -21,9 +21,12 @@ const RecipesShared = () => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
   const [loading, setLoading] = useState(true);
 
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userId = JSON.parse(user).id;
+
   useEffect(() => {
     getSharedRecipes(localToken).then((_) => setLoading(false));
-    getMyRecipes();
+    getMyRecipes(localToken, userId);
   }, []);
 
   return (
