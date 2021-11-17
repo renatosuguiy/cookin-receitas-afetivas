@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useToast } from "@chakra-ui/toast";
+import { useEffect } from "react";
 
 const AddRecipeContext = createContext();
 
@@ -10,10 +11,29 @@ export const AddRecipeProvider = ({ children }) => {
   const [item, setItem] = useState("");
   const toast = useToast();
 
+  useEffect(() => {
+    setRecipeBody({
+      ...recipeBody,
+      ingredients: [...ingredients],
+      instructions: [...instructions],
+    });
+  }, [instructions, ingredients]);
+
   const addToArray = (array, setArray, item) => {
     if (item) {
       if (!array.includes(item)) {
         setArray([...array, item]);
+        if (array === ingredients) {
+          localStorage.setItem(
+            "@cookin:ingredients",
+            JSON.stringify(ingredients)
+          );
+        } else {
+          localStorage.setItem(
+            "@cookin:instructions",
+            JSON.stringify(instructions)
+          );
+        }
       } else {
         toast({
           title: "Item já adicionado!",
@@ -38,6 +58,7 @@ export const AddRecipeProvider = ({ children }) => {
 
   const removeFromArray = (array, setArray, item) => {
     const filteredArray = array.filter((instruc) => instruc !== item);
+    setArray(filteredArray);
     if (array === ingredients) {
       localStorage.setItem(
         "@cookin:ingredients",
@@ -49,7 +70,7 @@ export const AddRecipeProvider = ({ children }) => {
         JSON.stringify(filteredArray)
       );
     }
-    setArray(filteredArray);
+
     toast({
       title: "Item excluído",
       description: `Item ${item} excluído da lista`,
@@ -58,6 +79,13 @@ export const AddRecipeProvider = ({ children }) => {
       isClosable: true,
       position: "top-right",
     });
+  };
+
+  const cleanStorage = () => {
+    setInstructions([]);
+    localStorage.setItem("@cookin:instructions", []);
+    setIngredients([]);
+    localStorage.setItem("@cookin:ingredients", []);
   };
 
   return (
@@ -73,6 +101,7 @@ export const AddRecipeProvider = ({ children }) => {
         setInstructions,
         item,
         setItem,
+        cleanStorage,
       }}
     >
       {children}
