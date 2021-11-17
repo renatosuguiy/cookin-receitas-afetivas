@@ -22,7 +22,8 @@ const AddItens = ({
   handleClick,
   handleBack,
   title,
-  secondaryTitle,
+  subtitle,
+  placeholder,
 }) => {
   const { addToArray, removeFromArray, item, setItem } = useAddRecipe();
 
@@ -57,7 +58,7 @@ const AddItens = ({
           <Box>
             <Input
               type="text"
-              placeholder="Ingrediente"
+              placeholder={placeholder}
               m="10px auto"
               w="70%"
               borderColor="gray"
@@ -85,7 +86,7 @@ const AddItens = ({
           borderRadius="25px"
         >
           <Text fontSize="xl" m="5px auto 10px" color="orange.700">
-            {secondaryTitle}
+            {subtitle}
           </Text>
           {array.map((item, index) => (
             <Box
