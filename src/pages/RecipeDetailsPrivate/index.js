@@ -137,7 +137,7 @@ const RecipeDetailsPrivate = () => {
               boxShadow="0 0 0.4em #ededed"
               /*Para excluir*/
               onClick={() => {
-                handleDeleteRecipe(recipeId);
+                handleDeleteRecipe(Number(recipeId));
                 getMyRecipes(localToken, userId);
               }}
             >

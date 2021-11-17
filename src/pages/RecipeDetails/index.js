@@ -99,9 +99,6 @@ const RecipeDetails = () => {
                   backgroundColor="#ededed"
                   boxShadow="0 0 0.4em #ededed"
                   onClick={() => {
-                    console.log(userId);
-                    console.log(recipeId);
-                    console.log(localToken);
                     removeFromFavoriteRecipes(userId, recipeId, localToken);
                   }}
                 >

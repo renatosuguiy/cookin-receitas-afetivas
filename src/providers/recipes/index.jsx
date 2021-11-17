@@ -163,7 +163,6 @@ export const RecipesProvider = ({ children }) => {
     const isFavorite = userIdList?.some((item) => item === userId);
 
     !isFavorite && userIdList.push(userId);
-    console.log(userIdList);
 
     const data = {
       favorites_users: userIdList,
@@ -173,8 +172,7 @@ export const RecipesProvider = ({ children }) => {
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
-        console.log(response);
+      .then((_) => {
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
         toast({
@@ -194,7 +192,6 @@ export const RecipesProvider = ({ children }) => {
     const [userIdList] = recipe.map((item) => item.favorites_users);
 
     const newUserIdList = userIdList.filter((item) => item !== userId);
-    console.log(newUserIdList);
 
     const data = {
       favorites_users: newUserIdList,
