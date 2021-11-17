@@ -64,7 +64,7 @@ const InputBase = ({ name, label, error = null, ...rest }, ref) => {
         />
 
         {/* {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>} */}
-        <InputRightElement>
+        <InputRightElement top='2.5px'>
           <Center
             borderRadius="100%"
             as="button"
