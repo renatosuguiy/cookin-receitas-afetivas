@@ -10,7 +10,6 @@ import {
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
-//import { IoClose } from "react-icons/io5";
 import { AiFillHeart } from "react-icons/ai";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
@@ -53,15 +52,15 @@ const RecipeDetails = () => {
     <>
       {isLagerThan768 && <HeaderWelcome />}
       {isLagerThan768 && <HeaderLogo />}
-      <Box margin="0 auto" position="relative" w={["100%", "700px"]}>
+      <Box margin="0 auto" position="relative" w={["100%", "100%", "700px"]}>
         <Box
           padding="20px"
           color="gray.900"
-          w={["100%", "450px"]}
-          margin={["", "0 auto"]}
-          textAlign={["", "center"]}
-          paddingTop={["60px", "20px"]}
-          backgroundColor={["orange.50", "white.50"]}
+          w={["100%", "100%", "450px"]}
+          margin={["", "", "0 auto"]}
+          textAlign={["", "", "center"]}
+          paddingTop={["60px", "60px", "20px"]}
+          backgroundColor={["orange.50", "orange.50", "white.50"]}
         >
           <Heading as="h1" size="lg" color="orange.400">
             {recipeDetails.title}
@@ -75,8 +74,8 @@ const RecipeDetails = () => {
             position="absolute"
             fontSize="30px"
             color="orange.700"
-            top={["18px", "50px"]}
-            left={["20px", "5px"]}
+            top={["18px", "18px", "50px"]}
+            left={["20px", "20px", "5px"]}
           >
             <Box as="button" onClick={() => history.push("/recipes")}>
               <FaArrowAltCircleLeft />
@@ -86,8 +85,8 @@ const RecipeDetails = () => {
             display="flex"
             position="absolute"
             fontSize="18px"
-            top={["8px", "40px"]}
-            right={["10px", "5px"]}
+            top={["8px", "8px", "40px"]}
+            right={["15px", "15px", "5px"]}
           >
             {!isTheOwner ? (
               isInFavorites ? (
@@ -158,14 +157,14 @@ const RecipeDetails = () => {
         </Box>
         <Box
           paddingTop={["10px"]}
-          borderTop={["", "1px solid #c0c0c0"]}
-          borderBottom={["", "1px solid #c0c0c0"]}
+          borderTop={["", "", "1px solid #c0c0c0"]}
+          borderBottom={["", "", "1px solid #c0c0c0"]}
         >
           <Heading
             as="h2"
             size="md"
             color="orange.400"
-            marginLeft={["10px", "40px"]}
+            marginLeft={["10px", "10px", "40px"]}
           >
             Ingredientes
           </Heading>
@@ -173,8 +172,8 @@ const RecipeDetails = () => {
             display="flex"
             flexWrap="wrap"
             padding="10px 0px"
-            w={["290px", "620px"]}
-            margin={["", "0 auto"]}
+            w={["90%", "90%", "620px"]}
+            margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
           >
             {recipeDetails.ingredients?.map((item, index) => (
@@ -183,7 +182,7 @@ const RecipeDetails = () => {
                 display="flex"
                 alignItems="center"
                 padding="5px 0px"
-                w={["290px", "310px"]}
+                w={["290px", "290px", "310px"]}
               >
                 <ListIcon as={CheckCircleIcon} color="orange.400" />
                 {item}
@@ -196,15 +195,15 @@ const RecipeDetails = () => {
             as="h2"
             size="md"
             color="orange.400"
-            marginLeft={["10px", "40px"]}
+            marginLeft={["10px", "10px", "40px"]}
           >
             Modo de Preparo
           </Heading>
           <Box
             padding="10px 0px"
-            margin={["", "0 auto"]}
+            margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
-            w={["300px", "620px"]}
+            w={["90%", "90%", "620px"]}
           >
             <List>
               {recipeDetails.instructions?.map((item, index) => (
