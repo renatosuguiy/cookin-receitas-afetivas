@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useCallback } from "react";
 import { api } from "../../services/api";
-import { Alert, AlertIcon } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 
 export const MyRecipesContext = createContext();
 
 export const MyRecipesProvider = ({ children }) => {
   const [myRecipes, setMyRecipes] = useState([]);
   const [recipesPrivateFound, setRecipesPrivateFound] = useState([]);
+  const toast = useToast();
+
 
   const getMyRecipes = (token, userId) => {
     api
@@ -14,7 +16,10 @@ export const MyRecipesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => setMyRecipes([...response.data]))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setMyRecipes([])
+      })
+
   };
 
   const addRecipe = (recipe, token) => {
@@ -24,27 +29,35 @@ export const MyRecipesProvider = ({ children }) => {
       })
       .then((response) => {
         setMyRecipes([...myRecipes, response.data]);
-        return (
-          <Alert status="success" variant="solid">
-            <AlertIcon />
-            Receita adicionada com sucesso!
-          </Alert>
-        );
+        toast({
+          title: "Receita adicionada",
+          description: "Receita adicionada com sucesso!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       })
       .catch((error) => console.log(error));
   };
 
-  const deleteRecipe = (recipeId, token) => {
+  const deleteRecipe = (recipeId, token, userId) => {
     api
       .delete(`/myrecipes/${recipeId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => (
-        <Alert status="info" variant="left-accent">
-          <AlertIcon />
-          Receita deletada.
-        </Alert>
-      ))
+      .then((response) => {
+        getMyRecipes(token, userId);
+        toast({
+          title: "Receita deletada",
+          description: "Receita deletada com sucesso!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+      )
       .catch((error) => console.log(error));
   };
 
