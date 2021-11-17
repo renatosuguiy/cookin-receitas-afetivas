@@ -118,7 +118,7 @@ const NewRecipePage01 = () => {
         <Button
           colorScheme="orange"
           color="white"
-          marginTop="20px"
+          m="20px auto 40px"
           onClick={nextPage}
         >
           Prosseguir
