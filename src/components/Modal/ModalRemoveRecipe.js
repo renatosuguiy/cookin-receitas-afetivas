@@ -9,7 +9,7 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { FaExclamation, FaTimes } from "react-icons/fa";
+import { FaExclamation } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
 export const ModalRemoveRecipe = ({ isOpen, onClose, onClick }) => {
