@@ -66,6 +66,7 @@ export const theme = extendTheme({
       body: {
         bg: "white",
         color: "#000000",
+        overflowX: 'hidden'
       },
     },
   },
