@@ -164,7 +164,7 @@ const Footer = () => {
       ) : (
         <>
           <Flex
-            w="100%"
+            w="100vw"
             alignItems="center"
             justifyContent="center"
             bgColor="orange.50"
