@@ -105,7 +105,7 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
                 <Image src={LogoGoogle} cursor="pointer" w="50px" h="35px" />
                 <Text textAlign="center" mt="20px" color="orange.400">
                     Já tem uma conta? <br />
-                    Crie uma {" "}
+                    Entre {" "}
                     <Link href="/login" fontWeight="bold" color="pink.400">
                         clicando aqui
                     </Link>
