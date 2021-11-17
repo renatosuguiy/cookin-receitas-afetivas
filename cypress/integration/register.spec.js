@@ -1,5 +1,3 @@
-import { cyan } from "@mui/material/colors"
-
 context('Register', () => {
     it('Enters landing page, tries to go to the register page and register a new user', () => {
         cy.visit('http://localhost:3000');
