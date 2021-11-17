@@ -226,7 +226,7 @@ export const RecipesProvider = ({ children }) => {
   //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
   function filterFavoriteRecipes(array, query) {
     return array.filter(function (el) {
-      return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return el.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
   }
 

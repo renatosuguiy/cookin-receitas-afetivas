@@ -15,6 +15,7 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 import LoveGray from "../../assets/Images/lovegray.svg";
 import LoveRed from "../../assets/Images/lovered.svg";
 
+
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import HeaderLogo from "../../components/HeaderLogo";
@@ -93,7 +94,8 @@ const RecipeDetails = () => {
             position="absolute"
             fontSize="18px"
             top={["8px", "8px", "40px"]}
-            right={["10px", "10px", "5px"]}
+            right={["15px", "15px", "5px"]}
+
           >
             {!isTheOwner ? (
               isInFavorites ? (
@@ -172,14 +174,14 @@ const RecipeDetails = () => {
         </Box>
         <Box
           paddingTop={["10px"]}
-          borderTop={["", "1px solid #c0c0c0"]}
-          borderBottom={["", "1px solid #c0c0c0"]}
+          borderTop={["", "", "1px solid #c0c0c0"]}
+          borderBottom={["", "", "1px solid #c0c0c0"]}
         >
           <Heading
             as="h2"
             size="md"
             color="orange.400"
-            marginLeft={["10px", "40px"]}
+            marginLeft={["10px", "10px", "40px"]}
           >
             Ingredientes
           </Heading>
@@ -187,7 +189,9 @@ const RecipeDetails = () => {
             display="flex"
             flexWrap="wrap"
             padding="10px 0px"
-            w={["290px", "290px", "620px"]}
+
+            w={["90%", "90%", "620px"]}
+
             margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
           >
@@ -197,7 +201,7 @@ const RecipeDetails = () => {
                 display="flex"
                 alignItems="center"
                 padding="5px 0px"
-                w={["290px", "310px"]}
+                w={["290px", "290px", "310px"]}
               >
                 <ListIcon as={CheckCircleIcon} color="orange.400" />
                 {item}
@@ -210,7 +214,7 @@ const RecipeDetails = () => {
             as="h2"
             size="md"
             color="orange.400"
-            marginLeft={["10px", "40px"]}
+            marginLeft={["10px", "10px", "40px"]}
           >
             Modo de Preparo
           </Heading>
@@ -218,7 +222,7 @@ const RecipeDetails = () => {
             padding="10px 0px"
             margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
-            w={["300px", "300px", "620px"]}
+            w={["90%", "90%", "620px"]}
           >
             <List>
               {recipeDetails.instructions?.map((item, index) => (
