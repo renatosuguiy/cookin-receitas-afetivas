@@ -81,7 +81,6 @@ export const CardRecipes = ({ item, typeCard }) => {
         <Box
           ml='4'
           onClick={() => {
-            console.log("card");
             getRecipeDetails(item.id, localToken);
             history.push(`/recipes/${item.id}`);
           }}
@@ -101,7 +100,6 @@ export const CardRecipes = ({ item, typeCard }) => {
             h='28px'
             borderRadius='100%'
             onClick={() => {
-              console.log("coração");
               addToFavoriteRecipes(userLoggedId, item.id, localToken);
             }}
             border='none'
@@ -120,7 +118,6 @@ export const CardRecipes = ({ item, typeCard }) => {
             h='28px'
             borderRadius='100%'
             onClick={() => {
-              console.log("coração");
               removeFromFavoriteRecipes(userLoggedId, item.id, localToken);
             }}
             border='none'
@@ -163,7 +160,6 @@ export const CardRecipes = ({ item, typeCard }) => {
           <Box
             ml='4'
             onClick={() => {
-              console.log("card");
               getPrivateRecipeDetails(item.id, localToken);
               history.push(`/myrecipes/${item.id}`);
             }}
