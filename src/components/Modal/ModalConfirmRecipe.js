@@ -9,7 +9,7 @@ import {
     Text,
     Center,
 } from "@chakra-ui/react";
-import { FaExclamation, FaQuestion, FaTimes } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
 export const ModalConfirmRecipe = ({

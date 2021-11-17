@@ -1,7 +1,6 @@
 import {
   Input as ChakraInput,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   InputGroup,
 } from "@chakra-ui/react";
@@ -65,7 +64,7 @@ const InputBase = ({ name, label, error = null, ...rest }, ref) => {
         />
 
         {/* {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>} */}
-        <InputRightElement>
+        <InputRightElement top='2.5px'>
           <Center
             borderRadius="100%"
             as="button"

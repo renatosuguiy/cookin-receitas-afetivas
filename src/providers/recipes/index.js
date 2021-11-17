@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  useContext,
-  useCallback,
-} from "react";
+import { createContext, useState, useContext, useCallback } from "react";
 import { api } from "../../services/api";
 import { useToast } from "@chakra-ui/toast";
 
@@ -14,9 +8,11 @@ export const RecipesProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [recipesSharedFound, setRecipesSharedFound] = useState([]);
   const [recipesFavoritesFound, setRecipesFavoritesFound] = useState([]);
+
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipePrivateDetails, setPrivateRecipeDetails] = useState({});
   const [recipeFavorites, setRecipeFavorites] = useState([]);
 
   const toast = useToast();
@@ -149,25 +145,34 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const addToFavoriteRecipes = (userId, recipeId, token) => {
-    const recipe = recipes.filter((item) => item.id === recipeId);
-    const [userIdList] = recipe.map((item) => item.favorites_users);
+  const getPrivateRecipeDetails = (recipeId, token) => {
+    api
+      .get(`/myRecipes/${recipeId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setPrivateRecipeDetails(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
-    const isFavorite = userIdList.some((item) => item === userId);
+  const addToFavoriteRecipes = async (userId, recipeId, token) => {
+    const recipe = recipes.filter((item) => item.id === Number(recipeId));
+    const userIdList = recipe.map((item) => item.favorites_users);
+
+    const isFavorite = userIdList?.some((item) => item === userId);
 
     !isFavorite && userIdList.push(userId);
-    console.log(userIdList);
 
     const data = {
       favorites_users: userIdList,
     };
 
-    api
+    await api
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
-        console.log(response);
+      .then((_) => {
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
         toast({
@@ -182,23 +187,21 @@ export const RecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  const removeFromFavoriteRecipes = (userId, recipeId, token) => {
-    const recipe = recipes.filter((item) => item.id === recipeId);
-    const [userIdList] = recipe.map((item) => item.favorites_users);
+  const removeFromFavoriteRecipes = async (userId, recipeId, token) => {
+    const recipe = recipes.filter((item) => item.id === Number(recipeId));
+    const userIdList = recipe.map((item) => item.favorites_users);
 
     const newUserIdList = userIdList.filter((item) => item !== userId);
-    console.log(newUserIdList);
 
     const data = {
       favorites_users: newUserIdList,
     };
 
-    api
+    await api
       .patch(`/recipes/${recipeId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
-        console.log(response);
+      .then((_) => {
         getSharedRecipes(token);
         getRecipeDetails(recipeId, token);
         toast({
@@ -223,7 +226,7 @@ export const RecipesProvider = ({ children }) => {
   //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
   function filterFavoriteRecipes(array, query) {
     return array.filter(function (el) {
-      return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return el.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
   }
 
@@ -265,6 +268,8 @@ export const RecipesProvider = ({ children }) => {
         searchForRecipeFavorite,
         recipesFavoritesFound,
         setRecipesFavoritesFound,
+        recipePrivateDetails,
+        getPrivateRecipeDetails,
       }}
     >
       {children}

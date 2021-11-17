@@ -13,9 +13,6 @@ const RecipesFavorite = () => {
   const {
     recipes,
     recipeFavorites,
-    recipesSharedFound,
-    setRecipesSharedFound,
-    searchForRecipePublic,
     getFavoriteRecipes,
     searchForRecipeFavorite,
     recipesFavoritesFound,
@@ -24,7 +21,6 @@ const RecipesFavorite = () => {
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getFavoriteRecipes(userId);
@@ -39,7 +35,10 @@ const RecipesFavorite = () => {
         <EmptyFavoritesPage />
       ) : (
         <>
-          <SearchBox functionToSearch={searchForRecipeFavorite} animation={fadeAnimation} />
+          <SearchBox
+            functionToSearch={searchForRecipeFavorite}
+            animation={fadeAnimation}
+          />
           <CardsList
             state={recipeFavorites}
             stateOfSearchedRecipes={recipesFavoritesFound}

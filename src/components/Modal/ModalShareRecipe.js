@@ -9,7 +9,7 @@ import {
     Text,
     Center,
 } from "@chakra-ui/react";
-import { FaShare, FaTimes } from "react-icons/fa";
+import { FaShare } from "react-icons/fa";
 import { theme } from "../../styles/theme";
 
 export const ModalShareRecipe = ({

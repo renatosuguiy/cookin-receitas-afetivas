@@ -6,58 +6,69 @@ import {
   Text,
   Circle,
   Box,
-  Button,
-  Center,
-  Image
 } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import LoveGray from "../../assets/Images/lovegray.svg";
-import LoveRed from "../../assets/Images/lovered.svg";
+import { useDisclosure } from "@chakra-ui/react";
 
-
+import { IoClose } from "react-icons/io5";
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
 import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
+import { ModalRemoveRecipe } from "../../components/Modal/ModalRemoveRecipe";
 
 import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
-import { useState, useEffect } from "react";
+import { useMyRecipes } from "../../providers/MyRecipes";
 
-
-const RecipeDetails = () => {
+const RecipeDetailsPrivate = () => {
   const history = useHistory();
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
-  const [loadingButton, setLoadingButton] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
     recipes,
-    recipeDetails,
-    addToFavoriteRecipes,
-    removeFromFavoriteRecipes,
+    recipePrivateDetails,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
-    getRecipeDetails
   } = useSharedRecipes();
+
+  const { deleteRecipe, getMyRecipes } = useMyRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
 
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
 
-  const isTheOwner = userId === recipeDetails.userId;
-
-  const isInFavorites = recipeDetails.favorites_users?.some(
-    (id) => id === userId
-  );
-
   const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
-  useEffect(() => getRecipeDetails(recipeId, localToken), [])
+
+  const handleDeleteRecipe = (privateId) => {
+    deleteRecipe(privateId, localToken, userId);
+
+    let foundPublicRecipe = recipes.find(
+      (item) => item.myrecipesId === privateId
+    );
+    let publicId = 0;
+
+    if (foundPublicRecipe !== undefined) {
+      publicId = foundPublicRecipe.id;
+    }
+    foundPublicRecipe && deleteOrUnshareSharedRecipes(publicId, localToken);
+
+    history.push("/myrecipes");
+  };
+
   return (
     <>
+      <ModalRemoveRecipe
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={() => handleDeleteRecipe(Number(recipeId))}
+      />
       {isLagerThan768 && <HeaderWelcome />}
       {isLagerThan768 && <HeaderLogo />}
       <Box margin="0 auto" position="relative" w={["100%", "100%", "700px"]}>
@@ -71,11 +82,11 @@ const RecipeDetails = () => {
           backgroundColor={["orange.50", "orange.50", "white.50"]}
         >
           <Heading as="h1" size="lg" color="orange.400">
-            {recipeDetails.title}
+            {recipePrivateDetails.title}
           </Heading>
           <Box display="flex" padding="10px 0px">
             <Text>Receita de &nbsp;</Text>
-            <Text color="pink.400">{recipeDetails.author}</Text>
+            <Text color="pink.400">{recipePrivateDetails.author}</Text>
           </Box>
           <Box
             display="flex"
@@ -85,7 +96,7 @@ const RecipeDetails = () => {
             top={["18px", "18px", "50px"]}
             left={["20px", "20px", "5px"]}
           >
-            <Box as="button" onClick={() => history.push("/recipes")}>
+            <Box as="button" onClick={() => history.push("/myrecipes")}>
               <FaArrowAltCircleLeft />
             </Box>
           </Box>
@@ -95,81 +106,53 @@ const RecipeDetails = () => {
             fontSize="18px"
             top={["8px", "8px", "40px"]}
             right={["15px", "15px", "5px"]}
-
           >
-            {!isTheOwner ? (
-              isInFavorites ? (
-                <Center
-                  w='40px'
-                  h='40px'
-                  borderRadius='100%'
-                  border='none'
-                  bgColor='#ededed'
-                  margin="2px"
-                >
-                  <Button
-                    background='none'
-                    padding='0'
-                    isLoading={loadingButton}
-                    onClick={() => {
-                      setLoadingButton(true);
-                      removeFromFavoriteRecipes(userId, recipeId, localToken).then((_) => setLoadingButton(false));
-                    }}>
-                    <Image src={LoveRed} />
-                  </Button>
-                </Center>
-              ) : (
-                <Center
-                  w='40px'
-                  h='40px'
-                  borderRadius='100%'
-                  border='none'
-                  bgColor='#ededed'
-                  margin="2px"
-                >
-                  <Button background='none' padding='0' isLoading={loadingButton} onClick={() => {
-                    setLoadingButton(true);
-                    addToFavoriteRecipes(userId, recipeId, localToken).then((_) => setLoadingButton(false));
-                  }}>
-                    <Image src={LoveGray} />
-                  </Button>
-                </Center>
-              )
+            {isShared ? (
+              <Box
+                as="button"
+                margin="2px"
+                borderRadius="100%"
+                padding="10px"
+                backgroundColor="#ededed"
+                boxShadow="0 0 0.4em #ededed"
+                /*Para des-compartilhar*/
+                onClick={() => {
+                  deleteOrUnshareSharedRecipes(recipeId, localToken);
+                }}
+              >
+                <FaShareAlt style={{ color: "#C8561F" }} />
+              </Box>
             ) : (
-              <>
-                {isShared ? (
-                  <Box
-                    as="button"
-                    margin="2px"
-                    borderRadius="100%"
-                    padding="10px"
-                    backgroundColor="#ededed"
-                    boxShadow="0 0 0.4em #ededed"
-                    /*Para des-compartilhar*/
-                    onClick={() => {
-                      deleteOrUnshareSharedRecipes(recipeId, localToken);
-                    }}
-                  >
-                    <FaShareAlt style={{ color: "#C8561F" }} />
-                  </Box>
-                ) : (
-                  <Box
-                    as="button"
-                    margin="2px"
-                    borderRadius="100%"
-                    padding="10px"
-                    backgroundColor="#ededed"
-                    boxShadow="0 0 0.4em #ededed"
-                    /*Para compartilhar*/
-                    onClick={() => {
-                      shareRecipe(recipeDetails, localToken);
-                    }}
-                  >
-                    <FaShareAlt style={{ color: "#979797" }} />
-                  </Box>
-                )}
-              </>
+              <Box
+                as="button"
+                margin="2px"
+                borderRadius="100%"
+                padding="10px"
+                backgroundColor="#ededed"
+                boxShadow="0 0 0.4em #ededed"
+                /*Para compartilhar*/
+                onClick={() => {
+                  shareRecipe(recipePrivateDetails, localToken);
+                }}
+              >
+                <FaShareAlt style={{ color: "#979797" }} />
+              </Box>
             )}
+            <Box
+              as="button"
+              margin="2px"
+              borderRadius="100%"
+              padding="8px"
+              backgroundColor="#ededed"
+              boxShadow="0 0 0.4em #ededed"
+              /*Para excluir*/
+              onClick={() => {
+                onOpen();
+                getMyRecipes(localToken, userId);
+              }}
+            >
+              <IoClose style={{ color: "#EB1616", fontSize: "22px" }} />
+            </Box>
           </Box>
         </Box>
         <Box
@@ -189,13 +172,11 @@ const RecipeDetails = () => {
             display="flex"
             flexWrap="wrap"
             padding="10px 0px"
-
             w={["90%", "90%", "620px"]}
-
             margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
           >
-            {recipeDetails.ingredients?.map((item, index) => (
+            {recipePrivateDetails.ingredients?.map((item, index) => (
               <ListItem
                 key={index}
                 display="flex"
@@ -225,7 +206,7 @@ const RecipeDetails = () => {
             w={["90%", "90%", "620px"]}
           >
             <List>
-              {recipeDetails.instructions?.map((item, index) => (
+              {recipePrivateDetails.instructions?.map((item, index) => (
                 <ListItem
                   key={index}
                   display="flex"
@@ -252,4 +233,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default RecipeDetailsPrivate;
