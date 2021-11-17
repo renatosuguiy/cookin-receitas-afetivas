@@ -11,22 +11,45 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { useAddRecipe } from "../../providers/AddRecipe";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import HeaderLogo from "../../components/HeaderLogo";
 import Menu from "../../components/Menu";
 import { HeaderWelcome } from "../../components/HeaderWelcome/index";
+import { useToast } from "@chakra-ui/toast";
 
 const NewRecipePage01 = () => {
   const history = useHistory();
   const { recipeBody, setRecipeBody } = useAddRecipe();
   const { id } = JSON.parse(localStorage.getItem("@cookin:user") || "");
   const { name } = JSON.parse(localStorage.getItem("@cookin:user") || "");
+  const toast = useToast();
+
+  const [recipeTitle, setRecipeTitle] = useState("");
+  const [recipeCategory, setRecipeCategory] = useState("");
 
   const nextPage = () => {
-    history.push("/addRecipe2");
-    setRecipeBody({ ...recipeBody, userId: id, author: name });
+    if (recipeTitle && recipeCategory) {
+      setRecipeBody({
+        ...recipeBody,
+        userId: id,
+        author: name,
+        title: recipeTitle,
+        category: recipeCategory,
+      });
+      history.push("/addRecipe2");
+      console.log(recipeBody);
+    } else {
+      toast({
+        title: "Nome e/ou categoria da receita inválido(s)",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
   };
 
   return (
@@ -69,22 +92,23 @@ const NewRecipePage01 = () => {
             Digite o nome da sua receita
           </Text>
           <Input
-            placeholder="&nbsp;Nome da receita"
+            isRequired
+            placeholder="Nome da receita"
             m="10px auto"
             w="80%"
-            onChange={(e) =>
-              setRecipeBody({ ...recipeBody, title: e.target.value })
-            }
+            focusBorderColor="orange.500"
+            onChange={(e) => setRecipeTitle(e.target.value)}
           />
           <Text fontSize="md">Selecione a categoria da sua receita</Text>
           <Select
-            placeholder="&nbsp;Categoria da sua receita"
+            focusBorderColor="orange.500"
+            placeholder="Categoria da sua receita"
             variant="outline"
             w="80%"
             m="10px auto"
             borderColor="gray"
             onChange={(e) => {
-              setRecipeBody({ ...recipeBody, category: e.target.value });
+              setRecipeCategory(e.target.value);
             }}
           >
             <option value="salgado">Salgado</option>

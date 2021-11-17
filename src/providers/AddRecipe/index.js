@@ -1,21 +1,38 @@
 import { createContext, useContext, useState } from "react";
+import { useToast } from "@chakra-ui/toast";
 
 const AddRecipeContext = createContext();
 
 export const AddRecipeProvider = ({ children }) => {
   const [recipeBody, setRecipeBody] = useState({});
-  const [ingredients, setIngredients] = useState(
-    []
-  );
-  const [instructions, setInstructions] = useState(
-    []);
+  const [ingredients, setIngredients] = useState([]);
+  const [instructions, setInstructions] = useState([]);
   const [item, setItem] = useState("");
+  const toast = useToast();
 
   const addToArray = (array, setArray, item) => {
-    if (!array.includes(item)) {
-      setArray([...array, item]);
+    if (item) {
+      if (!array.includes(item)) {
+        setArray([...array, item]);
+      } else {
+        toast({
+          title: "Item já adicionado!",
+          description: "Adicione um item diferente",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
+      }
     } else {
-      alert("você já adicionou esse item!");
+      toast({
+        title: "É preciso adicionar um item!",
+        description: "Escreva o nome do item para adicioná-lo",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top-right",
+      });
     }
   };
 
@@ -33,6 +50,14 @@ export const AddRecipeProvider = ({ children }) => {
       );
     }
     setArray(filteredArray);
+    toast({
+      title: "Item excluído",
+      description: `Item ${item} excluído da lista`,
+      status: "warning",
+      duration: 2000,
+      isClosable: true,
+      position: "top-right",
+    });
   };
 
   return (

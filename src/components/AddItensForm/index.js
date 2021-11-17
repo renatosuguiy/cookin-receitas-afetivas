@@ -56,10 +56,12 @@ const AddItens = ({
           </Text>
           <Box>
             <Input
+              type="text"
               placeholder="Ingrediente"
               m="10px auto"
               w="70%"
               borderColor="gray"
+              focusBorderColor="orange.500"
               onChange={(e) => setItem(e.target.value)}
             />
             <Button
