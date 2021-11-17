@@ -111,7 +111,9 @@ export const CardRecipes = ({ item, typeCard }) => {
               bottom='12px'
               right='18px'
             >
-              <Button padding='0'
+              <Button
+                borderRadius='100%'
+                padding='0'
                 isLoading={loadingButton}
                 onClick={() => {
                   setLoadingButton(true);
