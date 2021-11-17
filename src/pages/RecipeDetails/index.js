@@ -8,13 +8,13 @@ import {
   Box,
   Button,
   Center,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { CheckCircleIcon } from "@chakra-ui/icons";
+
 import LoveGray from "../../assets/Images/lovegray.svg";
 import LoveRed from "../../assets/Images/lovered.svg";
-
 
 import { FaShareAlt, FaArrowAltCircleLeft } from "react-icons/fa";
 
@@ -24,7 +24,6 @@ import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
 import { useState, useEffect } from "react";
-
 
 const RecipeDetails = () => {
   const history = useHistory();
@@ -38,7 +37,7 @@ const RecipeDetails = () => {
     removeFromFavoriteRecipes,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
-    getRecipeDetails
+    getRecipeDetails,
   } = useSharedRecipes();
 
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
@@ -55,7 +54,8 @@ const RecipeDetails = () => {
   const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
-  useEffect(() => getRecipeDetails(recipeId, localToken), [])
+  useEffect(() => getRecipeDetails(recipeId, localToken), []);
+
   return (
     <>
       {isLagerThan768 && <HeaderWelcome />}
@@ -73,7 +73,11 @@ const RecipeDetails = () => {
           <Heading as="h1" size="lg" color="orange.400">
             {recipeDetails.title}
           </Heading>
-          <Box display="flex" padding="10px 0px">
+          <Box
+            display="flex"
+            padding="10px 0px"
+            justifyContent={["", "", "center"]}
+          >
             <Text>Receita de &nbsp;</Text>
             <Text color="pink.400">{recipeDetails.author}</Text>
           </Box>
@@ -95,42 +99,53 @@ const RecipeDetails = () => {
             fontSize="18px"
             top={["8px", "8px", "40px"]}
             right={["15px", "15px", "5px"]}
-
           >
             {!isTheOwner ? (
               isInFavorites ? (
                 <Center
-                  w='40px'
-                  h='40px'
-                  borderRadius='100%'
-                  border='none'
-                  bgColor='#ededed'
+                  w="40px"
+                  h="40px"
+                  borderRadius="100%"
+                  border="none"
+                  bgColor="#ededed"
                   margin="2px"
                 >
                   <Button
-                    background='none'
-                    padding='0'
+                    background="none"
+                    padding="0"
                     isLoading={loadingButton}
                     onClick={() => {
                       setLoadingButton(true);
-                      removeFromFavoriteRecipes(userId, recipeId, localToken).then((_) => setLoadingButton(false));
-                    }}>
+                      removeFromFavoriteRecipes(
+                        userId,
+                        recipeId,
+                        localToken
+                      ).then((_) => setLoadingButton(false));
+                    }}
+                  >
                     <Image src={LoveRed} />
                   </Button>
                 </Center>
               ) : (
                 <Center
-                  w='40px'
-                  h='40px'
-                  borderRadius='100%'
-                  border='none'
-                  bgColor='#ededed'
+                  w="40px"
+                  h="40px"
+                  borderRadius="100%"
+                  border="none"
+                  bgColor="#ededed"
                   margin="2px"
                 >
-                  <Button background='none' padding='0' isLoading={loadingButton} onClick={() => {
-                    setLoadingButton(true);
-                    addToFavoriteRecipes(userId, recipeId, localToken).then((_) => setLoadingButton(false));
-                  }}>
+                  <Button
+                    background="none"
+                    padding="0"
+                    isLoading={loadingButton}
+                    onClick={() => {
+                      setLoadingButton(true);
+                      addToFavoriteRecipes(userId, recipeId, localToken).then(
+                        (_) => setLoadingButton(false)
+                      );
+                    }}
+                  >
                     <Image src={LoveGray} />
                   </Button>
                 </Center>
@@ -145,7 +160,6 @@ const RecipeDetails = () => {
                     padding="10px"
                     backgroundColor="#ededed"
                     boxShadow="0 0 0.4em #ededed"
-                    /*Para des-compartilhar*/
                     onClick={() => {
                       deleteOrUnshareSharedRecipes(recipeId, localToken);
                     }}
@@ -160,7 +174,6 @@ const RecipeDetails = () => {
                     padding="10px"
                     backgroundColor="#ededed"
                     boxShadow="0 0 0.4em #ededed"
-                    /*Para compartilhar*/
                     onClick={() => {
                       shareRecipe(recipeDetails, localToken);
                     }}
@@ -189,9 +202,7 @@ const RecipeDetails = () => {
             display="flex"
             flexWrap="wrap"
             padding="10px 0px"
-
             w={["90%", "90%", "620px"]}
-
             margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
           >

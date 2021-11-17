@@ -63,6 +63,7 @@ const RecipesPrivate = () => {
                   w="250px"
                   color="white.50"
                   mt="6"
+                  marginBottom="50px"
                   onClick={() => history.push("/addRecipe")}
                 >
                   Cadastrar receita
@@ -75,8 +76,8 @@ const RecipesPrivate = () => {
                 backgroundColor="orange.700"
                 borderRadius="100%"
                 position="fixed"
-                bottom="10px"
-                left="10px"
+                bottom="20px"
+                left="20px"
                 icon={<AddIcon />}
                 onClick={() => history.push("/addRecipe")}
               />

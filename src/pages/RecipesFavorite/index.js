@@ -5,7 +5,7 @@ import HeaderLogo from "../../components/HeaderLogo/index";
 import { SearchBox } from "../../components/SearchBox";
 import Menu from "../../components/Menu";
 import { CardsList } from "../../components/CardsList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import EmptyFavoritesPage from "../../components/EmptyFavoritesPage";
 import { fadeAnimation } from "../../styles/animations";
 
