@@ -39,7 +39,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -55,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cypress": "^9.0.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint-plugin-cypress": "^2.12.1"
   }
 }
