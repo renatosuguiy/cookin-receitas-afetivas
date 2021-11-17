@@ -97,7 +97,7 @@ const RecipeDetailsPrivate = () => {
             position="absolute"
             fontSize="18px"
             top={["8px", "8px", "40px"]}
-            right={["10px", "10px", "5px"]}
+            right={["15px", "15px", "5px"]}
           >
             {isShared ? (
               <Box
@@ -164,7 +164,7 @@ const RecipeDetailsPrivate = () => {
             display="flex"
             flexWrap="wrap"
             padding="10px 0px"
-            w={["290px", "290px", "620px"]}
+            w={["90%", "90%", "620px"]}
             margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
           >
@@ -193,9 +193,9 @@ const RecipeDetailsPrivate = () => {
           </Heading>
           <Box
             padding="10px 0px"
-            margin={["", "0 auto"]}
+            margin={["", "", "0 auto"]}
             marginLeft={["10px"]}
-            w={["300px", "300px", "620px"]}
+            w={["90%", "90%", "620px"]}
           >
             <List>
               {recipePrivateDetails.instructions?.map((item, index) => (
