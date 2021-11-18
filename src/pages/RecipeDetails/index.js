@@ -60,7 +60,11 @@ const RecipeDetails = () => {
     <>
       {isLagerThan768 && <HeaderWelcome />}
       {isLagerThan768 && <HeaderLogo />}
-      <Box margin="0 auto" position="relative" w={["100%", "100%", "700px"]}>
+      <Box
+        margin="0 auto 50px"
+        position="relative"
+        w={["100%", "100%", "700px"]}
+      >
         <Box
           padding="20px"
           color="gray.900"
@@ -112,7 +116,7 @@ const RecipeDetails = () => {
                 >
                   <Button
                     background="none"
-                    borderRadius='100%'
+                    borderRadius="100%"
                     padding="0"
                     isLoading={loadingButton}
                     onClick={() => {
@@ -138,7 +142,7 @@ const RecipeDetails = () => {
                 >
                   <Button
                     background="none"
-                    borderRadius='100%'
+                    borderRadius="100%"
                     padding="0"
                     isLoading={loadingButton}
                     onClick={() => {
