@@ -16,7 +16,7 @@ const EmptyPage = () => {
   const history = useHistory();
 
   return (
-    <Box w="100vw" mt="6" animation={fadeAnimation}>
+    <Box w="100vw" mt="6" animation={fadeAnimation} marginBottom="50px">
       <Flex flexDirection="column" alignItems="center" w="90%" margin="0 auto">
         <Center
           border="1px dashed #D0D0D0"
