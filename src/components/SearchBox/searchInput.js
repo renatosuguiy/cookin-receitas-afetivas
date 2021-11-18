@@ -3,6 +3,7 @@ import {
   FormControl,
   FormLabel,
   InputGroup,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { forwardRef, useState, useCallback, useEffect } from "react";
 
@@ -63,7 +64,7 @@ const InputBase = ({ name, label, error = null, ...rest }, ref) => {
           boxShadow="base"
         />
 
-        {/* {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>} */}
+        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
         <InputRightElement>
           <Center
             borderRadius="100%"
