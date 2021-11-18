@@ -6,7 +6,6 @@ import {
   VStack,
   Link,
   Select,
-  Image,
 } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
 import { rightAnimation } from "../../styles/animations";

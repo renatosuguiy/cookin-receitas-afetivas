@@ -17,21 +17,17 @@ export const RecipesProvider = ({ children }) => {
 
   const toast = useToast();
 
-  //lendo/puxando receitas públicas
   const getSharedRecipes = async (token) => {
     await api
       .get("/recipes", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        // console.log(response.data);
         setRecipes([...response.data]);
       })
       .catch((error) => console.log(error));
   };
 
-  //adicionando receitas públicas (compartilhamento)
-  //vou receber de parâmetro o corpo do receita privada e adicionar 2 campos de favorites e id da receita privada
   const shareRecipe = (data, token) => {
     const { title, ingredients, instructions, category, author, userId, id } =
       data;
@@ -53,10 +49,9 @@ export const RecipesProvider = ({ children }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         setRecipes([...recipes, response.data]);
         getSharedRecipes(localToken);
-        //toast de sucesso de compartilhamento
+
         toast({
           title: "Receita compartilhada!",
           description: "Receita compartilhada com sucesso.",
@@ -79,16 +74,14 @@ export const RecipesProvider = ({ children }) => {
       });
   };
 
-  //deletando ou retirando compartilhamento de receitas públicas
   const deleteOrUnshareSharedRecipes = (id, token) => {
     api
       .delete(`/recipes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
         getSharedRecipes(localToken);
-        //toast de sucesso em deletar/descompartilhar
+
         toast({
           title: "Receita descompartilhada!",
           description: "Receita descompartilhada com sucesso.",
@@ -111,7 +104,6 @@ export const RecipesProvider = ({ children }) => {
       });
   };
 
-  //procurando a receita publica
   const searchForRecipePublic = useCallback(async (recipeTitle, token) => {
     if (recipeTitle !== "") {
       const response = await api.get(`/recipes?title_like=${recipeTitle}`, {
@@ -120,7 +112,6 @@ export const RecipesProvider = ({ children }) => {
         },
       });
       if (!response.data.length) {
-        //chamar o toast de nada encontrado, procure novamente
         toast({
           title: "Nenhuma receita encontrada!",
           description: "Procure por outra receita.",
@@ -132,6 +123,7 @@ export const RecipesProvider = ({ children }) => {
       }
       setRecipesSharedFound(response.data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getRecipeDetails = (recipeId, token) => {
@@ -221,23 +213,18 @@ export const RecipesProvider = ({ children }) => {
   };
 
   const getFavoriteRecipes = async (userId) => {
-
     const favoriteRecipes = recipes.filter((item) =>
       item.favorites_users.find((id) => id === userId)
     );
     setRecipeFavorites(favoriteRecipes);
-    console.log(recipes)
-    console.log(favoriteRecipes)
   };
 
-  //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
   function filterFavoriteRecipes(array, query) {
     return array.filter(function (el) {
       return el.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
   }
 
-  //procurando a receita dentro dos favoritos
   const searchForRecipeFavorite = (recipeTitle, token) => {
     if (recipeTitle !== "") {
       const searchResult = filterFavoriteRecipes(recipeFavorites, recipeTitle);
