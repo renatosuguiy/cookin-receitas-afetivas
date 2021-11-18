@@ -11,7 +11,7 @@ import {
 import { Input } from "../../components/Form/Input"
 import { rightAnimation } from "../../styles/animations";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
-import LogoGoogle from "../../assets/Images/logogoogle.png";
+import LoginGoogle from "../GoogleLogin";
 
 const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
     return (
@@ -102,7 +102,7 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
                     Cadastrar
                 </Button>
                 <Text color="orange.400">Cadastrar com a conta do Google</Text>
-                <Image src={LogoGoogle} cursor="pointer" w="50px" h="35px" />
+                <LoginGoogle handleGoogle={handleSignUp} />
                 <Text textAlign="center" mt="20px" color="orange.400">
                     Já tem uma conta? <br />
                     Entre {" "}
