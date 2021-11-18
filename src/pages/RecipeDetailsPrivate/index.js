@@ -18,7 +18,7 @@ import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { ModalRemoveRecipe } from "../../components/Modal/ModalRemoveRecipe";
 
-import { useHistory, useParams } from "
+import { useHistory, useParams } from "react-router"
 import { useSharedRecipes } from "../../providers/recipes";
 import { useMyRecipes } from "../../providers/MyRecipes";
 
