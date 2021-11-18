@@ -9,6 +9,8 @@ export const MyRecipesProvider = ({ children }) => {
   const [recipesPrivateFound, setRecipesPrivateFound] = useState([]);
   const toast = useToast();
 
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userLoggedId = JSON.parse(user).id;
 
   const getMyRecipes = (token, userId) => {
     api
@@ -17,9 +19,8 @@ export const MyRecipesProvider = ({ children }) => {
       })
       .then((response) => setMyRecipes([...response.data]))
       .catch((error) => {
-        setMyRecipes([])
-      })
-
+        setMyRecipes([]);
+      });
   };
 
   const addRecipe = (recipe, token) => {
@@ -56,8 +57,8 @@ export const MyRecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
-      }
-      )
+        setRecipesPrivateFound([]);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -70,16 +71,26 @@ export const MyRecipesProvider = ({ children }) => {
 
   const searchForRecipePrivate = useCallback(async (recipeTitle, token) => {
     if (recipeTitle !== "") {
-      const response = await api.get(`/myRecipes?title_like=${recipeTitle}`, {
+      const response = await api.get(`/myrecipes?title_like=${recipeTitle}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (!response.data.length) {
-        //chamar o toast de nada encontrado, procure novamente
-        console.log("achei nada");
+      const filteredResult = response.data.filter(
+        (item) => item.userId === userLoggedId
+      );
+      if (!filteredResult.length) {
+        toast({
+          title: "Nenhuma receita encontrada!",
+          description: "Procure por outra receita.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top-right",
+        });
       }
-      setRecipesPrivateFound(response.data);
+
+      setRecipesPrivateFound(filteredResult);
     }
   }, []);
 

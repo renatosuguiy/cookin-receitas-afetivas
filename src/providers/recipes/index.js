@@ -183,6 +183,8 @@ export const RecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
+        setRecipesSharedFound([]);
+        setRecipesFavoritesFound([]);
       })
       .catch((error) => console.log(error));
   };
@@ -212,6 +214,8 @@ export const RecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
+        setRecipesSharedFound([]);
+        setRecipesFavoritesFound([]);
       })
       .catch((error) => console.log(error));
   };
