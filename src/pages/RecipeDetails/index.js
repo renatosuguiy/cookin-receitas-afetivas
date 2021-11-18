@@ -112,6 +112,7 @@ const RecipeDetails = () => {
                 >
                   <Button
                     background="none"
+                    borderRadius='100%'
                     padding="0"
                     isLoading={loadingButton}
                     onClick={() => {
@@ -137,6 +138,7 @@ const RecipeDetails = () => {
                 >
                   <Button
                     background="none"
+                    borderRadius='100%'
                     padding="0"
                     isLoading={loadingButton}
                     onClick={() => {

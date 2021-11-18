@@ -137,10 +137,11 @@ export const CardRecipes = ({ item, typeCard }) => {
               bottom='12px'
               right='18px'
             >
-              <Button padding='0' isLoading={loadingButton} onClick={() => {
-                setLoadingButton(true);
-                removeFromFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
-              }}>
+              <Button borderRadius='100%'
+                padding='0' isLoading={loadingButton} onClick={() => {
+                  setLoadingButton(true);
+                  removeFromFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
+                }}>
                 <Image src={LoveRed} />
               </Button>
             </Center>
