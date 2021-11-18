@@ -4,11 +4,13 @@ import { InputSearch } from "./searchInput";
 
 export const SearchBox = ({ functionToSearch }) => {
   const localToken = localStorage.getItem("@cookin:accessToken") || "";
+  const user = localStorage.getItem("@cookin:user") || "";
+  const userLoggedId = JSON.parse(user).id;
 
   const handleSearch = (wordSearched) => {
     const { title } = wordSearched;
 
-    functionToSearch(title, localToken);
+    functionToSearch(title, localToken, userLoggedId);
   };
 
   const { register, handleSubmit } = useForm();

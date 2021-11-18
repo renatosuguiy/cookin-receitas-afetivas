@@ -9,9 +9,6 @@ export const MyRecipesProvider = ({ children }) => {
   const [recipesPrivateFound, setRecipesPrivateFound] = useState([]);
   const toast = useToast();
 
-  const user = localStorage.getItem("@cookin:user") || "";
-  const userLoggedId = JSON.parse(user).id;
-
   const getMyRecipes = (token, userId) => {
     api
       .get(`/myrecipes?userId=${userId}`, {
@@ -69,30 +66,33 @@ export const MyRecipesProvider = ({ children }) => {
   //       .catch((error) => console.log(error));
   //   };
 
-  const searchForRecipePrivate = useCallback(async (recipeTitle, token) => {
-    if (recipeTitle !== "") {
-      const response = await api.get(`/myrecipes?title_like=${recipeTitle}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const filteredResult = response.data.filter(
-        (item) => item.userId === userLoggedId
-      );
-      if (!filteredResult.length) {
-        toast({
-          title: "Nenhuma receita encontrada!",
-          description: "Procure por outra receita.",
-          status: "warning",
-          duration: 2000,
-          isClosable: true,
-          position: "top-right",
+  const searchForRecipePrivate = useCallback(
+    async (recipeTitle, token, userId) => {
+      if (recipeTitle !== "") {
+        const response = await api.get(`/myrecipes?title_like=${recipeTitle}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-      }
+        const filteredResult = response.data.filter(
+          (item) => item.userId === userId
+        );
+        if (!filteredResult.length) {
+          toast({
+            title: "Nenhuma receita encontrada!",
+            description: "Procure por outra receita.",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+            position: "top-right",
+          });
+        }
 
-      setRecipesPrivateFound(filteredResult);
-    }
-  }, []);
+        setRecipesPrivateFound(filteredResult);
+      }
+    },
+    []
+  );
 
   return (
     <MyRecipesContext.Provider
