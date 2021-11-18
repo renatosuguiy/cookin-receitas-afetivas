@@ -18,11 +18,12 @@ import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { ModalRemoveRecipe } from "../../components/Modal/ModalRemoveRecipe";
 
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "
 import { useSharedRecipes } from "../../providers/recipes";
 import { useMyRecipes } from "../../providers/MyRecipes";
 
 import { useEffect, useState } from 'react';
+
 
 
 const RecipeDetailsPrivate = () => {
@@ -36,7 +37,7 @@ const RecipeDetailsPrivate = () => {
     recipePrivateDetails,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
-    getPrivateRecipeDetails
+    getPrivateRecipeDetails,
   } = useSharedRecipes();
 
   const { deleteRecipe, getMyRecipes } = useMyRecipes();
@@ -75,7 +76,6 @@ const RecipeDetailsPrivate = () => {
     getPrivateRecipeDetails(recipeId, localToken)
     setIsShared(recipes.some((recipe) => recipe.myrecipesId === Number(recipeId)))
   }, []);
-
 
   return (
     <>
@@ -134,7 +134,6 @@ const RecipeDetailsPrivate = () => {
                 padding="10px"
                 backgroundColor="#ededed"
                 boxShadow="0 0 0.4em #ededed"
-                /*Para des-compartilhar*/
                 onClick={() => {
                   deleteOrUnshareSharedRecipes(myrecipesId, localToken);
                   setIsShared(false)
@@ -150,7 +149,6 @@ const RecipeDetailsPrivate = () => {
                 padding="10px"
                 backgroundColor="#ededed"
                 boxShadow="0 0 0.4em #ededed"
-                /*Para compartilhar*/
                 onClick={() => {
                   shareRecipe(recipePrivateDetails, localToken);
                   setIsShared(true)
@@ -166,7 +164,6 @@ const RecipeDetailsPrivate = () => {
               padding="8px"
               backgroundColor="#ededed"
               boxShadow="0 0 0.4em #ededed"
-              /*Para excluir*/
               onClick={() => {
                 onOpen();
                 getMyRecipes(localToken, userId);

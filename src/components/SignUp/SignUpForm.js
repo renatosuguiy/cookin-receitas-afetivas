@@ -6,7 +6,6 @@ import {
   VStack,
   Link,
   Select,
-  Image,
 } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
 import { rightAnimation } from "../../styles/animations";
@@ -19,8 +18,8 @@ const SignUpForm = ({ handleSignUp, errors, register, loading }) => {
       onSubmit={handleSignUp}
       as="form"
       id="signup_Form"
-      mt="5 "
-      h="550px"
+      mt="5px"
+      h="auto"
       maxWidth="600px"
       padding={["5px 15px", "15px 20px", "15px 20px"]}
       width={["100%", "100%", "100%", "68%"]}

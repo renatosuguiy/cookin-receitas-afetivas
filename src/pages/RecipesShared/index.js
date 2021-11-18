@@ -27,6 +27,7 @@ const RecipesShared = () => {
   useEffect(() => {
     getSharedRecipes(localToken).then((_) => setLoading(false));
     getMyRecipes(localToken, userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -42,7 +43,7 @@ const RecipesShared = () => {
           state={recipes}
           stateOfSearchedRecipes={recipesSharedFound}
           setStateOfSearchedRecipes={setRecipesSharedFound}
-          typeCard='heart'
+          typeCard="heart"
           loading={loading}
         />
       </Box>

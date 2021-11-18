@@ -59,13 +59,6 @@ export const MyRecipesProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
-  //   const editRecipe = (recipeId) => {
-  //     api
-  //       .patch(`/myrecipes/${recipeId}`, )
-  //       .then((response) => console.log(response))
-  //       .catch((error) => console.log(error));
-  //   };
-
   const searchForRecipePrivate = useCallback(
     async (recipeTitle, token, userId) => {
       if (recipeTitle !== "") {
@@ -91,6 +84,7 @@ export const MyRecipesProvider = ({ children }) => {
         setRecipesPrivateFound(filteredResult);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
