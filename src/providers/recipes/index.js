@@ -53,7 +53,6 @@ export const RecipesProvider = ({ children }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         setRecipes([...recipes, response.data]);
         getSharedRecipes(localToken);
         //toast de sucesso de compartilhamento
@@ -86,7 +85,6 @@ export const RecipesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
         getSharedRecipes(localToken);
         //toast de sucesso em deletar/descompartilhar
         toast({
@@ -226,8 +224,7 @@ export const RecipesProvider = ({ children }) => {
       item.favorites_users.find((id) => id === userId)
     );
     setRecipeFavorites(favoriteRecipes);
-    console.log(recipes)
-    console.log(favoriteRecipes)
+
   };
 
   //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda
