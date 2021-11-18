@@ -42,7 +42,7 @@ export const HeaderWelcome = () => {
           <Image w="35px" h="35px" src={arrayAvatar[positionInArray]}></Image>
           <Heading
             ml="10px"
-            fontSize={["18px", "18px", "24px", "24px"]}
+            fontSize={["16px", "16px", "20px", "20px"]}
             fontFamily={theme.fonts.body}
             color={theme.colors.orange[400]}
           >

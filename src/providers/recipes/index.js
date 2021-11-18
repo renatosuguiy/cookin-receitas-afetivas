@@ -183,6 +183,8 @@ export const RecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
+        setRecipesSharedFound([]);
+        setRecipesFavoritesFound([]);
       })
       .catch((error) => console.log(error));
   };
@@ -212,15 +214,20 @@ export const RecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
+        setRecipesSharedFound([]);
+        setRecipesFavoritesFound([]);
       })
       .catch((error) => console.log(error));
   };
 
   const getFavoriteRecipes = async (userId) => {
+
     const favoriteRecipes = recipes.filter((item) =>
       item.favorites_users.find((id) => id === userId)
     );
     setRecipeFavorites(favoriteRecipes);
+    console.log(recipes)
+    console.log(favoriteRecipes)
   };
 
   //função para filtrar a receita dos favoritos conseguindo pegar por algumas letras a palavra toda

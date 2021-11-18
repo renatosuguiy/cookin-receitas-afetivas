@@ -13,17 +13,20 @@ const Menu = ({ index }) => {
       bgColor={["orange.50", "orange.50", "rgba(0,0,0,0)"]}
     >
       <Center
-        borderBottom="1px solid #D0BDBD"
         maxWidth="500px"
-        margin="0 auto"
+        margin="0px auto"
         w="90vw"
+        borderBottom="1px solid #cecece"
       >
         <Tabs index={index}>
           <TabList>
             <Tab
               onClick={() => history.push("/recipes")}
               w={["100px", "115px", "145px"]}
-              _selected={{ color: "orange.400", borderColor: "orange.400" }}
+              _selected={{
+                color: "orange.400",
+                borderColor: "orange.400",
+              }}
               fontSize="4xl"
               flexDir="column"
             >
