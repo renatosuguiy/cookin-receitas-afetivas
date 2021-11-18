@@ -90,7 +90,7 @@ const Welcome = () => {
             </Flex>
           </Grid>
         )}
-        <Footer />
+        <Footer mt='-1' />
       </Container>
     </>
   );

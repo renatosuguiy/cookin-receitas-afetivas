@@ -26,7 +26,10 @@ const AddItens = ({
   placeholder,
 }) => {
   const { addToArray, removeFromArray, item, setItem } = useAddRecipe();
-
+  const handleClickButton = () => {
+    addToArray(array, setArray, item);
+    setItem('');
+  }
   return (
     <>
       <HeaderWelcome />
@@ -61,6 +64,7 @@ const AddItens = ({
               placeholder={placeholder}
               m="10px auto"
               w="70%"
+              value={item}
               borderColor="gray"
               focusBorderColor="orange.500"
               onChange={(e) => setItem(e.target.value)}
@@ -71,7 +75,7 @@ const AddItens = ({
               fontSize="2xl"
               color="green.500"
               borderRadius="25px"
-              onClick={() => addToArray(array, setArray, item)}
+              onClick={handleClickButton}
             >
               <FaPlusCircle />
             </Button>
