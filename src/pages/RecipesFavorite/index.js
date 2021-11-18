@@ -33,7 +33,6 @@ const RecipesFavorite = () => {
     getFavoriteRecipes(userId);
   }, [recipes]);
 
-  console.log(recipeFavorites)
   return (
     <Box>
       <HeaderWelcome />
