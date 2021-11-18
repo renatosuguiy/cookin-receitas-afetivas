@@ -17,10 +17,17 @@ const RecipesFavorite = () => {
     searchForRecipeFavorite,
     recipesFavoritesFound,
     setRecipesFavoritesFound,
+    getSharedRecipes
   } = useSharedRecipes();
 
   const user = localStorage.getItem("@cookin:user") || "";
+  const token = localStorage.getItem('@cookin:accessToken')
   const userId = JSON.parse(user).id;
+
+  useEffect(() => {
+    getSharedRecipes(token)
+  }, []);
+
 
   useEffect(() => {
     getFavoriteRecipes(userId);

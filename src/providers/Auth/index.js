@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
         console.log(err);
         toast({
           title: "Login inválido!",
-          description: "Algo deu errado!",
+          description: "Email e/ou senha inválido!",
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
         console.log(err);
         toast({
           title: "Cadastro inválido!",
-          description: "Algo deu errado!",
+          description: "Usuário já existente!",
           status: "error",
           duration: 2000,
           isClosable: true,

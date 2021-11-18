@@ -22,6 +22,9 @@ import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
 import { useMyRecipes } from "../../providers/MyRecipes";
 
+import { useEffect } from 'react';
+
+
 const RecipeDetailsPrivate = () => {
   const history = useHistory();
   const parameters = useParams();
@@ -33,6 +36,7 @@ const RecipeDetailsPrivate = () => {
     recipePrivateDetails,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
+    getPrivateRecipeDetails
   } = useSharedRecipes();
 
   const { deleteRecipe, getMyRecipes } = useMyRecipes();
@@ -61,6 +65,9 @@ const RecipeDetailsPrivate = () => {
 
     history.push("/myrecipes");
   };
+
+  useEffect(() => getPrivateRecipeDetails(recipeId, localToken), []);
+
 
   return (
     <>

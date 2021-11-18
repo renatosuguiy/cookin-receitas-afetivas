@@ -9,7 +9,6 @@ export const MyRecipesProvider = ({ children }) => {
   const [recipesPrivateFound, setRecipesPrivateFound] = useState([]);
   const toast = useToast();
 
-
   const getMyRecipes = (token, userId) => {
     api
       .get(`/myrecipes?userId=${userId}`, {
@@ -17,9 +16,8 @@ export const MyRecipesProvider = ({ children }) => {
       })
       .then((response) => setMyRecipes([...response.data]))
       .catch((error) => {
-        setMyRecipes([])
-      })
-
+        setMyRecipes([]);
+      });
   };
 
   const addRecipe = (recipe, token) => {
@@ -56,8 +54,8 @@ export const MyRecipesProvider = ({ children }) => {
           isClosable: true,
           position: "top-right",
         });
-      }
-      )
+        setRecipesPrivateFound([]);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -68,20 +66,33 @@ export const MyRecipesProvider = ({ children }) => {
   //       .catch((error) => console.log(error));
   //   };
 
-  const searchForRecipePrivate = useCallback(async (recipeTitle, token) => {
-    if (recipeTitle !== "") {
-      const response = await api.get(`/myRecipes?title_like=${recipeTitle}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.data.length) {
-        //chamar o toast de nada encontrado, procure novamente
-        console.log("achei nada");
+  const searchForRecipePrivate = useCallback(
+    async (recipeTitle, token, userId) => {
+      if (recipeTitle !== "") {
+        const response = await api.get(`/myrecipes?title_like=${recipeTitle}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const filteredResult = response.data.filter(
+          (item) => item.userId === userId
+        );
+        if (!filteredResult.length) {
+          toast({
+            title: "Nenhuma receita encontrada!",
+            description: "Procure por outra receita.",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+            position: "top-right",
+          });
+        }
+
+        setRecipesPrivateFound(filteredResult);
       }
-      setRecipesPrivateFound(response.data);
-    }
-  }, []);
+    },
+    []
+  );
 
   return (
     <MyRecipesContext.Provider
