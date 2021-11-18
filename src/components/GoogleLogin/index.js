@@ -10,6 +10,7 @@ const LoginGoogle = () => {
   const pathname = location.pathname;
 
   const handleLogin = (response) => {
+    console.log(response);
     const {
       profileObj: { name, email, googleId },
     } = response;
