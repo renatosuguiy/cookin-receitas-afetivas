@@ -3,6 +3,7 @@ import {
   FormControl,
   FormLabel,
   InputGroup,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { forwardRef, useState, useCallback, useEffect } from "react";
 

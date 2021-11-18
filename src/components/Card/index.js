@@ -137,10 +137,11 @@ export const CardRecipes = ({ item, typeCard }) => {
               bottom='12px'
               right='18px'
             >
-              <Button padding='0' isLoading={loadingButton} onClick={() => {
-                setLoadingButton(true);
-                removeFromFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
-              }}>
+              <Button borderRadius='100%'
+                padding='0' isLoading={loadingButton} onClick={() => {
+                  setLoadingButton(true);
+                  removeFromFavoriteRecipes(userLoggedId, item.id, localToken).then((_) => setLoadingButton(false));
+                }}>
                 <Image src={LoveRed} />
               </Button>
             </Center>
@@ -167,7 +168,8 @@ export const CardRecipes = ({ item, typeCard }) => {
           boxShadow='base'
           position='relative'
           mb='26px'
-          _hover={{ animation: { scaleAnimation } }}
+          _hover={{ transform: "scale(1.1)" }}
+          transition='ease 0.2s'
         >
           <Center w='60px' h='60px' bg='white' fontSize='2x1' borderRadius='md'>
             {item.category === "doce" && <Image src={sweetCategory} />}
