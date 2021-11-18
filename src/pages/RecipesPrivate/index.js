@@ -36,6 +36,7 @@ const RecipesPrivate = () => {
 
   useEffect(() => {
     getMyRecipes(localToken, userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

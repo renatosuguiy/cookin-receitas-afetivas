@@ -22,8 +22,7 @@ import { useHistory, useParams } from "react-router";
 import { useSharedRecipes } from "../../providers/recipes";
 import { useMyRecipes } from "../../providers/MyRecipes";
 
-import { useEffect } from 'react';
-
+import { useEffect } from "react";
 
 const RecipeDetailsPrivate = () => {
   const history = useHistory();
@@ -36,7 +35,7 @@ const RecipeDetailsPrivate = () => {
     recipePrivateDetails,
     shareRecipe,
     deleteOrUnshareSharedRecipes,
-    getPrivateRecipeDetails
+    getPrivateRecipeDetails,
   } = useSharedRecipes();
 
   const { deleteRecipe, getMyRecipes } = useMyRecipes();
@@ -67,7 +66,6 @@ const RecipeDetailsPrivate = () => {
   };
 
   useEffect(() => getPrivateRecipeDetails(recipeId, localToken), []);
-
 
   return (
     <>
@@ -126,7 +124,6 @@ const RecipeDetailsPrivate = () => {
                 padding="10px"
                 backgroundColor="#ededed"
                 boxShadow="0 0 0.4em #ededed"
-                /*Para des-compartilhar*/
                 onClick={() => {
                   deleteOrUnshareSharedRecipes(recipeId, localToken);
                 }}
@@ -141,7 +138,6 @@ const RecipeDetailsPrivate = () => {
                 padding="10px"
                 backgroundColor="#ededed"
                 boxShadow="0 0 0.4em #ededed"
-                /*Para compartilhar*/
                 onClick={() => {
                   shareRecipe(recipePrivateDetails, localToken);
                 }}
@@ -156,7 +152,6 @@ const RecipeDetailsPrivate = () => {
               padding="8px"
               backgroundColor="#ededed"
               boxShadow="0 0 0.4em #ededed"
-              /*Para excluir*/
               onClick={() => {
                 onOpen();
                 getMyRecipes(localToken, userId);
