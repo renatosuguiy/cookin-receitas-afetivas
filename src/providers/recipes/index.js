@@ -217,6 +217,7 @@ export const RecipesProvider = ({ children }) => {
       item.favorites_users.find((id) => id === userId)
     );
     setRecipeFavorites(favoriteRecipes);
+
   };
 
   function filterFavoriteRecipes(array, query) {

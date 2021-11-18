@@ -35,7 +35,6 @@ const LoginComponent = () => {
   });
 
   const handleLogin = (data) => {
-    console.log(data + "login");
     setLoading(true);
     login(data)
       .then((_) => setLoading(false))
