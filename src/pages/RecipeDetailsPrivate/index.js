@@ -18,18 +18,20 @@ import HeaderLogo from "../../components/HeaderLogo";
 import { HeaderWelcome } from "../../components/HeaderWelcome";
 import { ModalRemoveRecipe } from "../../components/Modal/ModalRemoveRecipe";
 
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "
 import { useSharedRecipes } from "../../providers/recipes";
 import { useMyRecipes } from "../../providers/MyRecipes";
 
-import { useEffect } from "react";
+import { useEffect, useState } from 'react';
+
+
 
 const RecipeDetailsPrivate = () => {
   const history = useHistory();
   const parameters = useParams();
   const recipeId = parameters.idRecipes;
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [isShared, setIsShared] = useState(false)
   const {
     recipes,
     recipePrivateDetails,
@@ -45,7 +47,12 @@ const RecipeDetailsPrivate = () => {
   const user = localStorage.getItem("@cookin:user") || "";
   const userId = JSON.parse(user).id;
 
-  const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
+
+
+
+  const myrecipesId = recipes.find(
+    (item) => item.myrecipesId === Number(recipeId)
+  )?.id;
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
@@ -65,7 +72,10 @@ const RecipeDetailsPrivate = () => {
     history.push("/myrecipes");
   };
 
-  useEffect(() => getPrivateRecipeDetails(recipeId, localToken), []);
+  useEffect(() => {
+    getPrivateRecipeDetails(recipeId, localToken)
+    setIsShared(recipes.some((recipe) => recipe.myrecipesId === Number(recipeId)))
+  }, []);
 
   return (
     <>
@@ -125,7 +135,8 @@ const RecipeDetailsPrivate = () => {
                 backgroundColor="#ededed"
                 boxShadow="0 0 0.4em #ededed"
                 onClick={() => {
-                  deleteOrUnshareSharedRecipes(recipeId, localToken);
+                  deleteOrUnshareSharedRecipes(myrecipesId, localToken);
+                  setIsShared(false)
                 }}
               >
                 <FaShareAlt style={{ color: "#C8561F" }} />
@@ -140,6 +151,7 @@ const RecipeDetailsPrivate = () => {
                 boxShadow="0 0 0.4em #ededed"
                 onClick={() => {
                   shareRecipe(recipePrivateDetails, localToken);
+                  setIsShared(true)
                 }}
               >
                 <FaShareAlt style={{ color: "#979797" }} />
