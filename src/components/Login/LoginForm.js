@@ -1,12 +1,4 @@
-import {
-  Heading,
-  Button,
-  Grid,
-  Text,
-  VStack,
-  Link,
-  Image,
-} from "@chakra-ui/react";
+import { Heading, Button, Grid, Text, VStack, Link } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
 import { leftAnimation } from "../../styles/animations";
 import { FaEnvelope, FaLock } from "react-icons/fa";

@@ -54,6 +54,7 @@ const RecipeDetails = () => {
   const isShared = recipes.some((recipe) => recipe.id === Number(recipeId));
 
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
+
   useEffect(() => getRecipeDetails(recipeId, localToken), []);
 
   return (

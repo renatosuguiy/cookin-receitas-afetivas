@@ -17,20 +17,21 @@ const RecipesFavorite = () => {
     searchForRecipeFavorite,
     recipesFavoritesFound,
     setRecipesFavoritesFound,
-    getSharedRecipes
+    getSharedRecipes,
   } = useSharedRecipes();
 
   const user = localStorage.getItem("@cookin:user") || "";
-  const token = localStorage.getItem('@cookin:accessToken')
+  const token = localStorage.getItem("@cookin:accessToken");
   const userId = JSON.parse(user).id;
 
   useEffect(() => {
-    getSharedRecipes(token)
+    getSharedRecipes(token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   useEffect(() => {
     getFavoriteRecipes(userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipes]);
 
   return (

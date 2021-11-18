@@ -17,6 +17,7 @@ export const AddRecipeProvider = ({ children }) => {
       ingredients: [...ingredients],
       instructions: [...instructions],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instructions, ingredients]);
 
   const addToArray = (array, setArray, item) => {
