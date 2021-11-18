@@ -66,7 +66,20 @@ export const theme = extendTheme({
       body: {
         bg: "white",
         color: "#000000",
-        overflowX: 'hidden'
+        overflowX: "hidden",
+        overflowY: "auto",
+
+        "&::-webkit-scrollbar": {
+          width: "10px",
+        },
+
+        "&::-webkit-scrollbar-track": {
+          background: "orange.50",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "orange.700",
+        },
       },
     },
   },
