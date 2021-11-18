@@ -84,7 +84,11 @@ const RecipeDetailsPrivate = () => {
           <Heading as="h1" size="lg" color="orange.400">
             {recipePrivateDetails.title}
           </Heading>
-          <Box display="flex" padding="10px 0px">
+          <Box
+            display="flex"
+            padding="10px 0px"
+            justifyContent={["", "", "center"]}
+          >
             <Text>Receita de &nbsp;</Text>
             <Text color="pink.400">{recipePrivateDetails.author}</Text>
           </Box>
