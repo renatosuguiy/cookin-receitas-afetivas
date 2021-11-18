@@ -167,7 +167,8 @@ export const CardRecipes = ({ item, typeCard }) => {
           boxShadow='base'
           position='relative'
           mb='26px'
-          _hover={{ animation: { scaleAnimation } }}
+          _hover={{ transform: "scale(1.1)" }}
+          transition='ease 0.2s'
         >
           <Center w='60px' h='60px' bg='white' fontSize='2x1' borderRadius='md'>
             {item.category === "doce" && <Image src={sweetCategory} />}
