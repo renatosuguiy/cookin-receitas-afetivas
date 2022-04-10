@@ -1,14 +1,27 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../providers/Auth";
 import SignUpImages from "./SignUpImages.js";
 import SignUpForm from "./SignUpForm.js";
 import { Flex } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
+import { Analytics, AnalyticsBrowser, Context } from '@segment/analytics-next'
 
 const SignUpComponent = () => {
+
+  const [analytics, setAnalytics] = useState(undefined)
+  const [writeKey, setWriteKey] = useState('5XOz7TxNzQTBp6TeKNFY9yxUTtBlOYJ3')
+
+  useEffect(() => {
+    const loadAnalytics = async () => {
+      let [response] = await AnalyticsBrowser.load({ writeKey })
+      setAnalytics(response)
+    }
+    loadAnalytics()
+  }, [writeKey])
+
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
 
   const { signUp } = useAuth();
@@ -41,7 +54,10 @@ const SignUpComponent = () => {
   const handleSignUp = (data) => {
     setLoading(true);
     signUp(data)
-      .then((_) => setLoading(false))
+      .then((_) => {
+        setLoading(false)
+        analytics?.track('SignUp', { email: data.email, name: data.name });
+      })
       .catch((err) => setLoading(false));
   };
 

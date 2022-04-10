@@ -3,13 +3,18 @@ import { Flex } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../providers/Auth";
 import LoginImages from "./LoginImages";
 import LoginForm from "./LoginForm";
 import { useMediaQuery } from "@mui/material";
+import { Analytics, AnalyticsBrowser, Context } from '@segment/analytics-next'
+
 
 const LoginComponent = () => {
+
+  const [analytics, setAnalytics] = useState(undefined)
+  const [writeKey, setWriteKey] = useState('5XOz7TxNzQTBp6TeKNFY9yxUTtBlOYJ3')
 
   const isLagerThan768 = useMediaQuery('(min-width: 768px)');
 
@@ -17,6 +22,13 @@ const LoginComponent = () => {
   const { login } = useAuth();
 
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const loadAnalytics = async () => {
+      let [response] = await AnalyticsBrowser.load({ writeKey })
+      setAnalytics(response)
+    }
+    loadAnalytics()
+  }, [writeKey])
 
   const schema = yup.object().shape({
     email: yup.string().required("Informe email!").email("E-mail inválido"),
@@ -37,7 +49,11 @@ const LoginComponent = () => {
   const handleLogin = (data) => {
     setLoading(true);
     login(data)
-      .then((_) => setLoading(false))
+      .then((_) => {
+        setLoading(false)
+        analytics?.track('SignIn', { email: data.email });
+
+      })
       .catch((err) => setLoading(false));
   };
 
