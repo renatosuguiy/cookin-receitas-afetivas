@@ -57,7 +57,7 @@ const Menu = ({ index }) => {
             <Tab
               onClick={() => {
                 history.push("/myrecipes")
-                analytics?.track('Visit myRecipes page', { user: user.email });
+                analytics?.track('Visit myRecipes page', { user: user });
 
               }}
               flexDir="column"
