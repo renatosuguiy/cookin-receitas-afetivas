@@ -2,10 +2,26 @@ import { Tabs, TabList, Tab, Center, Text, Box } from "@chakra-ui/react";
 import { useMediaQuery } from "@mui/material";
 import { FaBookOpen, FaHeart, FaHome } from "react-icons/fa";
 import { useHistory } from "react-router";
+import { Analytics, AnalyticsBrowser, Context } from '@segment/analytics-next'
+import { useEffect, useState } from 'react';
+import { useAuth } from "../../providers/Auth";
 
 const Menu = ({ index }) => {
   const isLagerThan768 = useMediaQuery("(min-width: 768px)");
   const history = useHistory();
+  const { user } = useAuth();
+
+  const [analytics, setAnalytics] = useState(undefined)
+  const [writeKey, setWriteKey] = useState('5XOz7TxNzQTBp6TeKNFY9yxUTtBlOYJ3')
+
+  useEffect(() => {
+    const loadAnalytics = async () => {
+      let [response] = await AnalyticsBrowser.load({ writeKey })
+      setAnalytics(response)
+    }
+    loadAnalytics()
+  }, [writeKey])
+
   return (
     <Box
       w="100vw"
@@ -39,7 +55,11 @@ const Menu = ({ index }) => {
               )}
             </Tab>
             <Tab
-              onClick={() => history.push("/myrecipes")}
+              onClick={() => {
+                history.push("/myrecipes")
+                analytics?.track('Visit myRecipes page', { user: user.email });
+
+              }}
               flexDir="column"
               w={["100px", "115px", "145px"]}
               _selected={{ color: "orange.400", borderColor: "orange.400" }}
